@@ -4,6 +4,7 @@ import java.awt.DisplayMode;
 import java.util.HashSet;
 import java.util.Set;
 
+import JGame.GameStage;
 import JGame.GameObject.DisplayObject;
 import JGame.GameObject.GameObject;
 import JGame.Manager.BaseManager;

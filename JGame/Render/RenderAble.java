@@ -2,7 +2,7 @@ package JGame.Render;
 
 import JGame.GameObject.DisplayObject;
 
-public interface GameStage {
+public interface RenderAble {
 
 	/**
 	 * 渲染对象
@@ -13,5 +13,5 @@ public interface GameStage {
 	 * 清屏
 	 */
 	void clear();
-
+	
 }

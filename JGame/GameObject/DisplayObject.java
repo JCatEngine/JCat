@@ -25,6 +25,7 @@ public abstract class DisplayObject extends LoopObject{
 	private BufferedImage Image;
 
 	
+	
 	@Override
 	public void addToGame(JGame jGame) {
 		super.addToGame(jGame);

@@ -1,6 +1,7 @@
 package JGame.GameObject;
 
 import JGame.JGame;
+import JGame.Manager.InputManager.InputManager;
 
 /**
  * 游戏对象
@@ -34,5 +35,13 @@ public abstract class GameObject extends DisplayObject{
 	
 	protected abstract void loop();
 	protected abstract void init();
+	
+	
+	//获取输入管理器
+	public InputManager getInput()
+	{
+		return game.getInputManager();
+	}
+	
 
 }
