@@ -44,7 +44,6 @@ public class LoopManager extends BaseManager{
 		this.frameRate = frameRate;
 		this.sleepDelay = 1000/frameRate;
 	
-		
 		loopThread.resume();
 	}
 
@@ -60,7 +59,10 @@ public class LoopManager extends BaseManager{
 				{
 				try {
 					Thread.sleep(sleepDelay);
-					listener.onResponce();
+					if(listener!=null)
+					{
+						listener.onResponce();
+					}
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -70,6 +72,7 @@ public class LoopManager extends BaseManager{
 
 		};
 		
+		loopThread.start();
 		//先挂起线程
 		loopThread.suspend();
 	
