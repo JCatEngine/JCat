@@ -6,6 +6,7 @@ import JGame.Manager.GameObjectManager;
 import JGame.Manager.LoopManager;
 import JGame.Manager.LoopManager.OnResponceListener;
 import JGame.Render.GameStage;
+import JGame.Render.RenderManager;
 import JGame.Render.SwingStage;
 
 public class JGame {
@@ -20,6 +21,7 @@ public class JGame {
 	private LoopManager loopManager;
 	private EventManager eventManager;
 	private GameObjectManager gameObjectManager;
+	private RenderManager renderManager;
 	
 
 	public JGame(GameStage gameStage, int frameRate) {
@@ -46,6 +48,8 @@ public class JGame {
 		
 		loopManager=new LoopManager();
 		eventManager=new EventManager();
+		gameObjectManager=new GameObjectManager();
+		renderManager=new RenderManager();
 	}
 
 
@@ -53,10 +57,16 @@ public class JGame {
 	 * 主循环
 	 */
 	protected void mainLoop() {	
-		//广播事件
+		
+		//更新输入
+		
+		//广播更新事件
 		eventManager.sendBroadCast(new UpdateEvent());
 		//处理消息
 		eventManager.dealMessage();
+		//进行渲染
+		renderManager.render(gameStage,gameObjectManager.getAllGameObject());
+		
 	}
 
 
@@ -75,4 +85,8 @@ public class JGame {
 		return gameObjectManager;
 	}
 
+	public RenderManager getRenderManager() {
+		
+		return renderManager;
+	}
 }
