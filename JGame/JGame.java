@@ -1,5 +1,6 @@
 package JGame;
 
+import JGame.GameObject.EventDispatcher;
 import JGame.GameObject.Component.Event.UpdateEvent;
 import JGame.Manager.EventManager;
 import JGame.Manager.GameObjectManager;
@@ -65,7 +66,7 @@ public class JGame {
 		//处理消息
 		eventManager.dealMessage();
 		//进行渲染
-		renderManager.render(gameStage,gameObjectManager.getAllGameObject());
+		renderManager.render(gameStage);
 		
 	}
 
@@ -88,5 +89,11 @@ public class JGame {
 	public RenderManager getRenderManager() {
 		
 		return renderManager;
+	}
+
+
+	public void addObject(EventDispatcher eventDispatcher) {
+		
+		eventDispatcher.addToGame(this);
 	}
 }

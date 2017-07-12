@@ -12,8 +12,12 @@ import JGame.GameObject.Component.Event.EventType;
  */
 public abstract class LoopObject extends EventDispatcher{
 
-	public LoopObject(JGame game) {
-		super(game);
+	@Override
+	public void addToGame(JGame jGame) {
+		super.addToGame(jGame);
+
+		objectInit();
+		
 		
 		getCom_eventhandler().addEventListener(EventType.UPDATE, new EventRecall() {
 
@@ -23,21 +27,16 @@ public abstract class LoopObject extends EventDispatcher{
 				_loop();
 			}
 		});
-		
-		
-		init();
-	}
-
-	protected void _loop() {
-	
-		
-		loop();
 	}
 	
 	
-	abstract protected void loop();
-	abstract protected void init();
+	protected void _loop() {	
+		objectLoop();
+	}
 	
+	
+	abstract protected void objectLoop();
+	abstract protected void objectInit();
 	
 
 }

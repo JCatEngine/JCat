@@ -1,19 +1,17 @@
 package main;
 
 import JGame.JGame;
+import JGame.GameObject.GameObject;
 import JGame.GameObject.LoopObject;
 
-public class test extends LoopObject{
+public class Aircraft extends GameObject{
 
-	public test(JGame game) {
-		super(game);
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	@Override
 	protected void loop() {
 		System.out.println("666");
-		
+		x+=5;
 	}
 
 	@Override
