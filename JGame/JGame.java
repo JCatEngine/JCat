@@ -1,6 +1,8 @@
 package JGame;
 
+import JGame.GameObject.DisplayObject;
 import JGame.GameObject.EventDispatcher;
+import JGame.GameObject.Root;
 import JGame.GameObject.Component.Event.UpdateEvent;
 import JGame.Manager.EventManager;
 import JGame.Manager.GameObjectManager;
@@ -23,6 +25,11 @@ public class JGame {
 	private GameObjectManager gameObjectManager;
 	private RenderManager renderManager;
 	private InputManager inputManager;
+	
+	/**
+	 * 顶级对象 从该对象开始向下渲染 因此所有需要渲染的对象必须在该对象的子树下
+	 */
+	private Root root;
 
 	public JGame(GameStage gameStage, int frameRate) {
 		initManager();
@@ -41,6 +48,9 @@ public class JGame {
 		
 		
 		gameStage.setInputManager(inputManager);
+		
+		
+		root=new Root();
 		
 	}
 
@@ -75,7 +85,7 @@ public class JGame {
 		//处理消息
 		eventManager.dealMessage();
 		//进行渲染
-		renderManager.render(gameStage);
+		renderManager.render(gameStage,root);
 		//解锁输入
 		inputManager.upLockInput();
 		
@@ -110,5 +120,16 @@ public class JGame {
 	public void addObject(EventDispatcher eventDispatcher) {
 		
 		eventDispatcher.addToGame(this);
+	}
+
+
+	public Root getRoot() {
+		return root;
+	}
+	
+	
+	public void addToRoot(DisplayObject object) {
+		
+		root.addChild(object);
 	}
 }

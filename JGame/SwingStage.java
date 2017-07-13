@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,16 +67,7 @@ public class SwingStage extends JFrame implements GameStage{
 		setVisible(true);
 	}
 
-	@Override
-	public void render(DisplayObject d) {
-		
-		if(d.getImage()!=null)
-		{
-			panel.getGraphics().drawImage(d.getImage(), d.x, d.y, d.width,d.height, null);
-			
-		}
-		
-	}
+
 
 	@Override
 	public void clear() {
@@ -86,6 +78,14 @@ public class SwingStage extends JFrame implements GameStage{
 	public void setInputManager(InputManager manager) {
 		this.manager = manager;
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void render(BufferedImage image, int x, int y, int width, int height, int angle) {
+		
+			panel.getGraphics().drawImage(image, x, y, width,height, null);
+		
 		
 	}
 
