@@ -51,6 +51,7 @@ public class JGame {
 		
 		
 		root=new Root();
+		root.addToGame(this);
 		
 	}
 

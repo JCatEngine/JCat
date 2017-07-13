@@ -1,5 +1,6 @@
 package JGame;
 
+import javax.imageio.ImageTypeSpecifier;
 import javax.swing.JFrame;
 
 import JGame.GameObject.DisplayObject;
@@ -24,7 +25,10 @@ public class SwingStage extends JFrame implements GameStage{
 	private int planeHeight;
 	private InputManager manager;
 
-	
+	/**
+	 * 缓冲区
+	 */
+	private BufferedImage cache;
 	
 	public SwingStage(int width, int height) {
 		
@@ -62,6 +66,9 @@ public class SwingStage extends JFrame implements GameStage{
 			}
 		});
 		
+		cache=new BufferedImage(width, height, 1);
+		
+		
 		
 		getContentPane().add(panel);
 		setVisible(true);
@@ -71,7 +78,7 @@ public class SwingStage extends JFrame implements GameStage{
 
 	@Override
 	public void clear() {
-		panel.getGraphics().clearRect(0, 0, planeWidth, planeHeight);
+		cache.getGraphics().clearRect(0, 0, planeWidth, planeHeight);
 	}
 
 	@Override
@@ -83,9 +90,18 @@ public class SwingStage extends JFrame implements GameStage{
 
 	@Override
 	public void render(BufferedImage image, int x, int y, int width, int height, int angle) {
+		//先绘制在缓冲区上 最后一次性渲染出来 防止闪烁
+		cache.getGraphics().drawImage(image, x, y, width,height, null);
 		
-			panel.getGraphics().drawImage(image, x, y, width,height, null);
 		
+	}
+
+
+
+	@Override
+	public void renderOver() {
+		panel.getGraphics().clearRect(0, 0, planeWidth, planeHeight);
+		panel.getGraphics().drawImage(cache, 0, 0, planeWidth,planeHeight, null);
 		
 	}
 

@@ -27,15 +27,16 @@ public class RenderManager extends BaseManager{
 		gameStage.clear();
 		_render(gameStage,root);
 		
+		gameStage.renderOver();
 	}
 
 	
 	
 	private void _render(GameStage gameStage, DisplayObject parent) {
 		//进行递归渲染对象
-		if(parent.getImage()!=null)
+		if(parent.getCom_anime()!=null)
 		{
-			BufferedImage image=parent.getImage();
+			BufferedImage image=parent.getCom_anime().getImage();
 			int width=parent.width;
 			int height=parent.height;
 			int x=parent.x;

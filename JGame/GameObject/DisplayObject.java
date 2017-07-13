@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
 import JGame.JGame;
+import JGame.GameObject.Component.Anime.AnimeComponent;
 
 /**
  * 显示对象的基类(可能不是游戏对象 比如渲染到屏幕上的调试信息)
@@ -25,8 +26,6 @@ public abstract class DisplayObject extends LoopObject{
 	 */
 	public int angle;
 	
-	private BufferedImage Image;
-	
 	
 	/**
 	 * 子级(越后加入的层级越高)
@@ -41,6 +40,11 @@ public abstract class DisplayObject extends LoopObject{
 	 */
 	public Root root;
 	
+	/**
+	 * 动画组件
+	 */
+	private AnimeComponent com_anime;
+	
 	@Override
 	public void addToGame(JGame jGame) {
 		super.addToGame(jGame);
@@ -50,6 +54,9 @@ public abstract class DisplayObject extends LoopObject{
 //		game.getRenderManager().addDisplayObject(this);
 		
 		root=jGame.getRoot();
+		
+		com_anime=new AnimeComponent(this);
+		
 		displayInit();
 	}
 	
@@ -57,6 +64,7 @@ public abstract class DisplayObject extends LoopObject{
 	@Override
 	protected void objectLoop() {
 		
+		com_anime.loopAnime();
 		
 		displayLoop();
 	}
@@ -72,21 +80,7 @@ public abstract class DisplayObject extends LoopObject{
 	protected abstract void displayInit();
 
 
-	public BufferedImage getImage() {
-		return Image;
-	}
 
-
-	public void setImage(BufferedImage image) {
-		Image = image;
-		
-		//初始化长宽为图片的长宽
-		if(width==0&&height==0)
-		{
-			width=image.getWidth();
-			height=image.getHeight();
-		}
-	}
 	
 	/**
 	 * 添加子级
@@ -133,8 +127,11 @@ public abstract class DisplayObject extends LoopObject{
 	public LinkedList<DisplayObject> getChilds() {
 		return childs;
 	}
-	
-	
+
+
+	public AnimeComponent getCom_anime() {
+		return com_anime;
+	}
 	
 	
 }

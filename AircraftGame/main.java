@@ -18,24 +18,30 @@ public class main {
 		//不过却有一个进程同时运行多个游戏的能力
 		JGame jGame=new JGame(600,800,30);
 		Aircraft aircraft=new Aircraft();
+		jGame.addObject(aircraft);
+		jGame.addToRoot(aircraft);
 		aircraft.x=300;
 		aircraft.y=600;
 		aircraft.width=50;
 		aircraft.height=50;
-		aircraft.setImage(Util.LoadImg("aircraft.png"));
-		jGame.addObject(aircraft);
+		aircraft.getCom_anime().addImage(Util.LoadImg("aircraft.png"));
+		
 		
 		//添加到顶层渲染中 这和上面的add不一样 上面的只是为了一种资源绑定关系
 		//而也不是所有的对象都在顶层渲染中 
-		jGame.addToRoot(aircraft);
 		
 		
-		Aircraft aircraft2=new Aircraft();
-		aircraft2.x=0;
-		aircraft2.y=-50;
-		aircraft2.width=50;
-		aircraft2.height=50;
-		aircraft2.setImage(Util.LoadImg("aircraft.png"));
-		aircraft.addChild(aircraft2);
+		Money money=new Money();
+		jGame.addObject(money);
+		jGame.addToRoot(money);
+		money.x=100;
+		money.y=100;
+		money.getCom_anime().CreateAnime("test", 12, Util.LoadImg("testAnime1.png"));
+		money.getCom_anime().addKeyFrame("test", 4, Util.LoadImg("testAnime2.png"));
+		money.getCom_anime().addKeyFrame("test", 7, Util.LoadImg("testAnime3.png"));
+		money.getCom_anime().addKeyFrame("test", 10, Util.LoadImg("testAnime4.png"));
+		
+		
+		jGame.getRoot().getCom_anime().addImage(Util.LoadImg("back.jpeg"));
 	}
 }
