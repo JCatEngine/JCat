@@ -2,7 +2,7 @@ package JGame.Render;
 
 import java.awt.image.BufferedImage;
 
-import JGame.GameObject.DisplayObject;
+import JGame.RenderSystem.Display.DisplayObject;
 
 public interface RenderAble {
 

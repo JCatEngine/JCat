@@ -3,8 +3,8 @@ package JGame;
 import javax.imageio.ImageTypeSpecifier;
 import javax.swing.JFrame;
 
-import JGame.GameObject.DisplayObject;
 import JGame.Manager.InputManager.InputManager;
+import JGame.RenderSystem.Display.DisplayObject;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;

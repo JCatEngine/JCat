@@ -1,15 +1,14 @@
 package JGame;
 
-import JGame.GameObject.DisplayObject;
-import JGame.GameObject.EventDispatcher;
-import JGame.GameObject.Root;
-import JGame.GameObject.Component.Event.UpdateEvent;
+import JGame.GameCore.GameObject.Component.Event.UpdateEvent;
 import JGame.Manager.EventManager;
 import JGame.Manager.GameObjectManager;
 import JGame.Manager.LoopManager;
 import JGame.Manager.InputManager.InputManager;
 import JGame.Manager.LoopManager.OnResponceListener;
 import JGame.Render.RenderManager;
+import JGame.RenderSystem.Display.DisplayObject;
+import JGame.RenderSystem.Display.EventDispatcher;
 
 public class JGame {
 
@@ -32,6 +31,7 @@ public class JGame {
 	private Root root;
 
 	public JGame(GameStage gameStage, int frameRate) {
+		//init subSystem
 		initManager();
 		
 		this.gameStage = gameStage;

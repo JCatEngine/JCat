@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import JGame.GameObject.GameObject;
+import JGame.GameCore.GameObject.GameObject;
 
 public class GameObjectManager extends BaseManager{
 

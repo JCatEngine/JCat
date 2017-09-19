@@ -5,9 +5,8 @@ import java.util.List;
 
 import javax.swing.text.AbstractDocument;
 
-
-import JGame.GameObject.EventDispatcher;
-import JGame.GameObject.Component.Event.AbstractEvent;
+import JGame.GameCore.GameObject.Component.Event.AbstractEvent;
+import JGame.RenderSystem.Display.EventDispatcher;
 
 /**
  * event管理器(注意并不是所有可收发事件的对象都是游戏对象,游戏对象更加高级)

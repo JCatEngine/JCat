@@ -6,10 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import JGame.GameStage;
-import JGame.GameObject.DisplayObject;
-import JGame.GameObject.GameObject;
-import JGame.GameObject.Root;
+import JGame.GameCore.GameObject.GameObject;
+import JGame.GameCore.GameObject.Root;
 import JGame.Manager.BaseManager;
+import JGame.RenderSystem.Display.DisplayObject;
 
 public class RenderManager extends BaseManager{
 
