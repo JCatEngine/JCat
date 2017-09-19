@@ -1,4 +1,4 @@
-package JGame.Manager;
+package JGame.GameCore.Manager;
 
 import java.util.ArrayList;
 import java.util.List;

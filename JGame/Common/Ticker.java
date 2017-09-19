@@ -2,8 +2,6 @@ package JGame.Common;
 
 import java.util.ArrayList;
 
-import JGame.Manager.LoopManager.OnResponceListener;
-
 public class Ticker {
 	
 	public interface OnResponceListener {

@@ -3,6 +3,7 @@ package JGame.RenderSystem.Display;
 import java.util.function.Function;
 
 import JGame.GameCore.GameObject.Component.Anime.AnimeComponent;
+import JGame.RenderSystem.Display.Calculation.Transform;
 import JGame.RenderSystem.Math.Matrix;
 
 /**
@@ -217,11 +218,11 @@ public abstract class DisplayObject extends EventDispatcher{
 		if(parent!=null)
 		{
 			Transform transform2=parent.getWorldTransform();
-			this.worldTransform=transform.append(transform2);
+			this.worldTransform=transform.clone().append(transform2);
 		}
 		else
 		{
-			this.worldTransform=this.localTransform;
+			this.worldTransform=this.localTransform.clone();
 		}
 		
 	}

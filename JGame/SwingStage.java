@@ -3,7 +3,7 @@ package JGame;
 import javax.imageio.ImageTypeSpecifier;
 import javax.swing.JFrame;
 
-import JGame.Manager.InputManager.InputManager;
+import JGame.GameCore.Manager.InputManager.InputManager;
 import JGame.RenderSystem.Display.DisplayObject;
 
 import javax.swing.JPanel;
@@ -20,6 +20,7 @@ import java.util.Map;
  *
  */
 public class SwingStage extends JFrame implements GameStage{
+	
 	private JPanel panel;
 	private int planeWidth;
 	private int planeHeight;

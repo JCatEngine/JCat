@@ -10,22 +10,39 @@ import JGame.JGame;
 import JGame.SwingStage;
 import JGame.Common.Ticker;
 import JGame.Common.Ticker.OnResponceListener;
+import JGame.GameCore.Loader.ImageLoader;
+import JGame.GameCore.Loader.ImageLoader.onAchieveListener;
 import JGame.RenderSystem.RenderSystem;
+import JGame.RenderSystem.Display.Bitmap;
 import JGame.RenderSystem.Display.EventDispatcher;
+import JGame.RenderSystem.Display.Sprite;
 import JGame.RenderSystem.Display.Stage;
+import JGame.RenderSystem.Textures.Texture;
 import SampleAircraftGame.Util.Util;
 
 public class main {
 
 	public static void main(String[] args) throws IOException {
 		
-		
-		RenderSystem system=new RenderSystem(600, 800);
-		Stage stage=system.getStage();
 
-		Aircraft aircraft=new Aircraft();
+		RenderSystem system=new RenderSystem(600, 800);
 		
-		system.render();
+		ImageLoader loader=new ImageLoader(system);
+		loader
+		.add("src\\resources\\aircraft.png")
+		.add("src\\resources\\back.jpeg")
+		.start(new onAchieveListener() {
+
+			@Override
+			public void onAchieve(ImageLoader loader) {
+				
+				loadAchieve(system);
+			}
+		});
+		
+		
+		
+
 		
 		
 //		jGame.addObject(aircraft);
@@ -53,5 +70,22 @@ public class main {
 //		
 //		
 //		jGame.getRoot().getCom_anime().addImage(Util.LoadImg("back.jpeg"));
+	}
+
+	protected static void loadAchieve(RenderSystem system) {
+		
+		Stage stage=system.getStage();
+
+		Sprite sprite=new Sprite();
+		Texture texture=system.getImageManager().getTextureByName("aircraft");
+
+		Bitmap bitmap=new Bitmap(texture);
+		
+		sprite.addChild(bitmap);
+		
+		stage.addChild(sprite);
+		
+		system.render();
+		
 	}
 }

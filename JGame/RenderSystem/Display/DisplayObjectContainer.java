@@ -25,7 +25,7 @@ public class DisplayObjectContainer extends InteractiveObject{
 	 */
 	public void addChildAt(DisplayObject displayObject, int index) {
 		
-		checkIndex(index,0,childs.size()-1);
+		checkIndex(index,0,childs.size());
 		
 		if(displayObject.parent!=null)
 		{

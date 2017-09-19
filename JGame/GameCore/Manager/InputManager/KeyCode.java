@@ -1,4 +1,4 @@
-package JGame.Manager.InputManager;
+package JGame.GameCore.Manager.InputManager;
 
 public class KeyCode {
 	 public static final int VK_ENTER          = '\n';

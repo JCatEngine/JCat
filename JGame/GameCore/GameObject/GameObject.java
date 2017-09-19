@@ -4,7 +4,7 @@ import JGame.JGame;
 import JGame.GameCore.GameObject.Component.Event.AbstractEvent;
 import JGame.GameCore.GameObject.Component.Event.EventRecall;
 import JGame.GameCore.GameObject.Component.Event.EventType;
-import JGame.Manager.InputManager.InputManager;
+import JGame.GameCore.Manager.InputManager.InputManager;
 import JGame.RenderSystem.Display.DisplayObject;
 import JGame.RenderSystem.Display.MovieClip;
 

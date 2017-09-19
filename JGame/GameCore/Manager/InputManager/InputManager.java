@@ -1,10 +1,10 @@
-package JGame.Manager.InputManager;
+package JGame.GameCore.Manager.InputManager;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import JGame.GameStage;
-import JGame.Manager.BaseManager;
+import JGame.GameCore.Manager.BaseManager;
 
 /**
  * 输入管理器

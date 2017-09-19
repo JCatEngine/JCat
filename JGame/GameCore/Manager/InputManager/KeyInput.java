@@ -1,4 +1,4 @@
-package JGame.Manager.InputManager;
+package JGame.GameCore.Manager.InputManager;
 
 public interface KeyInput {
 

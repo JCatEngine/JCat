@@ -1,11 +1,11 @@
 package JGame;
 
 import JGame.GameCore.GameObject.Component.Event.UpdateEvent;
-import JGame.Manager.EventManager;
-import JGame.Manager.GameObjectManager;
-import JGame.Manager.LoopManager;
-import JGame.Manager.InputManager.InputManager;
-import JGame.Manager.LoopManager.OnResponceListener;
+import JGame.GameCore.Manager.EventManager;
+import JGame.GameCore.Manager.GameObjectManager;
+import JGame.GameCore.Manager.LoopManager;
+import JGame.GameCore.Manager.InputManager.InputManager;
+import JGame.GameCore.Manager.LoopManager.OnResponceListener;
 import JGame.Render.RenderManager;
 import JGame.RenderSystem.Display.DisplayObject;
 import JGame.RenderSystem.Display.EventDispatcher;
