@@ -5,18 +5,17 @@ import java.util.LinkedList;
 public class DisplayObjectContainer extends InteractiveObject{
 
 	/**
-	 * 子级(越后加入的层级越高)
+	 * childs
 	 */
 	private LinkedList<DisplayObject> childs = new LinkedList<>();
 
 	/**
-	 * 添加子级
+	 * add child object
 	 * @param displayObject
 	 */
 	public void addChild(DisplayObject displayObject) {
 		
-		childs.add(displayObject);
-		displayObject.parent=this;
+		addChildAt(displayObject, childs.size());
 	}
 
 	/**
@@ -26,11 +25,37 @@ public class DisplayObjectContainer extends InteractiveObject{
 	 */
 	public void addChildAt(DisplayObject displayObject, int index) {
 		
-		childs.add(index, displayObject);
+		checkIndex(index,0,childs.size()-1);
+		
+		if(displayObject.parent!=null)
+		{
+			displayObject.parent.removeChild(displayObject);
+			displayObject.parent=this;
+		}
+		
+		if(index==childs.size())
+		{
+			childs.add(displayObject);
+			
+		}
+		else
+		{
+			childs.add(index, displayObject);
+		}
+		
+	}
+
+	private void checkIndex(int index, int min, int max) {
+		
+		if(index<min||index>max)
+		{
+			throw new RuntimeException("out of range");
+		}
+		
 	}
 
 	/**
-	 * 返回子级数量
+	 * 
 	 * @return
 	 */
 	public int getChildCount() {
@@ -39,7 +64,7 @@ public class DisplayObjectContainer extends InteractiveObject{
 	}
 
 	/**
-	 * 移除子级
+	 * remove child
 	 * @return
 	 */
 	public void removeChild(DisplayObject displayObject) {
@@ -47,6 +72,10 @@ public class DisplayObjectContainer extends InteractiveObject{
 		this.childs.remove(displayObject);
 	}
 
+	/**
+	 * get all childs
+	 * @return
+	 */
 	public LinkedList<DisplayObject> getChilds() {
 		return childs;
 	}

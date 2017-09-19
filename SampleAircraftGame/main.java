@@ -25,6 +25,7 @@ public class main {
 
 		Aircraft aircraft=new Aircraft();
 		
+		system.render();
 		
 		
 //		jGame.addObject(aircraft);

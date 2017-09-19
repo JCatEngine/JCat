@@ -56,9 +56,18 @@ public abstract class DisplayObject extends EventDispatcher{
 	 * stage reference
 	 */
 	protected Stage stage;
-	
-	
-	
+	/**
+	 * localTransform,will be recalcued per frame
+	 */
+	private Matrix localTransform;
+	/**
+	 * worldTransform,will be recalcued per frame
+	 */
+	private Matrix worldTransform;
+	/**
+	 * parent
+	 */
+	public DisplayObjectContainer parent;
 	
 	
 	public int getX() {
@@ -175,31 +184,34 @@ public abstract class DisplayObject extends EventDispatcher{
 	
 	public Matrix getLocalTransform()
 	{
-		return null;
+		return localTransform;
 		
 	}
 	
 	public Matrix getWorldTransform()
 	{
-		return null;
+		return worldTransform;
+		
+	}
+
+
+	public void updateTransform() {
+		
+		//update localTransform
+		
+		//update worldTransform
+		if(parent!=null)
+		{
+			
+		}
+		else
+		{
+			this.worldTransform=this.localTransform;
+		}
 		
 	}
 	
-//	@Override
-//	public void addToGame(JGame jGame) {
-//		super.addToGame(jGame);
-//		
-//
-////		//将自己添加到渲染的根对象组中
-////		game.getRenderManager().addDisplayObject(this);
-//		
-//		root=jGame.getRoot();
-//		
-//		com_anime=new AnimeComponent(this);
-//		
-//		displayInit();
-//	}
-//	
+	
 	
 
 
