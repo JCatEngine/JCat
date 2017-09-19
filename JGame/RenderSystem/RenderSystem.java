@@ -67,10 +67,12 @@ public class RenderSystem extends EventDispatcher{
 	 */
 	public void render()
 	{
+		//dispatch event before render
 		
 		renderObject(root);
 		
-		
+		//dispatch event after render
+
 	}
 	
 	private void renderObject(DisplayObject displayObject) {
@@ -83,7 +85,7 @@ public class RenderSystem extends EventDispatcher{
 			Texture texture=bitmap.getTexture();
 		}
 		
-		if(displayObject instanceof DisplayObjectContainer)
+		else if(displayObject instanceof DisplayObjectContainer)
 		{
 			DisplayObjectContainer displayObjectContainer=(DisplayObjectContainer) displayObject;
 			for(DisplayObject child:displayObjectContainer.getChilds())

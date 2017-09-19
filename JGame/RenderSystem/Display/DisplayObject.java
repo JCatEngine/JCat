@@ -35,11 +35,11 @@ public abstract class DisplayObject extends EventDispatcher{
 	/**
 	 * scale x
 	 */
-	protected int scaleX;
+	protected int scaleX=1;
 	/**
 	 * scale y
 	 */
-	protected int scaleY;
+	protected int scaleY=1;
 	/**
 	 * alpha 0~1
 	 */
@@ -59,11 +59,11 @@ public abstract class DisplayObject extends EventDispatcher{
 	/**
 	 * localTransform,will be recalcued per frame
 	 */
-	private Matrix localTransform;
+	private Transform localTransform;
 	/**
 	 * worldTransform,will be recalcued per frame
 	 */
-	private Matrix worldTransform;
+	private Transform worldTransform;
 	/**
 	 * parent
 	 */
@@ -182,27 +182,42 @@ public abstract class DisplayObject extends EventDispatcher{
 	}
 
 	
-	public Matrix getLocalTransform()
+	/**
+	 * 
+	 * @return
+	 */
+	public Transform getLocalTransform()
 	{
 		return localTransform;
 		
 	}
 	
-	public Matrix getWorldTransform()
+	/**
+	 * 
+	 * @return
+	 */
+	public Transform getWorldTransform()
 	{
 		return worldTransform;
 		
 	}
 
 
+	/**
+	 * auto called before render
+	 */
 	public void updateTransform() {
 		
 		//update localTransform
+		Transform transform=new Transform(x,y,rotation,scaleX,scaleY);
+		this.localTransform=transform;
+		
 		
 		//update worldTransform
 		if(parent!=null)
 		{
-			
+			Transform transform2=parent.getWorldTransform();
+			this.worldTransform=transform.append(transform2);
 		}
 		else
 		{
