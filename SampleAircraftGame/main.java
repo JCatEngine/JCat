@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.lang.model.element.VariableElement;
 
 import JGame.JGame;
 import JGame.SwingStage;
 import JGame.Common.Ticker;
 import JGame.Common.Ticker.OnResponceListener;
+import JGame.RenderSystem.RenderSystem;
 import JGame.RenderSystem.Display.EventDispatcher;
+import JGame.RenderSystem.Display.Stage;
 import SampleAircraftGame.Util.Util;
 
 public class main {
@@ -17,18 +20,13 @@ public class main {
 	public static void main(String[] args) throws IOException {
 		
 		
-		Ticker ticker=new Ticker(100);
-		ticker.addListener(new OnResponceListener() {
-			
-			@Override
-			public void onResponce() {
-				System.out.println("666");
-				
-			}
-		});
+		RenderSystem system=new RenderSystem(600, 800);
+		Stage stage=system.getStage();
+
+		Aircraft aircraft=new Aircraft();
 		
-		//JGame jGame=new JGame(600,800,30);
-//		Aircraft aircraft=new Aircraft();
+		
+		
 //		jGame.addObject(aircraft);
 //		jGame.addToRoot(aircraft);
 //		aircraft.x=300;

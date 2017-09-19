@@ -1,49 +1,189 @@
 package JGame.RenderSystem.Display;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.util.LinkedList;
+import java.util.function.Function;
 
-import JGame.JGame;
 import JGame.GameCore.GameObject.Component.Anime.AnimeComponent;
+import JGame.RenderSystem.Math.Matrix;
 
 /**
- * 显示对象的基类(可能不是游戏对象 比如渲染到屏幕上的调试信息)
+ * baseobject that can be render to screen
  * @author Administrator
  *
  */
 public abstract class DisplayObject extends EventDispatcher{
 
 	/**
-	 * 显示数据(xy为相对坐标)
+	 * x position of objecy
 	 */
-	public int x;
-	public int y;
-	public int width;
-	public int height;
+	protected int x;
 	/**
-	 * 相对角度(是角度不是弧度)
+	 * y position of object
 	 */
-	public int angle;
+	protected int y;
+	/**
+	 * width
+	 */
+	protected int width;
+	/**
+	 * height
+	 */
+	protected int height;
+	/**
+	 * The rotation value of the object, in radians
+	 */
+	protected int rotation;
+	/**
+	 * scale x
+	 */
+	protected int scaleX;
+	/**
+	 * scale y
+	 */
+	protected int scaleY;
+	/**
+	 * alpha 0~1
+	 */
+	protected float alpha;
+	/**
+	 * name of the object
+	 */
+	protected String name;
+	/**
+	 * is this object visible?
+	 */
+	protected boolean visible;
+	/**
+	 * stage reference
+	 */
+	protected Stage stage;
 	
 	
-	/**
-	 * 子级(越后加入的层级越高)
-	 */
-	private LinkedList<DisplayObject> childs=new LinkedList<>();
-	/**
-	 * 父级
-	 */
-	public DisplayObject parent;
-	/**
-	 * 根对象
-	 */
-	public DisplayObject root;
 	
-	/**
-	 * 动画组件
-	 */
-	private AnimeComponent com_anime;
+	
+	
+	public int getX() {
+		return x;
+	}
+
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+
+	public int getY() {
+		return y;
+	}
+
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+
+	public int getWidth() {
+		return width;
+	}
+
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+
+	public int getHeight() {
+		return height;
+	}
+
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+
+	public int getRotation() {
+		return rotation;
+	}
+
+
+	public void setRotation(int rotation) {
+		this.rotation = rotation;
+	}
+
+
+	public int getScaleX() {
+		return scaleX;
+	}
+
+
+	public void setScaleX(int scaleX) {
+		this.scaleX = scaleX;
+	}
+
+
+	public int getScaleY() {
+		return scaleY;
+	}
+
+
+	public void setScaleY(int scaleY) {
+		this.scaleY = scaleY;
+	}
+
+
+	public float getAlpha() {
+		return alpha;
+	}
+
+
+	public void setAlpha(float alpha) {
+		this.alpha = alpha;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
+
+	public Stage getStage() {
+		return stage;
+	}
+
+
+	public DisplayObject() {
+		
+		
+
+	}
+
+	
+	public Matrix getLocalTransform()
+	{
+		return null;
+		
+	}
+	
+	public Matrix getWorldTransform()
+	{
+		return null;
+		
+	}
 	
 //	@Override
 //	public void addToGame(JGame jGame) {
@@ -65,56 +205,6 @@ public abstract class DisplayObject extends EventDispatcher{
 
 
 	
-	/**
-	 * 添加子级
-	 * @param displayObject
-	 */
-	public void addChild(DisplayObject displayObject) {
-		
-		childs.add(displayObject);
-		displayObject.parent=this;
-	}
-	
-	/**
-	 * 在指定位置添加子级
-	 * @param displayObject
-	 * @param index
-	 */
-	public void addChildAt(DisplayObject displayObject,int index) {
-		
-		childs.add(index, displayObject);
-	}
-	
-	/**
-	 * 返回子级数量
-	 * @return
-	 */
-	public int getChildCount() {
-		
-		return childs.size();
-	}
-	
-	
-	
 
-	/**
-	 * 移除子级
-	 * @return
-	 */
-	public void removeChild(DisplayObject displayObject) {
-		
-		this.childs.remove(displayObject);
-	}
-
-
-	public LinkedList<DisplayObject> getChilds() {
-		return childs;
-	}
-
-
-	public AnimeComponent getCom_anime() {
-		return com_anime;
-	}
-	
 	
 }
