@@ -17,4 +17,6 @@ public class Bitmap extends DisplayObject{
 		return texture;
 	}
 
+	
+
 }

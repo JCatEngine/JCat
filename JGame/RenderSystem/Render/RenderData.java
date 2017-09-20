@@ -5,6 +5,6 @@ import JGame.RenderSystem.Display.Calculation.Transform;
 public class RenderData {
 
 	public Transform transform;
-	public float alpha;
+	public double alpha;
 
 }

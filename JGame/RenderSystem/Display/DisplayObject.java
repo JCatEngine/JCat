@@ -32,19 +32,19 @@ public abstract class DisplayObject extends EventDispatcher{
 	/**
 	 * The rotation value of the object, in angle
 	 */
-	public float rotation;
+	public double rotation;
 	/**
 	 * scale x
 	 */
-	protected float scaleX=1;
+	protected double scaleX=1;
 	/**
 	 * scale y
 	 */
-	protected float scaleY=1;
+	protected double scaleY=1;
 	/**
 	 * alpha 0~1
 	 */
-	public float alpha=1;
+	public double alpha=1;
 	/**
 	 * name of the object
 	 */
@@ -69,6 +69,11 @@ public abstract class DisplayObject extends EventDispatcher{
 	 * parent
 	 */
 	public DisplayObjectContainer parent;
+	/**
+	 * world alpha of the object
+	 * it's will be auto updated before render
+	 */
+	private double worldAlpha=1;
 	
 	
 
@@ -87,7 +92,7 @@ public abstract class DisplayObject extends EventDispatcher{
 		else
 		{
 			
-			scaleX=((float)width/this.width);
+			scaleX=((double)width/this.width);
 			
 		}
 		
@@ -99,6 +104,7 @@ public abstract class DisplayObject extends EventDispatcher{
 	}
 
 
+	
 	public void setHeight(int height) {
 		
 		//if it's height==0,change it's width was useless
@@ -113,22 +119,22 @@ public abstract class DisplayObject extends EventDispatcher{
 	}
 
 
-	public float getScaleX() {
+	public double getScaleX() {
 		return scaleX;
 	}
 
 
-	public void setScaleX(float scaleX) {
+	public void setScaleX(double scaleX) {
 		this.scaleX = scaleX;
 	}
 
 
-	public float getScaleY() {
+	public double getScaleY() {
 		return scaleY;
 	}
 
 
-	public void setScaleY(float scaleY) {
+	public void setScaleY(double scaleY) {
 		this.scaleY = scaleY;
 	}
 
@@ -165,6 +171,27 @@ public abstract class DisplayObject extends EventDispatcher{
 		
 	}
 
+	public void updateAlpha()
+	{
+		
+		if(parent!=null)
+		{
+			this.worldAlpha=parent.getWorldAlpha()*this.alpha;
+		}
+		else
+		{
+			this.worldAlpha=this.alpha;
+		}
+		
+	}
+
+	
+	
+	public double getWorldAlpha() {
+		
+		return worldAlpha;
+	}
+
 
 	/**
 	 * auto called before render
@@ -180,9 +207,21 @@ public abstract class DisplayObject extends EventDispatcher{
 		if(parent!=null)
 		{
 			
-			Transform transform2=parent.getWorldTransform();
-			this.worldTransform=transform.clone().append(transform2);
-			this.worldTransform.updateFromMatrix();
+			Transform parentTransform=parent.getWorldTransform();
+			
+			//though these value can just decompose from matrix in the transform
+			//but i konw little about matrix calculation,
+			//so i just use this way to calculate;
+			this.worldTransform=transform.clone();
+			this.worldTransform.x+=parentTransform.x;
+			this.worldTransform.y+=parentTransform.y;
+			this.worldTransform.rotation+=parentTransform.rotation;
+			this.worldTransform.scaleX*=parentTransform.scaleX;
+			this.worldTransform.scaleY*=parentTransform.scaleY;
+			
+			//also append the matrix to ensure data are consistent with
+			//matrix 
+			this.worldTransform.append(parentTransform);
 			
 		}
 		else

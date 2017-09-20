@@ -62,12 +62,12 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		double scaleX=transform.scaleX;
 		double scaleY=transform.scaleY;
 		
-		float alpha=renderData.alpha;
+		double alpha=renderData.alpha;
 		
 		int width=(int) (image.getWidth(null)*scaleX);
 		int height=(int) (image.getHeight(null)*scaleY);
 		
-		float radins=(float) (transform.rotation/180*Math.PI);
+		double radins= (transform.rotation/180*Math.PI);
 		
 		Graphics2D graphics2d=cache.createGraphics();
 		
@@ -76,7 +76,7 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		graphics2d.translate(x, y);
 		graphics2d.rotate(radins);
 		
-		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,alpha);
+		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float) alpha);
 		graphics2d.setComposite(alphaComposite);
 		graphics2d.drawImage(image, 0, 0,width,height, null);
 		

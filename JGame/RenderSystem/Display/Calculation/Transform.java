@@ -8,15 +8,15 @@ public class Transform {
 	
 	public int x;
 	public int y;
-	public float rotation;
-	public float scaleX;
-	public float scaleY;
+	public double rotation;
+	public double scaleX;
+	public double scaleY;
 
 	
 	
 
 
-	public Transform(int x, int y, float rotation2, float scaleX2, float scaleY2) {
+	public Transform(int x, int y, double rotation2, double scaleX2, double scaleY2) {
 		this.x = x;
 		this.y = y;
 		this.rotation = rotation2;
@@ -51,11 +51,7 @@ public class Transform {
 	}
 
 
-	public void updateFromMatrix() {
-		
-		matrix.decompose(this);
-		
-	}
+
 
 	
 

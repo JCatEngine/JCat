@@ -89,7 +89,7 @@ public class main {
 		
 		
 		sprite.addChild(bitmap);
-		//sprite.addChild(bitmap2);
+		sprite.addChild(bitmap2);
 		bitmap2.x=100;
 		bitmap2.y=50;
 		
@@ -105,7 +105,7 @@ public class main {
 
 			@Override
 			public void onResponce() {
-				loop(bitmap,system);
+				loop(sprite,system);
 				
 			}
 		});
@@ -113,11 +113,12 @@ public class main {
 		
 	}
 
-	protected static void loop(Bitmap bitmap, RenderSystem system) {
+	protected static void loop(Sprite sprite, RenderSystem system) {
 		
 	
 		//sprite.x+=5;
-		bitmap.rotation++;
+		sprite.rotation++;
+		sprite.alpha=0.5;
 		system.render();
 		
 	}
