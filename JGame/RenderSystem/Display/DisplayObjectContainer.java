@@ -2,6 +2,8 @@ package JGame.RenderSystem.Display;
 
 import java.util.LinkedList;
 
+import JGame.RenderSystem.Display.Calculation.Bound;
+
 public class DisplayObjectContainer extends InteractiveObject{
 
 	/**
@@ -79,8 +81,26 @@ public class DisplayObjectContainer extends InteractiveObject{
 	 * @return
 	 */
 	public LinkedList<DisplayObject> getChilds() {
-		return childs;
+		
+		LinkedList<DisplayObject> linkedList=new LinkedList<>();
+		childs.forEach(d->linkedList.add(d));
+		
+		return linkedList;
+		
 	}
 
+	
+	@Override
+	void updateBound() {
+		Bound bound=new Bound();
+		
+		for (DisplayObject displayObject : childs) {
+			
+			bound.addBound(displayObject.getBound(displayObject));
+		}
+		
+		localBound=bound;
+	}
+	
 	
 }

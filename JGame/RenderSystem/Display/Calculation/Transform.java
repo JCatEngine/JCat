@@ -1,6 +1,7 @@
 package JGame.RenderSystem.Display.Calculation;
 
 import JGame.RenderSystem.Math.Matrix;
+import JGame.RenderSystem.Math.Vector2;
 
 public class Transform {
 
@@ -31,9 +32,11 @@ public class Transform {
 	public void updateMatrix()
 	{
 		this.matrix=new Matrix();
-		matrix.translate(x, y);
-		matrix.rotate(rotation);
+		
+		matrix.rotate(rotation/180f*Math.PI);
 		matrix.scale(scaleX, scaleY);
+		matrix.translate(x, y);
+		
 	}
 	
 	public Transform append(Transform transform2) {
@@ -48,6 +51,12 @@ public class Transform {
 	{
 		Transform transform=new Transform(x, y, rotation, scaleX, scaleY);
 		return transform;
+	}
+
+
+	public Vector2 apply(Vector2 vector2) {
+		// TODO Auto-generated method stub
+		return matrix.apply(vector2);
 	}
 
 

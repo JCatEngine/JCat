@@ -3,8 +3,11 @@ package JGame.RenderSystem.Display;
 import java.util.function.Function;
 
 import JGame.GameCore.GameObject.Component.Anime.AnimeComponent;
+import JGame.RenderSystem.Display.Calculation.Bound;
 import JGame.RenderSystem.Display.Calculation.Transform;
 import JGame.RenderSystem.Math.Matrix;
+import JGame.RenderSystem.Math.Rect;
+import JGame.RenderSystem.Math.Vector2;
 
 /**
  * baseobject that can be render to screen
@@ -22,11 +25,11 @@ public abstract class DisplayObject extends EventDispatcher{
 	 */
 	public int y;
 	/**
-	 * width
+	 * the origin width(before scale and rotate,be notice rotation also change the final width) 
 	 */
 	protected int width;
 	/**
-	 * height
+	 * the origin height(before scale and rotate,be notice rotation also change the final height) 
 	 */
 	protected int height;
 	/**
@@ -74,45 +77,51 @@ public abstract class DisplayObject extends EventDispatcher{
 	 * it's will be auto updated before render
 	 */
 	private double worldAlpha=1;
+	/**
+	 * localBound
+	 */
+	protected Bound localBound;
 	
 	
 
-	public int getWidth() {
-		return (int) (width*scaleX);
+	public double getWidth() {
+		
+		return getBound(this).width;
 	}
 
 
-	public void setWidth(int width) {
+	public void setWidth(double width) {
 		
 		//if it's width==0,change it's width was useless
-		if(this.width==0)
+		if(getWidth()==0)
 		{
 			return;
 		}
 		else
 		{
-			scaleX=((double)width/this.width);
+			scaleX=(width/getWidth());
 		}
 		
 	}
 
 
-	public int getHeight() {
-		return (int) (height*scaleY);
+	public double getHeight() {
+		
+		return getBound(this).height;
 	}
 
 
 	
-	public void setHeight(int height) {
+	public void setHeight(double height) {
 		
-		//if it's height==0,change it's width was useless
-		if(this.height==0)
+		//if it's height==0,change it's height was useless
+		if(getHeight()==0)
 		{
 			return;
 		}
 		else
 		{
-			scaleY=(height/this.height);
+			scaleY=(height/getHeight());
 		}
 	}
 
@@ -144,6 +153,7 @@ public abstract class DisplayObject extends EventDispatcher{
 
 	public DisplayObject() {
 		
+		updateTransform();
 		
 
 	}
@@ -242,22 +252,53 @@ public abstract class DisplayObject extends EventDispatcher{
 	
 	
 	
-	public void calculateBound() {
+	void updateBound() {
+	
+		//for displayobject,bound is base on origin width,height,and rotation,scale
+		Bound bound=new Bound();
+		//localbound x,y always is 0
 	
 		
+		
+		Transform transform=this.localTransform;
+		
+		Vector2 vector1=new Vector2(0, 0);
+		vector1=transform.apply(vector1);
+		bound.addVector2(vector1);
+		
+		Vector2 vector2=new Vector2(width, 0);
+		vector2=transform.apply(vector2);
+		bound.addVector2(vector2);
+		
+		Vector2 vector3=new Vector2(0, height);
+		vector3=transform.apply(vector3);
+		bound.addVector2(vector3);
+		
+		Vector2 vector4=new Vector2(width, height);
+		vector4=transform.apply(vector4);
+		bound.addVector2(vector4);
+				
+		localBound=bound;
 		
 	}
 	
 	
 	/**
-	 * return the bound,be notice this bound is auto calculated before render
-	 * and if you move child after render,the bound will not influenced because efficiency
-	 * therefore if you want the exact result after move some child,call calculateBound first
-	 * @param displayObject targetCoordinateSpace 
+	 * 
+	 * @param displayObject 
+	 * @return
 	 */
-	public void getBound(DisplayObject displayObject)
+	public Rect getBound(DisplayObject displayObject)
 	{
+		//update localBound
+		updateBound();
 		
+		Bound bound=localBound;
+		Rect rect=bound.toRect();
+		//transform rect to target Coordinate
+		
+		
+		return rect;
 	}
 
 

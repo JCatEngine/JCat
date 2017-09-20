@@ -152,4 +152,14 @@ public class Matrix {
     	
     	
     }
+
+	public Vector2 apply(Vector2 vector2) {
+		
+		double x=vector2.x*x1+vector2.y*x2+tx;
+		double y=vector2.x*y1+vector2.y*y2+ty;
+		
+		
+		
+		return new Vector2(x, y);
+	}
 }
