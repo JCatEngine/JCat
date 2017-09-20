@@ -119,6 +119,7 @@ public class main {
 		//sprite.x+=5;
 		sprite.rotation++;
 		sprite.alpha=0.5;
+		sprite.setWidth(sprite.getWidth()+1);
 		system.render();
 		
 	}

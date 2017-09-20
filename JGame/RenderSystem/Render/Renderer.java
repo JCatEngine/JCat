@@ -32,12 +32,7 @@ public class Renderer {
 	private void renderObject(DisplayObject displayObject, Canvas canvas) 
 	{
 
-		//update its transform before render
-		//the renderer needs the transform to render the texture
-		displayObject.updateTransform();
-		//update its alpha before render
-		displayObject.updateAlpha();
-		
+
 		if(displayObject instanceof Bitmap)
 		{
 			Bitmap bitmap=(Bitmap) displayObject;

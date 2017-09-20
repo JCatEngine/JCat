@@ -91,9 +91,7 @@ public abstract class DisplayObject extends EventDispatcher{
 		}
 		else
 		{
-			
 			scaleX=((double)width/this.width);
-			
 		}
 		
 	}
@@ -157,6 +155,7 @@ public abstract class DisplayObject extends EventDispatcher{
 	 */
 	public Transform getLocalTransform()
 	{
+		updateTransform();
 		return localTransform;
 		
 	}
@@ -167,11 +166,20 @@ public abstract class DisplayObject extends EventDispatcher{
 	 */
 	public Transform getWorldTransform()
 	{
+		//update transform to new and return
+		//consider updateTransform is a complex calculation
+		//This may not be a good solution because the transform may not change(same as last update)
+		//An alternative method is use id
+		//every time it's x,y and other field change,add the id
+		//if the id don't equal old id,it means the transform exactly change,then update it
+		//but for simplicity,i just update it every call;
+
+		updateTransform();
 		return worldTransform;
 		
 	}
 
-	public void updateAlpha()
+	void updateAlpha()
 	{
 		
 		if(parent!=null)
@@ -189,6 +197,7 @@ public abstract class DisplayObject extends EventDispatcher{
 	
 	public double getWorldAlpha() {
 		
+		updateAlpha();
 		return worldAlpha;
 	}
 
@@ -196,7 +205,7 @@ public abstract class DisplayObject extends EventDispatcher{
 	/**
 	 * auto called before render
 	 */
-	public void updateTransform() {
+	void updateTransform() {
 		
 		//update localTransform
 		Transform transform=new Transform(x,y,rotation,scaleX,scaleY);
@@ -233,7 +242,23 @@ public abstract class DisplayObject extends EventDispatcher{
 	
 	
 	
+	public void calculateBound() {
 	
+		
+		
+	}
+	
+	
+	/**
+	 * return the bound,be notice this bound is auto calculated before render
+	 * and if you move child after render,the bound will not influenced because efficiency
+	 * therefore if you want the exact result after move some child,call calculateBound first
+	 * @param displayObject targetCoordinateSpace 
+	 */
+	public void getBound(DisplayObject displayObject)
+	{
+		
+	}
 
 
 
