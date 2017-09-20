@@ -17,6 +17,13 @@ public class Transform {
 	
 
 
+	@Override
+	public String toString() {
+		return "Transform [x=" + x + ", y=" + y + ", rotation=" + rotation + ", scaleX=" + scaleX + ", scaleY=" + scaleY
+				+ "]";
+	}
+
+
 	public Transform(int x, int y, double rotation2, double scaleX2, double scaleY2) {
 		this.x = x;
 		this.y = y;
@@ -60,6 +67,10 @@ public class Transform {
 	}
 
 
+	public Vector2 applyInverse(Vector2 vector2)
+	{
+		return matrix.appInverse(vector2);
+	}
 
 
 	

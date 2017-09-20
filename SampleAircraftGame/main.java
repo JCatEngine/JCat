@@ -16,6 +16,7 @@ import JGame.RenderSystem.Display.Bitmap;
 import JGame.RenderSystem.Display.EventDispatcher;
 import JGame.RenderSystem.Display.Sprite;
 import JGame.RenderSystem.Display.Stage;
+import JGame.RenderSystem.Math.Vector2;
 import JGame.RenderSystem.Textures.Texture;
 import JGame.RenderSystem.Utils.MathUtil;
 import SampleAircraftGame.Util.Util;
@@ -77,8 +78,8 @@ public class main {
 		Stage stage=system.getStage();
 
 		Sprite sprite=new Sprite();
-		sprite.x=0;
-		sprite.y=0;
+		sprite.x=10;
+		sprite.y=10;
 	
 		
 		Texture texture=system.getImageManager().getTextureByName("aircraft");
@@ -105,12 +106,17 @@ public class main {
 
 			@Override
 			public void onResponce() {
-				loop(sprite,system);
+				//loop(sprite,system);
 				
 			}
 		});
 		
 		
+		System.out.println(bitmap.globalToLocal(new Vector2(120, 120)));	
+		
+		//System.out.println(bitmap.getBound(bitmap));
+		//System.out.println(bitmap.getBound(stage));
+
 	}
 
 	protected static void loop(Sprite sprite, RenderSystem system) {
@@ -119,9 +125,11 @@ public class main {
 		//sprite.x+=5;
 		//sprite.rotation++;
 		//sprite.alpha=0.5;
-		//sprite.rotation++;
+		sprite.rotation++;
 		
-		sprite.setWidth(sprite.getWidth()+1);
+		//sprite.setWidth(sprite.getWidth()+1);
+		
+		System.out.println(sprite.getWidth());
 		
 		system.render();
 		

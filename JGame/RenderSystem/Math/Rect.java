@@ -123,7 +123,67 @@ public class Rect {
 			height=value-y;
 		}
 
-		
+		public Boolean contains(Vector2 vector2) {
+			
+			return vector2.x>=getMinX()&&vector2.x<=getMaxX()&&vector2.y>=getMinY()&&vector2.y<=getMaxY();
+		}
 
+		public Boolean hitTest(Rect rect) {
+			
+			
+			if(this.contains(rect.getLeftDownPoint()))
+			{
+				return true;
+			}
+			if(this.contains(rect.getLeftTopPoint()))
+			{
+				return true;
+			}
+			if(this.contains(rect.getRightDownPoint()))
+			{
+				return true;
+			}
+			if(this.contains(rect.getRightTopPoint()))
+			{
+				return true;
+			}
+			
+			if(rect.contains(getLeftDownPoint()))
+			{
+				return true;
+			}
+			if(rect.contains(getLeftTopPoint()))
+			{
+				return true;
+			}
+			if(rect.contains(getRightDownPoint()))
+			{
+				return true;
+			}
+			if(rect.contains(getRightTopPoint()))
+			{
+				return true;
+			}
+			
+			//special condition
+			if(this.getMinY()<=rect.getMinY()&&this.getMaxX()>=rect.getMaxY())
+			{
+				if(rect.getMinX()<=this.getMinX()&&rect.getMaxX()>=this.getMaxX())
+				{
+					return true;
+				}
+			}
+			
+			
+			return null;
+		}
+
+		@Override
+		public String toString() {
+			return "Rect [x=" + x + ", y=" + y + ", width=" + width + ", height=" + height + "]";
+		}
+
+		
+		
 
 }

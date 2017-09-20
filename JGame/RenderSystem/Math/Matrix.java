@@ -162,4 +162,20 @@ public class Matrix {
 		
 		return new Vector2(x, y);
 	}
+
+	public Vector2 appInverse(Vector2 vector2) {
+		
+		
+
+	    double id = 1f / ((this.x1 * this.y2) + (this.x2 * -this.y1));
+
+	    double x = vector2.x;
+	    double y = vector2.y;
+
+	    double newx = (this.y2 * id * x) + (-this.x2 * id * y) + (((this.ty * this.x2) - (this.tx * this.y2)) * id);
+	    double newY = (this.x1 * id * y) + (-this.y1 * id * x) + (((-this.ty * this.x1) + (this.tx * this.y1)) * id);
+
+	      
+		return new Vector2(newx, newY);
+	}
 }

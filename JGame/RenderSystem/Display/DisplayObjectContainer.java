@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import JGame.RenderSystem.Display.Calculation.Bound;
 
-public class DisplayObjectContainer extends InteractiveObject{
+abstract public class DisplayObjectContainer extends InteractiveObject{
 
 	/**
 	 * childs
@@ -96,7 +96,8 @@ public class DisplayObjectContainer extends InteractiveObject{
 		
 		for (DisplayObject displayObject : childs) {
 			
-			bound.addBound(displayObject.getBound(displayObject));
+			bound.addBound(displayObject.getBound(this));
+			
 		}
 		
 		localBound=bound;

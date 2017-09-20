@@ -1,6 +1,6 @@
 package JGame.RenderSystem.Display;
 
-public class InteractiveObject extends DisplayObject{
+public abstract class InteractiveObject extends DisplayObject{
 
 	/**
 	 * 父级

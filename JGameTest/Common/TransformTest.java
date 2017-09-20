@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import JGame.RenderSystem.RenderSystem;
 import JGame.RenderSystem.Display.Calculation.Transform;
 import JGame.RenderSystem.Math.Vector2;
 
@@ -31,6 +32,8 @@ public class TransformTest {
 
 	@Test
 	public void test() {
+		
+		
 		
 		Transform transform=new Transform(1, 1, 45, 1, 1);
 		Vector2 vector2=new Vector2(1, 0);

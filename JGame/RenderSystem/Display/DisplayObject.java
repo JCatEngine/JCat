@@ -165,11 +165,20 @@ public abstract class DisplayObject extends EventDispatcher{
 	 */
 	public Transform getLocalTransform()
 	{
-		updateTransform();
+		updateLocalTransform();
 		return localTransform;
 		
 	}
 	
+	private void updateLocalTransform() {
+		
+		//update localTransform
+		Transform transform=new Transform(x,y,rotation,scaleX,scaleY);
+		this.localTransform=transform;
+		
+	}
+
+
 	/**
 	 * 
 	 * @return
@@ -217,9 +226,7 @@ public abstract class DisplayObject extends EventDispatcher{
 	 */
 	void updateTransform() {
 		
-		//update localTransform
-		Transform transform=new Transform(x,y,rotation,scaleX,scaleY);
-		this.localTransform=transform;
+		updateLocalTransform();
 		
 		
 		//update worldTransform
@@ -231,7 +238,7 @@ public abstract class DisplayObject extends EventDispatcher{
 			//though these value can just decompose from matrix in the transform
 			//but i konw little about matrix calculation,
 			//so i just use this way to calculate;
-			this.worldTransform=transform.clone();
+			this.worldTransform=localTransform.clone();
 			this.worldTransform.x+=parentTransform.x;
 			this.worldTransform.y+=parentTransform.y;
 			this.worldTransform.rotation+=parentTransform.rotation;
@@ -251,36 +258,10 @@ public abstract class DisplayObject extends EventDispatcher{
 	}
 	
 	
-	
-	void updateBound() {
-	
-		//for displayobject,bound is base on origin width,height,and rotation,scale
-		Bound bound=new Bound();
-		//localbound x,y always is 0
-	
-		
-		
-		Transform transform=this.localTransform;
-		
-		Vector2 vector1=new Vector2(0, 0);
-		vector1=transform.apply(vector1);
-		bound.addVector2(vector1);
-		
-		Vector2 vector2=new Vector2(width, 0);
-		vector2=transform.apply(vector2);
-		bound.addVector2(vector2);
-		
-		Vector2 vector3=new Vector2(0, height);
-		vector3=transform.apply(vector3);
-		bound.addVector2(vector3);
-		
-		Vector2 vector4=new Vector2(width, height);
-		vector4=transform.apply(vector4);
-		bound.addVector2(vector4);
-				
-		localBound=bound;
-		
-	}
+	/**
+	 * update local bound
+	 */
+	abstract void updateBound();
 	
 	
 	/**
@@ -293,17 +274,85 @@ public abstract class DisplayObject extends EventDispatcher{
 		//update localBound
 		updateBound();
 		
-		Bound bound=localBound;
-		Rect rect=bound.toRect();
+		Bound bound=new Bound();
+		
+		Rect rect=localBound.toRect();
+		
 		//transform rect to target Coordinate
 		
+		Transform transform=displayObject.getLocalTransform();
+	
+		Vector2 vector1=rect.getLeftTopPoint();
+		vector1=localToGlobal(vector1);
+		vector1=displayObject.globalToLocal(vector1);
+		bound.addVector2(vector1);
 		
-		return rect;
+		Vector2 vector2=rect.getRightTopPoint();
+		vector2=localToGlobal(vector2);
+		vector2=displayObject.globalToLocal(vector2);
+		bound.addVector2(vector2);
+
+		Vector2 vector3=rect.getLeftDownPoint();
+		vector3=localToGlobal(vector3);
+		vector3=displayObject.globalToLocal(vector3);
+		bound.addVector2(vector3);
+		
+		Vector2 vector4=rect.getRightDownPoint();
+		vector4=localToGlobal(vector4);
+		System.out.println(vector4);
+		vector4=displayObject.globalToLocal(vector4);
+		System.out.println(vector4);
+		bound.addVector2(vector4);
+		
+		
+		
+		return bound.toRect();
 	}
 
 
+	/**
+	 * 
+	 * @param vector2 the point in world coordinate
+	 * @return 
+	 */
+	public Vector2 globalToLocal(Vector2 vector2)
+	{
+		return getLocalTransform().applyInverse(vector2);	
+	}
 
+	/**
+	 * 
+	 * @param displayObject
+	 * @return
+	 */
+	public Boolean hitTestObject(DisplayObject displayObject)
+	{
+		Rect rect=displayObject.getBound(stage);
+		Rect rect2=this.getBound(stage);
+		
+		return rect.hitTest(rect2);
+		
+	}
 	
-
+	/**
+	 * 
+	 * @param vector2
+	 * @return
+	 */
+	public Boolean hitTestPoint(Vector2 vector2)
+	{
+		return getBound(stage).contains(vector2);
+		
+	}
+	
+	/**
+	 * 
+	 * @param vector2
+	 * @return
+	 */
+	public Vector2 localToGlobal(Vector2 vector2)
+	{
+		return getWorldTransform().apply(vector2);
+	}
 	
 }
