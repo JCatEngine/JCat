@@ -7,8 +7,8 @@ public class Transform {
 
 	private Matrix matrix;
 	
-	public int x;
-	public int y;
+	public double x;
+	public double y;
 	public double rotation;
 	public double scaleX;
 	public double scaleY;
@@ -24,9 +24,9 @@ public class Transform {
 	}
 
 
-	public Transform(int x, int y, double rotation2, double scaleX2, double scaleY2) {
-		this.x = x;
-		this.y = y;
+	public Transform(double x2, double y2, double rotation2, double scaleX2, double scaleY2) {
+		this.x = x2;
+		this.y = y2;
 		this.rotation = rotation2;
 		this.scaleX = scaleX2;
 		this.scaleY = scaleY2;

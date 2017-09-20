@@ -56,8 +56,8 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		
 		Transform transform=renderData.transform;
 		
-		int x=transform.x;
-		int y=transform.y;
+		int x=(int) transform.x;
+		int y=(int) transform.y;
 		
 		double scaleX=transform.scaleX;
 		double scaleY=transform.scaleY;
@@ -75,10 +75,11 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		//set graphics to left-top corner of bitmap
 		graphics2d.translate(x, y);
 		graphics2d.rotate(radins);
+		graphics2d.translate(-x, -y);
 		
 		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float) alpha);
 		graphics2d.setComposite(alphaComposite);
-		graphics2d.drawImage(image, 0, 0,width,height, null);
+		graphics2d.drawImage(image, x, y,width,height, null);
 		
 	
 		

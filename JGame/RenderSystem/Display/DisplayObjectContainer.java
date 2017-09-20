@@ -47,6 +47,7 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 		
 		displayObject.parent=this;
 		
+		
 	}
 
 	private void checkIndex(int index, int min, int max) {

@@ -180,7 +180,7 @@ public class Rect {
 
 		@Override
 		public String toString() {
-			return "Rect [x=" + x + ", y=" + y + ", width=" + width + ", height=" + height + "]";
+			return "Rect [x=" + (int)x + ", y=" + (int)y + ", width=" + (int)width + ", height=" + (int)height + "]";
 		}
 
 		

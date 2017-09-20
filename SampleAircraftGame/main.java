@@ -106,32 +106,43 @@ public class main {
 
 			@Override
 			public void onResponce() {
-				//loop(sprite,system);
+				loop(sprite,system,bitmap);
 				
 			}
 		});
 		
 		
-		System.out.println(bitmap.globalToLocal(new Vector2(120, 120)));	
+//		System.out.println(bitmap.globalToLocal(new Vector2(120, 120)));	
 		
+		//bitmap.rotation-=45;
 		//System.out.println(bitmap.getBound(bitmap));
-		//System.out.println(bitmap.getBound(stage));
+		//System.out.println(bitmap.getBound(bitmap.stage));
+		
+		//System.out.println(bitmap.localToGlobal(new Vector2(200, 200)));
 
 	}
 
-	protected static void loop(Sprite sprite, RenderSystem system) {
+	protected static void loop(Sprite sprite, RenderSystem system, Bitmap bitmap) {
 		
 	
 		//sprite.x+=5;
-		//sprite.rotation++;
-		//sprite.alpha=0.5;
-		sprite.rotation++;
+		//sprite.rotation--;
+		sprite.alpha=0.5;
 		
-		//sprite.setWidth(sprite.getWidth()+1);
+
+		//sprite.setWidth(sprite.getWidth()+10);
+
+		//sprite.setScaleX(sprite.getScaleX()+0.01);
+
 		
-		System.out.println(sprite.getWidth());
+		//System.out.println(sprite.getWidth());
+		//System.out.println(bitmap.getBound(bitmap.stage));
+		
+		
 		
 		system.render();
+		
+		
 		
 	}
 }

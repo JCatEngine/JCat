@@ -9,8 +9,8 @@ public class Bitmap extends DisplayObject{
 
 	public Bitmap(Texture texture) {
 		this.texture=texture;
-		width=texture.getWidth();
-		height=texture.getHeight();
+		this.width=texture.getWidth();
+		this.height=texture.getHeight();
 	}
 
 	public Texture getTexture() {
@@ -25,10 +25,10 @@ public class Bitmap extends DisplayObject{
 		Bound bound=new Bound();
 		
 		//localbound x,y always is 0
-		bound.x=0;
-		bound.y=0;
-		bound.width=width;
-		bound.height=height;
+		bound.minX=0;
+		bound.minY=0;
+		bound.maxX=width;
+		bound.maxY=height;
 		
 		localBound=bound;
 		

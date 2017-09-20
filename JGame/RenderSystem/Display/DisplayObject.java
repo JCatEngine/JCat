@@ -1,5 +1,6 @@
 package JGame.RenderSystem.Display;
 
+import java.security.acl.LastOwnerException;
 import java.util.function.Function;
 
 import JGame.GameCore.GameObject.Component.Anime.AnimeComponent;
@@ -19,19 +20,19 @@ public abstract class DisplayObject extends EventDispatcher{
 	/**
 	 * x position of objecy
 	 */
-	public int x;
+	public double x;
 	/**
 	 * y position of object
 	 */
-	public int y;
+	public double y;
 	/**
 	 * the origin width(before scale and rotate,be notice rotation also change the final width) 
 	 */
-	protected int width;
+	protected double width;
 	/**
 	 * the origin height(before scale and rotate,be notice rotation also change the final height) 
 	 */
-	protected int height;
+	protected double height;
 	/**
 	 * The rotation value of the object, in angle
 	 */
@@ -59,7 +60,7 @@ public abstract class DisplayObject extends EventDispatcher{
 	/**
 	 * stage reference
 	 */
-	protected Stage stage;
+	public Stage stage;
 	/**
 	 * localTransform,will be recalcued per frame
 	 */
@@ -86,11 +87,12 @@ public abstract class DisplayObject extends EventDispatcher{
 
 	public double getWidth() {
 		
-		return getBound(this).width;
+		return getBound(parent).width;
 	}
 
 
 	public void setWidth(double width) {
+	
 		
 		//if it's width==0,change it's width was useless
 		if(getWidth()==0)
@@ -99,7 +101,9 @@ public abstract class DisplayObject extends EventDispatcher{
 		}
 		else
 		{
-			scaleX=(width/getWidth());
+		
+			scaleX=(width/(getWidth()/scaleX));
+			
 		}
 		
 	}
@@ -107,7 +111,7 @@ public abstract class DisplayObject extends EventDispatcher{
 
 	public double getHeight() {
 		
-		return getBound(this).height;
+		return getBound(parent).height;
 	}
 
 
@@ -121,7 +125,7 @@ public abstract class DisplayObject extends EventDispatcher{
 		}
 		else
 		{
-			scaleY=(height/getHeight());
+			scaleY=(height/(getHeight()/scaleY));
 		}
 	}
 
@@ -145,10 +149,6 @@ public abstract class DisplayObject extends EventDispatcher{
 		this.scaleY = scaleY;
 	}
 
-
-	public Stage getStage() {
-		return stage;
-	}
 
 
 	public DisplayObject() {
@@ -299,9 +299,7 @@ public abstract class DisplayObject extends EventDispatcher{
 		
 		Vector2 vector4=rect.getRightDownPoint();
 		vector4=localToGlobal(vector4);
-		System.out.println(vector4);
 		vector4=displayObject.globalToLocal(vector4);
-		System.out.println(vector4);
 		bound.addVector2(vector4);
 		
 		
@@ -317,7 +315,7 @@ public abstract class DisplayObject extends EventDispatcher{
 	 */
 	public Vector2 globalToLocal(Vector2 vector2)
 	{
-		return getLocalTransform().applyInverse(vector2);	
+		return getWorldTransform().applyInverse(vector2);	
 	}
 
 	/**
@@ -354,5 +352,23 @@ public abstract class DisplayObject extends EventDispatcher{
 	{
 		return getWorldTransform().apply(vector2);
 	}
+
+
+	public void updateStage(Stage stage) {
+		
+		this.stage=stage;
+		if(this instanceof DisplayObjectContainer)
+		{
+			DisplayObjectContainer container=(DisplayObjectContainer) this;
+			for (DisplayObject displayObject : container.getChilds()) {
+				
+				displayObject.updateStage(stage);
+			}
+		}
+		
+	}
+	
+
+	
 	
 }
