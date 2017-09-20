@@ -30,7 +30,7 @@ public class DisplayObjectContainer extends InteractiveObject{
 		if(displayObject.parent!=null)
 		{
 			displayObject.parent.removeChild(displayObject);
-			displayObject.parent=this;
+			
 		}
 		
 		if(index==childs.size())
@@ -42,6 +42,8 @@ public class DisplayObjectContainer extends InteractiveObject{
 		{
 			childs.add(index, displayObject);
 		}
+		
+		displayObject.parent=this;
 		
 	}
 

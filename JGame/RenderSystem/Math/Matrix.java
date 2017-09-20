@@ -1,5 +1,7 @@
 package JGame.RenderSystem.Math;
 
+import JGame.RenderSystem.Display.Calculation.Transform;
+
 public class Matrix {
 
 	public double x1;
@@ -133,5 +135,21 @@ public class Matrix {
         matrix.ty = this.ty;
 
         return matrix;
+    }
+    
+    
+    /**
+     * Decomposes the matrix (x, y, scaleX, scaleY, and rotation) and sets the properties on to a transform.
+     * @param transform
+     * @return
+     */
+    public void decompose(Transform transform)
+    {
+       transform.x=(int) tx;
+       transform.y=(int) ty;
+       
+       
+    	
+    	
     }
 }

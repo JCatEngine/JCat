@@ -7,7 +7,6 @@ import javax.imageio.ImageIO;
 import javax.lang.model.element.VariableElement;
 
 import JGame.JGame;
-import JGame.SwingStage;
 import JGame.Common.Ticker;
 import JGame.Common.Ticker.OnResponceListener;
 import JGame.GameCore.Loader.ImageLoader;
@@ -18,6 +17,7 @@ import JGame.RenderSystem.Display.EventDispatcher;
 import JGame.RenderSystem.Display.Sprite;
 import JGame.RenderSystem.Display.Stage;
 import JGame.RenderSystem.Textures.Texture;
+import JGame.RenderSystem.Utils.MathUtil;
 import SampleAircraftGame.Util.Util;
 
 public class main {
@@ -77,14 +77,47 @@ public class main {
 		Stage stage=system.getStage();
 
 		Sprite sprite=new Sprite();
+		sprite.x=0;
+		sprite.y=0;
+	
+		
 		Texture texture=system.getImageManager().getTextureByName("aircraft");
-
 		Bitmap bitmap=new Bitmap(texture);
 		
+		
+		Bitmap bitmap2=new Bitmap(texture);
+		
+		
 		sprite.addChild(bitmap);
+		//sprite.addChild(bitmap2);
+		bitmap2.x=100;
+		bitmap2.y=50;
+		
+		
+		bitmap.x=100;
+		bitmap.y=100;
 		
 		stage.addChild(sprite);
 		
+		
+		Ticker ticker=new Ticker(50);
+		ticker.addListener(new OnResponceListener() {
+
+			@Override
+			public void onResponce() {
+				loop(bitmap,system);
+				
+			}
+		});
+		
+		
+	}
+
+	protected static void loop(Bitmap bitmap, RenderSystem system) {
+		
+	
+		//sprite.x+=5;
+		bitmap.rotation++;
 		system.render();
 		
 	}

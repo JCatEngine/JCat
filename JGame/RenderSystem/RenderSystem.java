@@ -15,6 +15,7 @@ import JGame.RenderSystem.Display.DisplayObjectContainer;
 import JGame.RenderSystem.Display.EventDispatcher;
 import JGame.RenderSystem.Display.Stage;
 import JGame.RenderSystem.Manager.TextureManager;
+import JGame.RenderSystem.Render.RenderData;
 import JGame.RenderSystem.Render.Renderer;
 import JGame.RenderSystem.Textures.Texture;
 
@@ -72,50 +73,12 @@ public class RenderSystem extends EventDispatcher{
 	 */
 	public void render()
 	{
-		//dispatch event before render
 		
-		canvas.preRender();
-		
-		renderObject(root);
-		
-		canvas.postRender();
-		
-		//dispatch event after render
+		renderer.render(root,canvas);
 
 	}
 	
-	/**
-	 * render a object and it's child
-	 * @param displayObject
-	 */
-	private void renderObject(DisplayObject displayObject) 
-	{
 
-		//update its transform before render
-		//the renderer needs the transform to render the texture
-		displayObject.updateTransform();
-		
-		if(displayObject instanceof Bitmap)
-		{
-			Bitmap bitmap=(Bitmap) displayObject;
-			Texture texture=bitmap.getTexture();
-			
-			//render the texture to screen
-			canvas.drawTexture(texture,bitmap.getWorldTransform());
-		}
-		
-		//if it's a container,render it's childs
-		else if(displayObject instanceof DisplayObjectContainer)
-		{
-			DisplayObjectContainer displayObjectContainer=(DisplayObjectContainer) displayObject;
-			for(DisplayObject child:displayObjectContainer.getChilds())
-			{
-				renderObject(child);
-			}
-		}
-		
-	
-	}
 
 
 	public Canvas getCanvas() {

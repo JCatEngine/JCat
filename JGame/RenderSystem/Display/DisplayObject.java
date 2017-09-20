@@ -16,11 +16,11 @@ public abstract class DisplayObject extends EventDispatcher{
 	/**
 	 * x position of objecy
 	 */
-	protected int x;
+	public int x;
 	/**
 	 * y position of object
 	 */
-	protected int y;
+	public int y;
 	/**
 	 * width
 	 */
@@ -30,29 +30,29 @@ public abstract class DisplayObject extends EventDispatcher{
 	 */
 	protected int height;
 	/**
-	 * The rotation value of the object, in radians
+	 * The rotation value of the object, in angle
 	 */
-	protected int rotation;
+	public float rotation;
 	/**
 	 * scale x
 	 */
-	protected int scaleX=1;
+	protected float scaleX=1;
 	/**
 	 * scale y
 	 */
-	protected int scaleY=1;
+	protected float scaleY=1;
 	/**
 	 * alpha 0~1
 	 */
-	protected float alpha;
+	public float alpha=1;
 	/**
 	 * name of the object
 	 */
-	protected String name;
+	public String name;
 	/**
 	 * is this object visible?
 	 */
-	protected boolean visible;
+	public boolean visible=true;
 	/**
 	 * stage reference
 	 */
@@ -71,103 +71,65 @@ public abstract class DisplayObject extends EventDispatcher{
 	public DisplayObjectContainer parent;
 	
 	
-	public int getX() {
-		return x;
-	}
-
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-
-	public int getY() {
-		return y;
-	}
-
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
 
 	public int getWidth() {
-		return width;
+		return (int) (width*scaleX);
 	}
 
 
 	public void setWidth(int width) {
-		this.width = width;
+		
+		//if it's width==0,change it's width was useless
+		if(this.width==0)
+		{
+			return;
+		}
+		else
+		{
+			
+			scaleX=((float)width/this.width);
+			
+		}
+		
 	}
 
 
 	public int getHeight() {
-		return height;
+		return (int) (height*scaleY);
 	}
 
 
 	public void setHeight(int height) {
-		this.height = height;
+		
+		//if it's height==0,change it's width was useless
+		if(this.height==0)
+		{
+			return;
+		}
+		else
+		{
+			scaleY=(height/this.height);
+		}
 	}
 
 
-	public int getRotation() {
-		return rotation;
-	}
-
-
-	public void setRotation(int rotation) {
-		this.rotation = rotation;
-	}
-
-
-	public int getScaleX() {
+	public float getScaleX() {
 		return scaleX;
 	}
 
 
-	public void setScaleX(int scaleX) {
+	public void setScaleX(float scaleX) {
 		this.scaleX = scaleX;
 	}
 
 
-	public int getScaleY() {
+	public float getScaleY() {
 		return scaleY;
 	}
 
 
-	public void setScaleY(int scaleY) {
+	public void setScaleY(float scaleY) {
 		this.scaleY = scaleY;
-	}
-
-
-	public float getAlpha() {
-		return alpha;
-	}
-
-
-	public void setAlpha(float alpha) {
-		this.alpha = alpha;
-	}
-
-
-	public String getName() {
-		return name;
-	}
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	public boolean isVisible() {
-		return visible;
-	}
-
-
-	public void setVisible(boolean visible) {
-		this.visible = visible;
 	}
 
 
@@ -217,8 +179,11 @@ public abstract class DisplayObject extends EventDispatcher{
 		//update worldTransform
 		if(parent!=null)
 		{
+			
 			Transform transform2=parent.getWorldTransform();
 			this.worldTransform=transform.clone().append(transform2);
+			this.worldTransform.updateFromMatrix();
+			
 		}
 		else
 		{
@@ -226,6 +191,7 @@ public abstract class DisplayObject extends EventDispatcher{
 		}
 		
 	}
+	
 	
 	
 	

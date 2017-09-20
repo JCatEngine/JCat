@@ -1,12 +1,16 @@
 package JGame.RenderSystem.Canvas;
 
+import java.awt.AlphaComposite;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import JGame.RenderSystem.Display.Calculation.Transform;
+import JGame.RenderSystem.Render.RenderData;
 import JGame.RenderSystem.Textures.Texture;
 
 public class SwingCanvas extends JFrame  implements Canvas{
@@ -45,21 +49,38 @@ public class SwingCanvas extends JFrame  implements Canvas{
 	}
 
 	@Override
-	public void drawTexture(Texture texture, Transform transform) {
+	public void drawTexture(Texture texture, RenderData renderData) {
+		
 		
 		Image image=texture.getImage();
 		
-		int x=transform.getX();
-		int y=transform.getY();
+		Transform transform=renderData.transform;
 		
-		double scaleX=transform.getScaleX();
-		double scaleY=transform.getScaleY();
+		int x=transform.x;
+		int y=transform.y;
+		
+		double scaleX=transform.scaleX;
+		double scaleY=transform.scaleY;
+		
+		float alpha=renderData.alpha;
 		
 		int width=(int) (image.getWidth(null)*scaleX);
 		int height=(int) (image.getHeight(null)*scaleY);
 		
+		float radins=(float) (transform.rotation/180*Math.PI);
+		
+		Graphics2D graphics2d=cache.createGraphics();
+		
+		
+		//set graphics to left-top corner of bitmap
+		graphics2d.translate(x, y);
+		graphics2d.rotate(radins);
+		
+		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,alpha);
+		graphics2d.setComposite(alphaComposite);
+		graphics2d.drawImage(image, 0, 0,width,height, null);
+		
 	
-		cache.getGraphics().drawImage(image, x, y,width,height, null);
 		
 	}
 

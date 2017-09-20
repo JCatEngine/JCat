@@ -8,6 +8,8 @@ public class Bitmap extends DisplayObject{
 
 	public Bitmap(Texture texture) {
 		this.texture=texture;
+		width=texture.getWidth();
+		height=texture.getHeight();
 	}
 
 	public Texture getTexture() {
