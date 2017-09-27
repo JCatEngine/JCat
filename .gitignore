@@ -1,0 +1,7 @@
+/plugins/*
+/.idea/*
+/.settings/*
+/.bin/*
+*.xml
+*.iml
+*.classpath
