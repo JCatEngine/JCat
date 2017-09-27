@@ -1,6 +1,7 @@
 /plugins/*
 /.idea/*
 /.settings/*
+/.gradle/*
 /bin/*
 *.project
 *.xml
