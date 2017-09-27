@@ -30,8 +30,8 @@ public class main {
 		
 		ImageLoader loader=new ImageLoader(system);
 		loader
-		.add("src\\resources\\aircraft.png")
-		.add("src\\resources\\back.jpeg")
+		.add("resources\\aircraft.png")
+		.add("resources\\back.jpeg")
 		.start(new onAchieveListener() {
 
 			@Override
