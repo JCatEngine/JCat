@@ -1,4 +1,4 @@
-package Test.Common;
+package JCatTest.Common;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

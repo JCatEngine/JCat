@@ -1,4 +1,4 @@
-package Test.Common;
+package JCatTest.Common;
 
 import static org.junit.Assert.*;
 
