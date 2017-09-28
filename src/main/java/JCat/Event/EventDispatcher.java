@@ -6,6 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import JCat.Display.DisplayObject;
+import JCat.Display.DisplayObjectContainer;
+
 /**
  * a object can send and receive event
  * @author Administrator
@@ -258,6 +261,32 @@ public class EventDispatcher{
 		}
 		
 		
+		
+		
+	}
+
+
+
+
+
+	/**
+	 * send a event copy to all it's child,used internally just for system event need to 
+	 * send all object in the main display tree such as keyboard event
+	 * @param event
+	 */
+	 void _boardCast(Event event) {
+		 //dispatch at this object
+		this.dispatchEvent(event.clone());
+		//if has childs,dispatch to all it's child
+		if(this instanceof DisplayObjectContainer)
+		{
+			DisplayObjectContainer container=(DisplayObjectContainer) this;
+			LinkedList<DisplayObject> linkedList=container.getChilds();
+			for (DisplayObject displayObject : linkedList) {
+				((EventDispatcher)displayObject)._boardCast(event.clone());
+			}
+			
+		}
 		
 		
 	}

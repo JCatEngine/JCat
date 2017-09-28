@@ -1,5 +1,8 @@
 package JCat.Event;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 public class Event {
 
 	/**
@@ -90,6 +93,29 @@ public class Event {
 	}
 
 	 
-	
+	/**
+	 * clone a event
+	 */
+	public Event clone()
+	{
+		
+		Object object = null;
+		Class<?> class1=this.getClass();
+		try {
+			Constructor<?> constructor=class1.getConstructor(String.class);
+			 object=constructor.newInstance(type);
+		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Event event=(Event) object;
+		event.bubbles=bubbles;
+		event.currentTarget=currentTarget;
+		event.target=target;
+		event.isStop=isStop;
+		
+		return event;
+	}
 	 
 }

@@ -12,9 +12,11 @@ public class EventManager {
 	 * @param eventDispatcher
 	 * @param event
 	 */
-	static void dispatchEvent(EventDispatcher eventDispatcher, Event event) {
+	public static void dispatchEvent(EventDispatcher eventDispatcher, Event event) {
 		
 	
+		event=event.clone();
+		
 		event.target=eventDispatcher;
 		
 		//a bubbles event
@@ -50,10 +52,14 @@ public class EventManager {
 	 * just used for system event,such as keyboard event or loop event
 	 * @param event
 	 */
-	static void boardCast(Stage stage,Event event)
+	public static void boardCast(Stage stage,Event event)
 	{
 		event.target=stage;
 		event.eventPhase=EventPhase.AT_TARGET;
+		
+		((EventDispatcher)stage)._boardCast(event);
+		
+		
 		
 		
 	}
@@ -68,7 +74,7 @@ public class EventManager {
 		
 		event.currentTarget=eventDispatcher;
 		event.eventPhase=EventPhase.AT_TARGET;
-		eventDispatcher.sendEventCurrentObject(event);
+		eventDispatcher.sendEventCurrentObject(event.clone());
 	}
 
 	/**
@@ -141,7 +147,7 @@ public class EventManager {
 	
 		event.currentTarget=eventDispatcher;
 		event.eventPhase=EventPhase.CAPTURING_PHASE;
-		eventDispatcher.sendEventCurrentObject(event);
+		eventDispatcher.sendEventCurrentObject(event.clone());
 		
 		
 	}
@@ -155,7 +161,7 @@ public class EventManager {
 	
 		event.currentTarget=eventDispatcher;
 		event.eventPhase=EventPhase.BUBBLING_PHASE;
-		eventDispatcher.sendEventCurrentObject(event);
+		eventDispatcher.sendEventCurrentObject(event.clone());
 		
 		
 	}

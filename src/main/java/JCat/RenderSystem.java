@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import JCat.Canvas.Canvas;
+import JCat.Canvas.CanvasFactory;
 import JCat.Canvas.CanvasType;
 import JCat.Canvas.SwingCanvas;
 import JCat.Display.Bitmap;
@@ -14,6 +15,7 @@ import JCat.Display.DisplayObject;
 import JCat.Display.DisplayObjectContainer;
 import JCat.Display.Stage;
 import JCat.Event.EventDispatcher;
+import JCat.Interaction.InteractionManager;
 import JCat.Manager.TextureManager;
 import JCat.Render.RenderData;
 import JCat.Render.Renderer;
@@ -37,6 +39,10 @@ public class RenderSystem extends EventDispatcher{
 	 * image manager
 	 */
 	private TextureManager imageManager=new TextureManager();
+	/**
+	 * interaction manager
+	 */
+	private InteractionManager interactionManager;
 
 
 	
@@ -47,15 +53,9 @@ public class RenderSystem extends EventDispatcher{
 
 		this.renderer=new Renderer();
 		
-		if(type==CanvasType.swing)
-		{
-
-			this.canvas=new SwingCanvas(width, height);
-		}
-		else
-		{
-			throw new RuntimeException("unsupport canvas currently");
-		}
+		this.canvas=CanvasFactory.getCanvas(type,width,height);
+		
+		this.interactionManager=new InteractionManager(this);
 		
 	}
 

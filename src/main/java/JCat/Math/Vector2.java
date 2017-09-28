@@ -62,14 +62,14 @@ public class Vector2 {
 	}
 	
 	/**
-	 *根据角度返回 单位向量 
+	 *return vector based on angle
 	 * @param param0
 	 * 
 	 */		
 	public static Vector2 getRotationVector2(double angle)
 	{
 		
-		//先转换为弧度
+		//convert to radian
 		double h=angle/180*Math.PI;
 		
 		Vector2 v=new Vector2(Math.cos(h),Math.sin(h));
@@ -79,7 +79,7 @@ public class Vector2 {
 	
 	
 	/**
-	 *返回距离 
+	 *return distance
 	 * @param point1
 	 * @param point2
 	 * @return 
@@ -106,7 +106,7 @@ public class Vector2 {
 	
 	
 	/**
-	 *减去一个向量 
+	 *reduce a vector
 	 * @param v
 	 * @return 
 	 * 
@@ -119,7 +119,7 @@ public class Vector2 {
 	}
 	
 	/**
-	 *加上一个向量 
+	 *add a vector
 	 * @param v
 	 * @return 
 	 * 
@@ -133,7 +133,7 @@ public class Vector2 {
 	}
 	
 	/**
-	 *向量标准化(转化为单位向量) 
+	 *normalize a vector
 	 * 
 	 */		
 	public Vector2 normalize()
@@ -145,7 +145,7 @@ public class Vector2 {
 		
 		if(s==0)
 		{
-			//避免除0错
+			//avoid error when divide a number to zero
 			newX=0;
 			newY=0;
 		}
@@ -161,7 +161,7 @@ public class Vector2 {
 	
 	
 	/**
-	 *返回向量的大小 
+	 *return the size of the vector
 	 * @return 
 	 * 
 	 */		
@@ -180,7 +180,7 @@ public class Vector2 {
 	}
 	
 	/**
-	 *翻转向量 
+	 *reverse the vector
 	 * @return 
 	 * 
 	 */		

@@ -22,7 +22,7 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 	}
 
 	/**
-	 * 在指定位置添加子级
+	 * add child at index
 	 * @param displayObject
 	 * @param index
 	 */

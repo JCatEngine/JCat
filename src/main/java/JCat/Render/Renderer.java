@@ -4,6 +4,7 @@ import JCat.Canvas.Canvas;
 import JCat.Display.Bitmap;
 import JCat.Display.DisplayObject;
 import JCat.Display.DisplayObjectContainer;
+import JCat.Display.MovieClip;
 import JCat.Display.Stage;
 import JCat.Textures.Texture;
 
@@ -32,7 +33,7 @@ public class Renderer {
 	private void renderObject(DisplayObject displayObject, Canvas canvas) 
 	{
 
-
+		//render bitmap
 		if(displayObject instanceof Bitmap)
 		{
 			Bitmap bitmap=(Bitmap) displayObject;
@@ -45,6 +46,12 @@ public class Renderer {
 				//render the texture to screen
 				canvas.drawTexture(texture,renderData);
 			}
+			
+		}
+		
+		//render the current frame of the movieclip
+		else if(displayObject instanceof MovieClip)
+		{
 			
 		}
 		

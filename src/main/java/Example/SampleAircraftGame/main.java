@@ -7,6 +7,7 @@ import JCat.Display.Bitmap;
 import JCat.Display.Sprite;
 import JCat.Display.Stage;
 import JCat.Event.Event;
+import JCat.Event.KeyEvent;
 import JCat.Loader.ImageLoader;
 import JCat.Loader.ImageLoader.onAchieveListener;
 import JCat.Textures.Texture;
@@ -34,35 +35,7 @@ public class main {
 		});
 		
 		
-		
 
-		
-		
-//		jGame.addObject(aircraft);
-//		jGame.addToRoot(aircraft);
-//		aircraft.x=300;
-//		aircraft.y=600;
-//		aircraft.width=50;
-//		aircraft.height=50;
-//		aircraft.getCom_anime().addImage(Util.LoadImg("aircraft.png"));
-//		
-//		
-//		//添加到顶层渲染中 这和上面的add不一样 上面的只是为了一种资源绑定关系
-//		//而也不是所有的对象都在顶层渲染中 
-//		
-//		
-//		Money money=new Money();
-//		jGame.addObject(money);
-//		jGame.addToRoot(money);
-//		money.x=100;
-//		money.y=100;
-//		money.getCom_anime().CreateAnime("test", 12, Util.LoadImg("testAnime1.png"));
-//		money.getCom_anime().addKeyFrame("test", 4, Util.LoadImg("testAnime2.png"));
-//		money.getCom_anime().addKeyFrame("test", 7, Util.LoadImg("testAnime3.png"));
-//		money.getCom_anime().addKeyFrame("test", 10, Util.LoadImg("testAnime4.png"));
-//		
-//		
-//		jGame.getRoot().getCom_anime().addImage(Util.LoadImg("back.jpeg"));
 	}
 
 	protected static void loadAchieve(RenderSystem system) {
@@ -86,7 +59,9 @@ public class main {
 		bitmap2.x=100;
 		bitmap2.y=50;
 		
-		sprite.addEventListener("test", e->System.out.println(e));
+		//sprite.addEventListener("test", e->System.out.println(e));
+		sprite.addEventListener(KeyEvent.KEY_DOWN, e->System.out.println(e));
+		
 		
 		bitmap.x=100;
 		bitmap.y=100;
@@ -121,6 +96,7 @@ public class main {
 		//sprite.x+=5;
 		sprite.rotation--;
 		sprite.alpha=0.5;
+		
 		
 
 		bitmap.dispatchEvent(new Event("test", true));

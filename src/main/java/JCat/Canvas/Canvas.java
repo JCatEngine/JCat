@@ -1,9 +1,15 @@
 package JCat.Canvas;
 
-import JCat.Display.Calculation.Transform;
+import JCat.Interaction.CanvasKeyListener;
+import JCat.Interaction.CanvasMouseListener;
 import JCat.Render.RenderData;
 import JCat.Textures.Texture;
 
+/**
+ * a canvas have ability to draw texture and receive origin event
+ * @author Administrator
+ *
+ */
 public interface Canvas {
 
 	/**
@@ -22,5 +28,13 @@ public interface Canvas {
 	 * called after render
 	 */
 	void postRender();
+	/**
+	 * 
+	 */
+	void addMouseListener(CanvasMouseListener listener);
+	/**
+	 * 
+	 */
+	void addKeyListener(CanvasKeyListener listener);
 
 }

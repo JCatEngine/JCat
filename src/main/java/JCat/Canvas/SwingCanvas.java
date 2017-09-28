@@ -3,6 +3,10 @@ package JCat.Canvas;
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
@@ -10,6 +14,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import JCat.Display.Calculation.Transform;
+import JCat.Interaction.CanvasKeyEvent;
+import JCat.Interaction.CanvasKeyListener;
+import JCat.Interaction.CanvasMouseEvent;
+import JCat.Interaction.CanvasMouseListener;
 import JCat.Render.RenderData;
 import JCat.Textures.Texture;
 
@@ -23,6 +31,8 @@ public class SwingCanvas extends JFrame  implements Canvas{
 	 * cache image,the texture first draw on it,finally it's be draw to screen
 	 */
 	private BufferedImage cache;
+	private CanvasKeyListener canvaskeylistener;
+	private CanvasMouseListener canvasmouselistener;
 	
 	
 	public SwingCanvas(int width, int height) {
@@ -46,6 +56,104 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		
 		getContentPane().add(panel);
 		setVisible(true);
+		
+		addListeners();
+	}
+
+	/**
+	 * 
+	 */
+	private void addListeners() {
+		
+		panel.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+			
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+				canvaskeylistener.keyUp(createKeyEvent(e));
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				canvaskeylistener.keyDown(createKeyEvent(e));
+				
+			}
+		});
+		
+		
+		panel.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				
+				canvasmouselistener.mouseUp(createMouseEvent(e));
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+				canvasmouselistener.mouseDown(createMouseEvent(e));
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				
+				
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				
+				
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+	}
+
+	/**
+	 * convert swing mouse event to Jcat mouse event
+	 * @param e
+	 * @return
+	 */
+	protected CanvasMouseEvent createMouseEvent(MouseEvent e) {
+		
+		CanvasMouseEvent canvasMouseEvent=new CanvasMouseEvent();
+		canvasMouseEvent.x=e.getX();
+		canvasMouseEvent.y=e.getY();
+		
+		
+		return canvasMouseEvent;
+	}
+
+	
+	/**
+	 * convert swing key event to Jcat key event
+	 * @param e
+	 * @return
+	 */
+	protected CanvasKeyEvent createKeyEvent(KeyEvent e) {
+		
+		CanvasKeyEvent canvasKeyEvent=new CanvasKeyEvent();
+		canvasKeyEvent.keycode=e.getKeyCode();
+
+		return canvasKeyEvent;
 	}
 
 	@Override
@@ -97,6 +205,20 @@ public class SwingCanvas extends JFrame  implements Canvas{
 	public void postRender() {
 
 		panel.getGraphics().drawImage(cache, 0, 0, width,height, null);
+		
+	}
+
+	@Override
+	public void addMouseListener(CanvasMouseListener listener) {
+		
+		this.canvasmouselistener=listener;
+		
+	}
+
+	@Override
+	public void addKeyListener(CanvasKeyListener listener) {
+		
+		this.canvaskeylistener=listener;
 		
 	}
 
