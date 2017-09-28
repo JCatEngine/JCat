@@ -95,12 +95,12 @@ public class EventDispatcher{
 	 */
 	void sendEventCurrentObject(Event event)
 	{
-	
+		
 		//through high priority to low priority
 		for(int i=listeners.size()-1;i>=0;i--)
 		{
 			ListenerData data=listeners.get(i);
-			if(data.type==event.type)
+			if(data.type.equals(event.type))
 			{
 				//if in this two phase the listener will be trigged anyway
 				if(event.eventPhase==EventPhase.AT_TARGET||event.eventPhase==EventPhase.BUBBLING_PHASE)

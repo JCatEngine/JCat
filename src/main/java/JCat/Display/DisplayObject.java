@@ -338,21 +338,23 @@ public abstract class DisplayObject extends EventDispatcher{
 	 */
 	public Boolean hitTestObject(DisplayObject displayObject)
 	{
-		Rect rect=displayObject.getBound(stage);
-		Rect rect2=this.getBound(stage);
 		
-		return rect.hitTest(rect2);
+		throw new RuntimeException("undo");
+		
 		
 	}
 	
 	/**
-	 * 
-	 * @param vector2
+	 * check hitTest width Point
+	 * @param vector2 in the world Coordinate
 	 * @return
 	 */
 	public Boolean hitTestPoint(Vector2 vector2)
 	{
-		return getBound(stage).contains(vector2);
+		updateBound();
+		Vector2 local=getWorldTransform().applyInverse(vector2);
+		return localBound.toRect().contains(local);
+		
 		
 	}
 	

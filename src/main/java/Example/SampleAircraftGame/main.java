@@ -8,6 +8,7 @@ import JCat.Display.Sprite;
 import JCat.Display.Stage;
 import JCat.Event.Event;
 import JCat.Event.KeyEvent;
+import JCat.Event.MouseEvent;
 import JCat.Loader.ImageLoader;
 import JCat.Loader.ImageLoader.onAchieveListener;
 import JCat.Textures.Texture;
@@ -55,7 +56,7 @@ public class main {
 		
 		
 		sprite.addChild(bitmap);
-		sprite.addChild(bitmap2);
+		//sprite.addChild(bitmap2);
 		bitmap2.x=100;
 		bitmap2.y=50;
 		
@@ -68,6 +69,7 @@ public class main {
 		
 		stage.addChild(sprite);
 		
+		sprite.addEventListener(MouseEvent.MOUSE_DOWN, e->System.out.println(e));
 		
 		Ticker ticker=new Ticker(50);
 		ticker.addListener(new OnResponceListener() {
@@ -94,12 +96,12 @@ public class main {
 		
 	
 		//sprite.x+=5;
-		sprite.rotation--;
-		sprite.alpha=0.5;
+		//sprite.rotation--;
+		//sprite.alpha=0.5;
 		
 		
 
-		bitmap.dispatchEvent(new Event("test", true));
+		//bitmap.dispatchEvent(new Event("test", true));
 		
 	
 		//sprite.setWidth(sprite.getWidth()+10);
@@ -113,6 +115,7 @@ public class main {
 		
 		
 		system.render();
+		
 		
 		
 		

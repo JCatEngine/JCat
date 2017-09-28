@@ -114,8 +114,15 @@ public class Event {
 		event.currentTarget=currentTarget;
 		event.target=target;
 		event.isStop=isStop;
+		event.eventPhase=eventPhase;
 		
 		return event;
 	}
+
+	public void setTarget(Object target) {
+		this.target = target;
+	}
 	 
+	
+	
 }

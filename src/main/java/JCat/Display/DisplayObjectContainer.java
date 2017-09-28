@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import JCat.Display.Calculation.Bound;
 import JCat.Interaction.InteractiveObject;
+import JCat.Math.Vector2;
 
 abstract public class DisplayObjectContainer extends InteractiveObject{
 
@@ -115,6 +116,20 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 		}
 		
 		localBound=bound;
+	}
+	
+	@Override
+	public Boolean hitTestPoint(Vector2 vector2) {
+		
+		//check whether one of childs has hittestd the point
+		for (DisplayObject displayObject : childs) {
+			if(displayObject.hitTestPoint(vector2)==true)
+			{
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	

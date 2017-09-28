@@ -13,12 +13,19 @@ public class MouseEvent extends Event {
 	/**
 	 * x in the stage Coordinate
 	 */
-	public int globalX;
+	public double globalX;
 	/**
 	 * y in the stage Coordinate
 	 */
-	public int globalY;
-	
+	public double globalY;
+	/**
+	 * x in the local Coordinate
+	 */
+	public double localX;
+	/**
+	 * y in the local Coordinate
+	 */
+	public double localY;
 	
 	public MouseEvent(String type, boolean bubbles) {
 		super(type, bubbles);
@@ -28,8 +35,26 @@ public class MouseEvent extends Event {
 		super(type);
 		// TODO Auto-generated constructor stub
 	}
+	@Override
+	public String toString() {
+		return "MouseEvent [globalX=" + globalX + ", globalY=" + globalY + ", localX=" + localX + ", localY=" + localY
+				+ ", " + (type != null ? "type=" + type + ", " : "")
+				+ (currentTarget != null ? "currentTarget=" + currentTarget + ", " : "")
+				+ (eventPhase != null ? "eventPhase=" + eventPhase + ", " : "")
+				+ (target != null ? "target=" + target + ", " : "") + "bubbles=" + bubbles + ", isStop=" + isStop + "]";
+	}
 	
 
+	@Override
+	public MouseEvent clone() {
+		MouseEvent event=(MouseEvent) super.clone();
+		event.globalX=globalX;
+		event.globalY=globalY;
+		event.localX=localX;
+		event.localY=localY;
+		
+		return event;
+	}
 	
 	
 }

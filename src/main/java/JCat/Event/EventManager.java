@@ -17,6 +17,7 @@ public class EventManager {
 	
 		event=event.clone();
 		
+		
 		event.target=eventDispatcher;
 		
 		//a bubbles event
@@ -27,8 +28,8 @@ public class EventManager {
 			{
 				throw new RuntimeException("only event from DisplayObject can send bubble event");
 			}
-			else if(((DisplayObject)eventDispatcher).getStage()==null)
-			{
+			else if(((DisplayObject)eventDispatcher).getStage()==null&&!(eventDispatcher instanceof Stage))
+			{		
 				throw new RuntimeException("only DisplayObject in the main display tree can send bubble event");
 			}
 			else {
@@ -85,6 +86,7 @@ public class EventManager {
 	private static void _dispatchBubbleEvent(DisplayObject object, Event event) {
 		
 		
+		
 		//the capture phase flow path
 		Stack<DisplayObject> capturingStack=new Stack<>();
 		//the bubbling phase flow path
@@ -111,7 +113,6 @@ public class EventManager {
 			}
 			
 			DisplayObject currentTarget=capturingStack.pop();
-			
 			_sendEventCapturePhase(event, currentTarget);
 			
 			//add to bubbling Stack
@@ -145,6 +146,7 @@ public class EventManager {
 	 */
 	private static void _sendEventCapturePhase(Event event, EventDispatcher eventDispatcher) {
 	
+		
 		event.currentTarget=eventDispatcher;
 		event.eventPhase=EventPhase.CAPTURING_PHASE;
 		eventDispatcher.sendEventCurrentObject(event.clone());
