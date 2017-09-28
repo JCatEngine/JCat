@@ -60,13 +60,23 @@ public class Transform {
 		return transform;
 	}
 
-
+	
+	/**
+	 * 
+	 * @param vector2
+	 * @return
+	 */
 	public Vector2 apply(Vector2 vector2) {
 		// TODO Auto-generated method stub
 		return matrix.apply(vector2);
 	}
 
 
+	/**
+	 * 
+	 * @param vector2
+	 * @return
+	 */
 	public Vector2 applyInverse(Vector2 vector2)
 	{
 		return matrix.appInverse(vector2);

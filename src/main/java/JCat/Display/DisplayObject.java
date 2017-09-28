@@ -87,6 +87,11 @@ public abstract class DisplayObject extends EventDispatcher{
 	
 	
 
+	/**
+	 * note the returned width is the width in the parent coordinate as same as other field like x,y
+	 * the width fleid itself was the origin width have not be scaled,be rotated...
+	 * @return
+	 */
 	public double getWidth() {
 		
 		return getBound(parent).width;
@@ -96,14 +101,14 @@ public abstract class DisplayObject extends EventDispatcher{
 	public void setWidth(double width) {
 	
 		
-		//if it's width==0,change it's width was useless
+		//if it's width==0,change it's width was useless,because there are nothing!
 		if(getWidth()==0)
 		{
 			return;
 		}
 		else
 		{
-		
+			//because rotate will change width ,so we need call getWidth() instead of "scale=this.width/width"
 			scaleX=(width/(getWidth()/scaleX));
 			
 		}
@@ -111,6 +116,11 @@ public abstract class DisplayObject extends EventDispatcher{
 	}
 
 
+	/**
+	 * note the returned height is the height in the parent coordinate as same as other field like x,y
+	 * the height fleid itself was the origin height have not be scaled,be rotated...
+	 * @return
+	 */
 	public double getHeight() {
 		
 		return getBound(parent).height;
@@ -120,13 +130,14 @@ public abstract class DisplayObject extends EventDispatcher{
 	
 	public void setHeight(double height) {
 		
-		//if it's height==0,change it's height was useless
+		//if it's height==0,change it's height was useless,,because there are nothing!
 		if(getHeight()==0)
 		{
 			return;
 		}
 		else
 		{
+			//because rotate will change height ,so we need call getHeight() instead of "scale=this.height/height"
 			scaleY=(height/(getHeight()/scaleY));
 		}
 	}
@@ -261,7 +272,8 @@ public abstract class DisplayObject extends EventDispatcher{
 	
 	
 	/**
-	 * update local bound
+	 * update local bound(the display object don't have width and height,so it's abstract)
+	 * bitmap set it localbound to fix texture,displaycontainer set it's bound to fit all it's childs
 	 */
 	abstract void updateBound();
 	
@@ -281,7 +293,6 @@ public abstract class DisplayObject extends EventDispatcher{
 		Rect rect=localBound.toRect();
 		
 		//transform rect to target Coordinate
-		
 		Transform transform=displayObject.getLocalTransform();
 	
 		Vector2 vector1=rect.getLeftTopPoint();

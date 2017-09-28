@@ -3,6 +3,7 @@ package JCat.Event;
 import java.util.Stack;
 
 import JCat.Display.DisplayObject;
+import JCat.Display.Stage;
 
 public class EventManager {
 
@@ -43,6 +44,20 @@ public class EventManager {
 		}
 		
 	}
+	
+	/**
+	 * send this event to all object in the main dispay tree
+	 * just used for system event,such as keyboard event or loop event
+	 * @param event
+	 */
+	static void boardCast(Stage stage,Event event)
+	{
+		event.target=stage;
+		event.eventPhase=EventPhase.AT_TARGET;
+		
+		
+	}
+	
 
 	/**
 	 * 

@@ -49,6 +49,13 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 		displayObject.parent=this;
 		
 		
+		//set stage
+		if(this.getStage()!=null)
+		{
+			displayObject.recursiveUpdateStage(this.getStage(),true);
+		}
+		
+		
 	}
 
 	private void checkIndex(int index, int min, int max) {
@@ -76,6 +83,11 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 	public void removeChild(DisplayObject displayObject) {
 		
 		this.childs.remove(displayObject);
+		
+	
+		displayObject.recursiveUpdateStage(null,false);
+		
+		
 	}
 
 	/**

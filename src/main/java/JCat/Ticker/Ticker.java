@@ -107,22 +107,36 @@ public class Ticker {
 	
 	
 	
-	
+	/**
+	 * close the ticker,if has closed,the ticker can't be restart
+	 */
 	public void close()
 	{
 		close=true;
 	}
 
+	/**
+	 * stop the ticker,the ticker can be restart
+	 */
 	public void stop()
 	{
 		isRunning=false;
 	}
 
 	
+	/**
+	 * add listener
+	 * @param listener
+	 */
 	public void addListener(OnResponceListener listener) {
 		listeners.add(listener);
 	}
 
+	
+	/**
+	 * remove listener
+	 * @param listener
+	 */
 	public void removeListener(OnResponceListener listener) {
 		listeners.remove(listener);
 	}
