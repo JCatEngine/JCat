@@ -3,6 +3,7 @@ package JCat.Display;
 import java.util.LinkedList;
 
 import JCat.Display.Calculation.Bound;
+import JCat.Interaction.InteractiveObject;
 
 abstract public class DisplayObjectContainer extends InteractiveObject{
 

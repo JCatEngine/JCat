@@ -6,6 +6,7 @@ import JCat.RenderSystem;
 import JCat.Display.Bitmap;
 import JCat.Display.Sprite;
 import JCat.Display.Stage;
+import JCat.Event.Event;
 import JCat.Loader.ImageLoader;
 import JCat.Loader.ImageLoader.onAchieveListener;
 import JCat.Textures.Texture;
@@ -85,6 +86,7 @@ public class main {
 		bitmap2.x=100;
 		bitmap2.y=50;
 		
+		sprite.addEventListener("test", e->System.out.println(e));
 		
 		bitmap.x=100;
 		bitmap.y=100;
@@ -121,6 +123,8 @@ public class main {
 		sprite.alpha=0.5;
 		
 
+		bitmap.dispatchEvent(new Event("test", true));
+		
 	
 		//sprite.setWidth(sprite.getWidth()+10);
 

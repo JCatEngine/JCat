@@ -5,6 +5,7 @@ import java.util.function.Function;
 
 import JCat.Display.Calculation.Bound;
 import JCat.Display.Calculation.Transform;
+import JCat.Event.EventDispatcher;
 import JCat.Math.Matrix;
 import JCat.Math.Rect;
 import JCat.Math.Vector2;
@@ -57,9 +58,11 @@ public abstract class DisplayObject extends EventDispatcher{
 	 */
 	public boolean visible=true;
 	/**
-	 * stage reference
+	 * stage reference,if a object is in the root display tree this field will not be null
+	 * but if a object is not in the root display tree such as just inited and be remove
+	 * from parent,this field will be null
 	 */
-	public Stage stage;
+	Stage stage;
 	/**
 	 * localTransform,will be recalcued per frame
 	 */
@@ -71,7 +74,7 @@ public abstract class DisplayObject extends EventDispatcher{
 	/**
 	 * parent
 	 */
-	public DisplayObjectContainer parent;
+	DisplayObjectContainer parent;
 	/**
 	 * world alpha of the object
 	 * it's will be auto updated before render
@@ -353,18 +356,46 @@ public abstract class DisplayObject extends EventDispatcher{
 	}
 
 
-	public void updateStage(Stage stage) {
+	/**
+	 * Recursive set the stage field of the child object
+	 * if a DisplayObjectContainer was removed from parent,
+	 * the DisplayObjectContainer itself and all it's childs will
+	 * be removed from stage|main display tree
+	 * on the contrary,if a object was added to stage or a object in the main display tree
+	 * all it childs will be add to main display tree 
+	 * @param stage
+	 * @param addToStage 
+	 */
+	void recursiveUpdateStage(Stage stage, boolean addToStage) {
 		
-		this.stage=stage;
+		if(addToStage==true)
+		{
+			this.stage=stage;
+		}
+		else
+		{
+			this.stage=null;
+		}
+		
 		if(this instanceof DisplayObjectContainer)
 		{
 			DisplayObjectContainer container=(DisplayObjectContainer) this;
 			for (DisplayObject displayObject : container.getChilds()) {
 				
-				displayObject.updateStage(stage);
+				displayObject.recursiveUpdateStage(stage,addToStage);
 			}
 		}
 		
+	}
+
+
+	public Stage getStage() {
+		return stage;
+	}
+
+
+	public DisplayObjectContainer getParent() {
+		return parent;
 	}
 	
 

@@ -7,8 +7,16 @@ public class Stage extends DisplayObjectContainer{
 		// TODO Auto-generated method stub
 		super.addChildAt(displayObject, index);
 		
-		displayObject.updateStage(this);
+		displayObject.recursiveUpdateStage(this,true);
 		
+	}
+	
+	@Override
+	public void addChild(DisplayObject displayObject) {
+		// TODO Auto-generated method stub
+		super.addChild(displayObject);
+		
+		displayObject.recursiveUpdateStage(this,true);
 	}
 
 }
