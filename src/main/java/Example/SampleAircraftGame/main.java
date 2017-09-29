@@ -1,5 +1,6 @@
 package Example.SampleAircraftGame;
 
+import java.io.File;
 import java.io.IOException;
 
 import JCat.RenderSystem;
@@ -18,10 +19,12 @@ import JCat.Ticker.Ticker.OnResponceListener;
 public class main {
 
 	public static void main(String[] args) throws IOException {
-		
+
+
+        File file=new File("");
+
 
 		RenderSystem system=new RenderSystem(600, 800);
-		
 		ImageLoader loader=new ImageLoader(system);
 		loader
 		.add("resources\\aircraft.png")
