@@ -45,7 +45,12 @@ public class RenderSystem extends EventDispatcher{
 	private InteractionManager interactionManager;
 
 
-	
+	/**
+	 * create a render system
+	 * @param width
+	 * @param height
+	 * @param type
+	 */
 	public RenderSystem(int width, int height,CanvasType type) 
 	{
 		

@@ -37,7 +37,7 @@ public class BoundTest {
 		bound.addVector2(new Vector2(-100, 100));
 		bound.addVector2(new Vector2(0, -100));
 		
-		assertEquals("Bound [x=-100.0, y=-100.0, width=200.0, height=200.0]", bound.toString());
+		assertEquals("Bound [minX=-100.0, minY=-100.0, maxX=100.0, maxY=100.0]", bound.toString());
 	}
 	
 	
@@ -53,7 +53,7 @@ public class BoundTest {
 		
 		bound.addBound(bound2.toRect());
 		
-		assertEquals("Bound [x=-100.0, y=0.0, width=400.0, height=300.0]", bound.toString());
+		assertEquals("Bound [minX=-100.0, minY=100.0, maxX=300.0, maxY=300.0]", bound.toString());
 	}
 
 }

@@ -24,6 +24,7 @@ public class main {
         File file=new File("");
 
 
+
 		RenderSystem system=new RenderSystem(600, 800);
 		ImageLoader loader=new ImageLoader(system);
 		loader
