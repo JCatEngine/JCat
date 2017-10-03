@@ -17,6 +17,8 @@ repositories {
     jcenter()
 }
 
+
+
 dependencies {
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api 'org.apache.commons:commons-math3:3.6.1'
@@ -28,3 +30,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
+task hello {
+    doLast {
+        println 'Hello world!'
+    }
+}
