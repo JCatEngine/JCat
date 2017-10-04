@@ -20,11 +20,6 @@ public class main {
 
 	public static void main(String[] args) throws IOException {
 
-
-        File file=new File("");
-
-
-
 		RenderSystem system=new RenderSystem(600, 800);
 		ImageLoader loader=new ImageLoader(system);
 		loader

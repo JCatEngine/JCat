@@ -13,6 +13,7 @@ apply plugin: 'java-library'
 //the plugin can run java application in development
 apply plugin: 'application'
 
+apply plugin: 'idea'
 
 mainClassName = "Example.SampleAircraftGame.main"
 
@@ -36,23 +37,29 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+
+    // https://mvnrepository.com/artifact/org.json/json
+    compile group: 'org.json', name: 'json', version: '20160810'
+
 }
 
-task createDocs {
-    def docs = file("$buildDir/docs")
-    outputs.dir docs
-    doLast {
-        docs.mkdirs()
-        new File(docs, "readme.txt").write("Read me!")
+
+jar{
+    manifest{
+        attributes 'Main-Class':'Example.SampleAircraftGame.main'
     }
 }
 
-distributions {
-    main {
-        contents {
-            from(createDocs) {
-                into "docs"
-            }
+sourceSets{
+    main{
+        java{
+            srcDirs=['src\\main\\java']
+        }
+    }
+    test{
+        java{
+            srcDirs=['src\\test\\java']
         }
     }
 }
+//buildDir='out'
