@@ -18,7 +18,7 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 	 * @param displayObject
 	 */
 	public void addChild(DisplayObject displayObject) {
-		
+
 		addChildAt(displayObject, childs.size());
 	}
 
@@ -28,52 +28,52 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 	 * @param index
 	 */
 	public void addChildAt(DisplayObject displayObject, int index) {
-		
+
 		checkIndex(index,0,childs.size());
-		
+
 		if(displayObject.parent!=null)
 		{
 			displayObject.parent.removeChild(displayObject);
-			
+
 		}
-		
+
 		if(index==childs.size())
 		{
 			childs.add(displayObject);
-			
+
 		}
 		else
 		{
 			childs.add(index, displayObject);
 		}
-		
+
 		displayObject.parent=this;
-		
-		
+
+
 		//set stage
 		if(this.getStage()!=null)
 		{
 			displayObject.recursiveUpdateStage(this.getStage(),true);
 		}
-		
-		
+
+
 	}
 
 	private void checkIndex(int index, int min, int max) {
-		
+
 		if(index<min||index>max)
 		{
 			throw new RuntimeException("out of range");
 		}
-		
+
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public int getChildCount() {
-		
+
 		return childs.size();
 	}
 
@@ -82,13 +82,13 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 	 * @return
 	 */
 	public void removeChild(DisplayObject displayObject) {
-		
+
 		this.childs.remove(displayObject);
-		
-	
+
+
 		displayObject.recursiveUpdateStage(null,false);
-		
-		
+
+
 	}
 
 	/**
@@ -96,31 +96,30 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 	 * @return
 	 */
 	public LinkedList<DisplayObject> getChilds() {
-		
+
 		LinkedList<DisplayObject> linkedList=new LinkedList<>();
 		childs.forEach(d->linkedList.add(d));
-		
+
 		return linkedList;
-		
+
 	}
 
-	
-	@Override
+
 	void updateBound() {
 		Bound bound=new Bound();
-		
+
 		for (DisplayObject displayObject : childs) {
-			
+
 			bound.addBound(displayObject.getBound(this));
-			
+
 		}
-		
+
 		localBound=bound;
 	}
-	
+
 	@Override
 	public Boolean hitTestPoint(Vector2 vector2) {
-		
+
 		//check whether one of childs has hittestd the point
 		for (DisplayObject displayObject : childs) {
 			if(displayObject.hitTestPoint(vector2)==true)
@@ -128,9 +127,9 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
-	
-	
+
+
 }

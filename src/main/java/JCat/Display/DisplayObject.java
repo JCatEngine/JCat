@@ -26,11 +26,11 @@ public abstract class DisplayObject extends EventDispatcher{
 	 */
 	public double y;
 	/**
-	 * the origin width(before scale and rotate,be notice rotation also change the final width) 
+	 * the origin width(before scale and rotate,be notice rotation also change the final width)
 	 */
 	protected double width;
 	/**
-	 * the origin height(before scale and rotate,be notice rotation also change the final height) 
+	 * the origin height(before scale and rotate,be notice rotation also change the final height)
 	 */
 	protected double height;
 	/**
@@ -84,8 +84,8 @@ public abstract class DisplayObject extends EventDispatcher{
 	 * localBound
 	 */
 	protected Bound localBound;
-	
-	
+
+
 
 	/**
 	 * note the returned width is the width in the parent coordinate as same as other field like x,y
@@ -93,14 +93,14 @@ public abstract class DisplayObject extends EventDispatcher{
 	 * @return
 	 */
 	public double getWidth() {
-		
+
 		return getBound(parent).width;
 	}
 
 
 	public void setWidth(double width) {
-	
-		
+
+
 		//if it's width==0,change it's width was useless,because there are nothing!
 		if(getWidth()==0)
 		{
@@ -110,9 +110,9 @@ public abstract class DisplayObject extends EventDispatcher{
 		{
 			//because rotate will change width ,so we need call getWidth() instead of "scale=this.width/width"
 			scaleX=(width/(getWidth()/scaleX));
-			
+
 		}
-		
+
 	}
 
 
@@ -122,14 +122,14 @@ public abstract class DisplayObject extends EventDispatcher{
 	 * @return
 	 */
 	public double getHeight() {
-		
+
 		return getBound(parent).height;
 	}
 
 
-	
+
 	public void setHeight(double height) {
-		
+
 		//if it's height==0,change it's height was useless,,because there are nothing!
 		if(getHeight()==0)
 		{
@@ -165,35 +165,35 @@ public abstract class DisplayObject extends EventDispatcher{
 
 
 	public DisplayObject() {
-		
+
 		updateTransform();
-		
+
 
 	}
 
-	
+
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public Transform getLocalTransform()
 	{
 		updateLocalTransform();
 		return localTransform;
-		
+
 	}
-	
+
 	private void updateLocalTransform() {
-		
+
 		//update localTransform
 		Transform transform=new Transform(x,y,rotation,scaleX,scaleY);
 		this.localTransform=transform;
-		
+
 	}
 
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public Transform getWorldTransform()
@@ -208,12 +208,12 @@ public abstract class DisplayObject extends EventDispatcher{
 
 		updateTransform();
 		return worldTransform;
-		
+
 	}
 
 	void updateAlpha()
 	{
-		
+
 		if(parent!=null)
 		{
 			this.worldAlpha=parent.getWorldAlpha()*this.alpha;
@@ -222,13 +222,13 @@ public abstract class DisplayObject extends EventDispatcher{
 		{
 			this.worldAlpha=this.alpha;
 		}
-		
+
 	}
 
-	
-	
+
+
 	public double getWorldAlpha() {
-		
+
 		updateAlpha();
 		return worldAlpha;
 	}
@@ -238,16 +238,16 @@ public abstract class DisplayObject extends EventDispatcher{
 	 * auto called before render
 	 */
 	void updateTransform() {
-		
+
 		updateLocalTransform();
-		
-		
+
+
 		//update worldTransform
 		if(parent!=null)
 		{
-			
+
 			Transform parentTransform=parent.getWorldTransform();
-			
+
 			//though these value can just decompose from matrix in the transform
 			//but i konw little about matrix calculation,
 			//so i just use this way to calculate;
@@ -257,49 +257,49 @@ public abstract class DisplayObject extends EventDispatcher{
 			this.worldTransform.rotation+=parentTransform.rotation;
 			this.worldTransform.scaleX*=parentTransform.scaleX;
 			this.worldTransform.scaleY*=parentTransform.scaleY;
-			
+
 			//also append the matrix to ensure data are consistent with
-			//matrix 
+			//matrix
 			this.worldTransform.append(parentTransform);
-			
+
 		}
 		else
 		{
 			this.worldTransform=this.localTransform.clone();
 		}
-		
+
 	}
-	
-	
+
+
 	/**
 	 * update local bound(the display object don't have width and height,so it's abstract)
 	 * bitmap set it localbound to fix texture,displaycontainer set it's bound to fit all it's childs
 	 */
 	abstract void updateBound();
-	
-	
+
+
 	/**
-	 * 
-	 * @param displayObject 
+	 *
+	 * @param displayObject
 	 * @return
 	 */
 	public Rect getBound(DisplayObject displayObject)
 	{
 		//update localBound
 		updateBound();
-		
+
 		Bound bound=new Bound();
-		
+
 		Rect rect=localBound.toRect();
-		
+
 		//transform rect to target Coordinate
 		Transform transform=displayObject.getLocalTransform();
-	
+
 		Vector2 vector1=rect.getLeftTopPoint();
 		vector1=localToGlobal(vector1);
 		vector1=displayObject.globalToLocal(vector1);
 		bound.addVector2(vector1);
-		
+
 		Vector2 vector2=rect.getRightTopPoint();
 		vector2=localToGlobal(vector2);
 		vector2=displayObject.globalToLocal(vector2);
@@ -309,41 +309,41 @@ public abstract class DisplayObject extends EventDispatcher{
 		vector3=localToGlobal(vector3);
 		vector3=displayObject.globalToLocal(vector3);
 		bound.addVector2(vector3);
-		
+
 		Vector2 vector4=rect.getRightDownPoint();
 		vector4=localToGlobal(vector4);
 		vector4=displayObject.globalToLocal(vector4);
 		bound.addVector2(vector4);
-		
-		
-		
+
+
+
 		return bound.toRect();
 	}
 
 
 	/**
-	 * 
+	 *
 	 * @param vector2 the point in world coordinate
-	 * @return 
+	 * @return
 	 */
 	public Vector2 globalToLocal(Vector2 vector2)
 	{
-		return getWorldTransform().applyInverse(vector2);	
+		return getWorldTransform().applyInverse(vector2);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param displayObject
 	 * @return
 	 */
 	public Boolean hitTestObject(DisplayObject displayObject)
 	{
-		
+
 		throw new RuntimeException("undo");
-		
-		
+
+
 	}
-	
+
 	/**
 	 * check hitTest width Point
 	 * @param vector2 in the world Coordinate
@@ -354,12 +354,12 @@ public abstract class DisplayObject extends EventDispatcher{
 		updateBound();
 		Vector2 local=getWorldTransform().applyInverse(vector2);
 		return localBound.toRect().contains(local);
-		
-		
+
+
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param vector2
 	 * @return
 	 */
@@ -375,12 +375,12 @@ public abstract class DisplayObject extends EventDispatcher{
 	 * the DisplayObjectContainer itself and all it's childs will
 	 * be removed from stage|main display tree
 	 * on the contrary,if a object was added to stage or a object in the main display tree
-	 * all it childs will be add to main display tree 
+	 * all it childs will be add to main display tree
 	 * @param stage
-	 * @param addToStage 
+	 * @param addToStage
 	 */
 	void recursiveUpdateStage(Stage stage, boolean addToStage) {
-		
+
 		if(addToStage==true)
 		{
 			this.stage=stage;
@@ -389,16 +389,16 @@ public abstract class DisplayObject extends EventDispatcher{
 		{
 			this.stage=null;
 		}
-		
+
 		if(this instanceof DisplayObjectContainer)
 		{
 			DisplayObjectContainer container=(DisplayObjectContainer) this;
 			for (DisplayObject displayObject : container.getChilds()) {
-				
+
 				displayObject.recursiveUpdateStage(stage,addToStage);
 			}
 		}
-		
+
 	}
 
 
@@ -410,8 +410,8 @@ public abstract class DisplayObject extends EventDispatcher{
 	public DisplayObjectContainer getParent() {
 		return parent;
 	}
-	
 
-	
-	
+
+
+
 }
