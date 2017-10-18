@@ -1,10 +1,21 @@
 package JCat.Event;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-
 public class Event {
 
+	
+
+	/**
+	 * a object is removed from a container
+	 */
+	public static final String REMOVE = "Removed";
+
+
+	/**
+	 * a object is added to a container
+	 */
+	static public final String ADD="Added";
+	
+	
 	/**
 	 * the type of the event
 	 */
@@ -40,6 +51,7 @@ public class Event {
 		 this(type,false);
 	 }
 	 
+	
 	 /**
 	  * 
 	  * @param type
@@ -64,6 +76,7 @@ public class Event {
 		 isStop=true;
 	 }
 
+	 
 	@Override
 	public String toString() {
 		return "Event [" + (type != null ? "type=" + type + ", " : "")
@@ -94,28 +107,27 @@ public class Event {
 
 	 
 	/**
-	 * clone a event
+	 * copy the data in to the event
 	 */
-	public Event clone()
+	protected void defaultClone(Event event)
 	{
 		
-		Object object = null;
-		Class<?> class1=this.getClass();
-		try {
-			Constructor<?> constructor=class1.getConstructor(String.class);
-			 object=constructor.newInstance(type);
-		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		Event event=(Event) object;
 		event.bubbles=bubbles;
+		event.type=type;
 		event.currentTarget=currentTarget;
 		event.target=target;
 		event.isStop=isStop;
 		event.eventPhase=eventPhase;
 		
+	}
+	
+	/**
+	 * clone the event,in the implemention you need to call defaultClone
+	 */
+	public Event clone()
+	{
+		Event event=new Event(type);
+		defaultClone(event);
 		return event;
 	}
 

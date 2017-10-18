@@ -27,8 +27,9 @@ public class KeyEvent extends Event{
 	@Override
 	public KeyEvent clone() {
 		
-		KeyEvent event=(KeyEvent) super.clone();
+		KeyEvent event=new KeyEvent(type);
 		event.keyCode=keyCode;
+		defaultClone(event);
 		
 		return event;
 		

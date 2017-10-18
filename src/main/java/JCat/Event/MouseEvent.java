@@ -47,11 +47,13 @@ public class MouseEvent extends Event {
 
 	@Override
 	public MouseEvent clone() {
-		MouseEvent event=(MouseEvent) super.clone();
+		MouseEvent event=new MouseEvent(type);
 		event.globalX=globalX;
 		event.globalY=globalY;
 		event.localX=localX;
 		event.localY=localY;
+		
+		defaultClone(event);
 		
 		return event;
 	}
