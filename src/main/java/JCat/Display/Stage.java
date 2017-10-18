@@ -44,7 +44,7 @@ public class Stage extends DisplayObjectContainer{
 
 	
 	@Override
-	void updateLocalBound() {
+	protected void updateLocalBound() {
 		//the stage has the width and height even it's has no child,because all hitTest need to be triggered at stage
 		localBound=new Bound();
 		localBound.maxX=getStageWidth();

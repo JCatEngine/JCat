@@ -1,11 +1,12 @@
 package JCat.Render;
 
 import JCat.Canvas.Canvas;
+import JCat.Display.AnchorAble;
 import JCat.Display.Bitmap;
 import JCat.Display.DisplayObject;
 import JCat.Display.DisplayObjectContainer;
-import JCat.Display.MovieClip;
 import JCat.Display.Stage;
+import JCat.Display.MovieClip.MovieClip;
 import JCat.Graphics.Color;
 import JCat.Textures.Texture;
 
@@ -40,11 +41,11 @@ public class Renderer {
 		//move to anchor(only the bitmap support it..)
 		double anchorX=0.0;
 		double anchorY=0.0;
-		if(displayObject instanceof Bitmap)
+		if(displayObject instanceof AnchorAble)
 		{
-			Bitmap bitmap=(Bitmap) displayObject;
-			anchorX=bitmap.getAnchorX()*displayObject.getRawWidth()*displayObject.getScaleX();
-			anchorY=bitmap.getAnchorY()*displayObject.getRawHeight()*displayObject.getScaleY();
+			AnchorAble anchorAble=(AnchorAble) displayObject;
+			anchorX=anchorAble.getAnchorX()*anchorAble.getRawWidth()*displayObject.getScaleX();
+			anchorY=anchorAble.getAnchorY()*anchorAble.getRawHeight()*displayObject.getScaleY();
 		}
 		
 		canvas.translate(anchorX, anchorY);
@@ -60,7 +61,7 @@ public class Renderer {
 			{
 				Texture texture=bitmap.getTexture();
 				
-				RenderData renderData=createRenderData(bitmap,anchorX,anchorY);
+				RenderData renderData=createRenderData(bitmap,bitmap.getTexture(),anchorX,anchorY);
 				//render the texture to screen
 				canvas.drawTexture(texture,renderData);
 			}
@@ -70,6 +71,16 @@ public class Renderer {
 		//render the current frame of the movieclip
 		else if(displayObject instanceof MovieClip)
 		{
+			MovieClip movieClip=(MovieClip) displayObject;
+			
+			if(movieClip.visible)
+			{
+				Texture texture=movieClip.getTexture();
+				
+				RenderData renderData=createRenderData(movieClip,texture,anchorX,anchorY);
+				//render the texture to screen
+				canvas.drawTexture(texture,renderData);
+			}
 			
 		}
 		
@@ -92,14 +103,14 @@ public class Renderer {
 	}
 
 
-	private RenderData createRenderData(Bitmap bitmap, double anchorX, double anchorY) {
+	private RenderData createRenderData(DisplayObject displayObject, Texture texture, double anchorX, double anchorY) {
 		
 		RenderData renderData=new RenderData();
-		renderData.alpha=bitmap.getWorldAlpha();
+		renderData.alpha=displayObject.getWorldAlpha();
 		//be notici there are not set the width of bitmap!
 		//because rotation was be dealed before,so just return the width*scale will be fine
-		renderData.width=bitmap.getTexture().getImage().getWidth(null)*bitmap.getScaleX();
-		renderData.height=bitmap.getTexture().getImage().getHeight(null)*bitmap.getScaleY();
+		renderData.width=texture.getImage().getWidth(null)*displayObject.getScaleX();
+		renderData.height=texture.getImage().getHeight(null)*displayObject.getScaleY();
 		renderData.x=-anchorX;
 		renderData.y=-anchorY;
 		

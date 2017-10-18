@@ -232,7 +232,7 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 	/**
 	 * update the localbound
 	 */
-	void updateLocalBound() {
+	protected void updateLocalBound() {
 		
 		Bound bound=new Bound();
 		for (DisplayObject displayObject : childs) {
@@ -241,26 +241,12 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 			{
 				bound.addBound(displayObject.getBound(this));
 			}
-			
-
 		}
-		
-		
+
 		localBound=bound;
 		
 	}
 	
-	@Override
-	public double getRawWidth() {
-		updateLocalBound();
-		return localBound.toRect().width;
-	}
-	
-	@Override
-	public double getRawHeight() {
-		updateLocalBound();
-		return localBound.toRect().height;
-	}
 	
 	/**
 	 * check hittest point

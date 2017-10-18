@@ -280,7 +280,7 @@ public abstract class DisplayObject extends EventDispatcher{
 	 * update local bound(the display object don't have width and height,so it's abstract)
 	 * bitmap set it localbound to fix texture,displaycontainer set it's bound to fit all it's childs
 	 */
-	abstract void updateLocalBound();
+	abstract protected void updateLocalBound();
 
 
 	/**
@@ -418,23 +418,7 @@ public abstract class DisplayObject extends EventDispatcher{
 		return parent;
 	}
 
-	/**
-	 * return the width before any rotate and scale
-	 * @return
-	 */
-	public double getRawWidth() {
-		// TODO Auto-generated method stub
-		return width;
-	}
-
-	/**
-	 * return the height before any rotate and scale
-	 * @return
-	 */
-	public double getRawHeight() {
-		// TODO Auto-generated method stub
-		return height;
-	}
+	
 
 
 
