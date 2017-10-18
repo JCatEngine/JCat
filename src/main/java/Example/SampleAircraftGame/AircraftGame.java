@@ -38,45 +38,45 @@ public class AircraftGame {
 
 	protected static void loadAchieve(RenderSystem system) {
 		
-		Stage stage=system.getStage();
-
-		Sprite sprite=new Sprite();
-		sprite.x=10;
-		sprite.y=10;
-	
-		
-		Texture texture=system.getImageManager().getTextureByName("aircraft");
-		Bitmap bitmap=new Bitmap(texture);
-		
-		
-		Bitmap bitmap2=new Bitmap(texture);
-		
-		
-		sprite.addChild(bitmap);
-		//sprite.addChild(bitmap2);
-		bitmap2.x=100;
-		bitmap2.y=50;
-		
-		//sprite.addEventListener("test", e->System.out.println(e));
-		sprite.addEventListener(KeyEvent.KEY_DOWN, e->System.out.println(e));
-		
-		
-		bitmap.x=100;
-		bitmap.y=100;
-		
-		stage.addChild(sprite);
-		
-		sprite.addEventListener(MouseEvent.MOUSE_DOWN, e->System.out.println(e));
-		
-		Ticker ticker=new Ticker(50);
-		ticker.addListener(new OnResponceListener() {
-
-			@Override
-			public void onResponce() {
-				loop(sprite,system,bitmap);
-				
-			}
-		});
+//		Stage stage=system.getStage();
+//
+//		Sprite sprite=new Sprite();
+//		sprite.x=10;
+//		sprite.y=10;
+//	
+//		
+//		Texture texture=system.getImageManager().getTextureByName("aircraft");
+//		Bitmap bitmap=new Bitmap(texture);
+//		
+//		
+//		Bitmap bitmap2=new Bitmap(texture);
+//		
+//		
+//		sprite.addChild(bitmap);
+//		//sprite.addChild(bitmap2);
+//		bitmap2.x=100;
+//		bitmap2.y=50;
+//		
+//		//sprite.addEventListener("test", e->System.out.println(e));
+//		sprite.addEventListener(KeyEvent.KEY_DOWN, e->System.out.println(e));
+//		
+//		
+//		bitmap.x=100;
+//		bitmap.y=100;
+//		
+//		stage.addChild(sprite);
+//		
+//		sprite.addEventListener(MouseEvent.MOUSE_DOWN, e->System.out.println(e));
+//		
+//		Ticker ticker=new Ticker(50);
+//		ticker.addListener(new OnResponceListener() {
+//
+//			@Override
+//			public void onResponce() {
+//				loop(sprite,system,bitmap);
+//				
+//			}
+//		});
 		
 		
 //		System.out.println(bitmap.globalToLocal(new Vector2(120, 120)));	

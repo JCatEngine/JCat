@@ -13,7 +13,7 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 	/**
 	 * childs
 	 */
-	private LinkedList<DisplayObject> childs = new LinkedList<>();
+	private LinkedList<DisplayObject> childs=new LinkedList<>();;
 
 	/**
 	 * add child object
@@ -24,6 +24,10 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 		addChildAt(displayObject, childs.size());
 	}
 
+	public DisplayObjectContainer() {
+		
+	}
+	
 	/**
 	 * add child at index
 	 * @param displayObject
@@ -225,10 +229,12 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 	}
 
 	
-
+	/**
+	 * update the localbound
+	 */
 	void updateLocalBound() {
+		
 		Bound bound=new Bound();
-
 		for (DisplayObject displayObject : childs) {
 
 			if(displayObject.visible)
@@ -238,10 +244,24 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 			
 
 		}
-
+		
+		
 		localBound=bound;
+		
 	}
-
+	
+	@Override
+	public double getRawWidth() {
+		updateLocalBound();
+		return localBound.toRect().width;
+	}
+	
+	@Override
+	public double getRawHeight() {
+		updateLocalBound();
+		return localBound.toRect().height;
+	}
+	
 	/**
 	 * check hittest point
 	 */

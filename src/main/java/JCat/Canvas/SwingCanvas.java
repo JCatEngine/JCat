@@ -1,6 +1,7 @@
 package JCat.Canvas;
 
 import java.awt.AlphaComposite;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -46,20 +47,20 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		this.width = width;
 		this.height = height;
 		
-		setSize(width,height);
-				
+		
+		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		getContentPane().setLayout(null);
+		getContentPane().setPreferredSize(new Dimension(width, height));
 		
 		panel = new JPanel();
-		panel.setBounds(0, 0, 160, 10);
 		//set plane
 		panel.setSize(width,height);
 		panel.setFocusable(true);
 		
-		
 		getContentPane().add(panel);
+		pack();
 		setVisible(true);
+		setLocationRelativeTo(null);
 		
 		addListeners();
 	}
@@ -162,36 +163,21 @@ public class SwingCanvas extends JFrame  implements Canvas{
 
 	@Override
 	public void drawTexture(Texture texture, RenderData renderData) {
-		
-		
-		Image image=texture.getImage();
-		
-		Transform transform=renderData.transform;
-		
-		int x=(int) transform.x;
-		int y=(int) transform.y;
-		
-		double scaleX=transform.scaleX;
-		double scaleY=transform.scaleY;
-		
-		double alpha=renderData.alpha;
-		
-		int width=(int) (image.getWidth(null)*scaleX);
-		int height=(int) (image.getHeight(null)*scaleY);
-		
-		double radins= (transform.rotation/180*Math.PI);
-		
+
 
 		
-		//set graphics to left-top corner of bitmap
-		graphics.rotate(radins);
+		Image image=texture.getImage();
+		double alpha=renderData.alpha;
+		int width=(int) renderData.width;
+		int height=(int) renderData.height;
+		int x=(int) renderData.x;
+		int y=(int) renderData.y;
 
 		
 		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float) alpha);
 		graphics.setComposite(alphaComposite);
 		graphics.drawImage(image, x, y,width,height, null);
-		
-		graphics.rotate(-radins);
+
 		
 		
 	}
@@ -229,6 +215,18 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		
 		graphics.setColor(ColorTool.toSwingColor(color));
 		graphics.fillRect(0, 0, width, height);
+		
+	}
+
+	@Override
+	public void translate(double x, double y) {
+		graphics.translate(x, y);
+		
+	}
+
+	@Override
+	public void rotate(double radian) {
+		graphics.rotate(radian);
 		
 	}
 

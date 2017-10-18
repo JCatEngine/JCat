@@ -1,10 +1,11 @@
 package JCat.Render;
 
-import JCat.Display.Calculation.Transform;
-
 public class RenderData {
 
-	public Transform transform;
 	public double alpha;
+	public double width;
+	public double height;
+	public double x;
+	public double y;
 
 }

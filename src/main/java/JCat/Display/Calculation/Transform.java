@@ -5,6 +5,11 @@ import JCat.Math.Vector2;
 
 public class Transform {
 
+	/**
+	 * instance,for inner use to improve efficiency
+	 */
+	public static final Transform staticTransform=new Transform(0, 0, 0, 1, 1);
+
 	private Matrix matrix;
 	
 	public double x;

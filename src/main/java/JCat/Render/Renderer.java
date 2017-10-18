@@ -35,7 +35,22 @@ public class Renderer {
 	 */
 	private void renderObject(DisplayObject displayObject, Canvas canvas) 
 	{
-
+		//move to left-top corner(default zero point)
+		canvas.translate(displayObject.x,displayObject.y);
+		//move to anchor(only the bitmap support it..)
+		double anchorX=0.0;
+		double anchorY=0.0;
+		if(displayObject instanceof Bitmap)
+		{
+			Bitmap bitmap=(Bitmap) displayObject;
+			anchorX=bitmap.getAnchorX()*displayObject.getRawWidth()*displayObject.getScaleX();
+			anchorY=bitmap.getAnchorY()*displayObject.getRawHeight()*displayObject.getScaleY();
+		}
+		
+		canvas.translate(anchorX, anchorY);
+		//rotate
+		canvas.rotate(displayObject.rotation/180*Math.PI);
+		
 		//render bitmap
 		if(displayObject instanceof Bitmap)
 		{
@@ -45,7 +60,7 @@ public class Renderer {
 			{
 				Texture texture=bitmap.getTexture();
 				
-				RenderData renderData=createRenderData(bitmap);
+				RenderData renderData=createRenderData(bitmap,anchorX,anchorY);
 				//render the texture to screen
 				canvas.drawTexture(texture,renderData);
 			}
@@ -68,15 +83,25 @@ public class Renderer {
 			}
 		}
 		
+		canvas.rotate(-displayObject.rotation/180*Math.PI);
+		canvas.translate(-anchorX, -anchorY);
+		canvas.translate(-displayObject.x, -displayObject.y);
+		
+		
 	
 	}
 
 
-	private RenderData createRenderData(Bitmap bitmap) {
+	private RenderData createRenderData(Bitmap bitmap, double anchorX, double anchorY) {
 		
 		RenderData renderData=new RenderData();
-		renderData.transform=bitmap.getWorldTransform();
 		renderData.alpha=bitmap.getWorldAlpha();
+		//be notici there are not set the width of bitmap!
+		//because rotation was be dealed before,so just return the width*scale will be fine
+		renderData.width=bitmap.getTexture().getImage().getWidth(null)*bitmap.getScaleX();
+		renderData.height=bitmap.getTexture().getImage().getHeight(null)*bitmap.getScaleY();
+		renderData.x=-anchorX;
+		renderData.y=-anchorY;
 		
 		return renderData;
 	}

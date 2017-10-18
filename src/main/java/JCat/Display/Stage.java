@@ -54,4 +54,17 @@ public class Stage extends DisplayObjectContainer{
 	}
 	
 	
+	@Override
+	public double getWidth() {
+		// TODO Auto-generated method stub
+		return getStageWidth();
+	}
+	
+	@Override
+	public double getHeight() {
+		// TODO Auto-generated method stub
+		return getStageHeight();
+	}
+	
+	
 }

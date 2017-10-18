@@ -6,6 +6,8 @@ import JCat.Canvas.CanvasFactory;
 import JCat.Canvas.CanvasType;
 import JCat.Display.Stage;
 import JCat.Event.EventDispatcher;
+import JCat.Event.EventManager;
+import JCat.Event.UpdateEvent;
 import JCat.Interaction.InteractionManager;
 import JCat.Manager.TextureManager;
 import JCat.Render.Renderer;
@@ -22,7 +24,7 @@ import JCat.Utils.Ticker.OnResponceListener;
  */
 public class RenderSystem extends EventDispatcher{
 
-	private static final int DEFAULT_FRAMERATE = 40;
+	private static final int DEFAULT_FRAMERATE = 60;
 	/**
 	 * draw texture on canvas
 	 */
@@ -61,7 +63,7 @@ public class RenderSystem extends EventDispatcher{
 	 */
 	public void setFrameRate(int frameRate) {
 		
-			ticker.setDelay(1000.0/frameRate);
+		ticker.setDelay(1000.0/frameRate);
 		
 	}
 
@@ -88,6 +90,7 @@ public class RenderSystem extends EventDispatcher{
 
 			@Override
 			public void onResponce() {
+				EventManager.boardCast(root, new UpdateEvent());
 				render();
 				
 			}

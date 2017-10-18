@@ -14,6 +14,11 @@ public class Event {
 	 * a object is added to a container
 	 */
 	static public final String ADD="Added";
+
+	/**
+	 * 
+	 */
+	public static final String UPDATE = "update";
 	
 	
 	/**

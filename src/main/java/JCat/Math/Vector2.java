@@ -2,11 +2,11 @@ package JCat.Math;
 
 public class Vector2 {
 	
-	static private Vector2 DOWN = new Vector2(0, 1);
-	static private Vector2 UP = new Vector2(0, -1);
-	static private Vector2 LEFT = new Vector2(-1, 0);
-	static private Vector2 RIGHT=new Vector2(1,0);
-	private static Vector2 ZERO=new Vector2(0,0);
+	static public final Vector2 DOWN = new Vector2(0, 1);
+	static public final Vector2 UP = new Vector2(0, -1);
+	static public final Vector2 LEFT = new Vector2(-1, 0);
+	static public final Vector2 RIGHT=new Vector2(1,0);
+	static public final Vector2 ZERO=new Vector2(0,0);
 	
 	public double x;
 	public double y;
@@ -17,30 +17,6 @@ public class Vector2 {
 		this.y = y;
 	}
 	
-	public static Vector2 ZERO()
-	{
-		return ZERO.clone();
-	}
-
-	public static Vector2 DOWN()
-	{
-		return DOWN.clone();
-	}
-	
-	public static Vector2 UP()
-	{
-		return UP.clone();
-	}
-	
-	public static Vector2 LEFT()
-	{
-		return LEFT.clone();
-	}
-	
-	public static Vector2 RIGHT()
-	{
-		return RIGHT.clone();
-	}
 	
 
 	public Vector2 multiply(double i)

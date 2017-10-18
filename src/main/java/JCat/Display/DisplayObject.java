@@ -5,6 +5,7 @@ import JCat.Display.Calculation.Transform;
 import JCat.Event.EventDispatcher;
 import JCat.Math.Rect;
 import JCat.Math.Vector2;
+import JCat.Utils.MathTool;
 
 /**
  * base object that can be render to screen
@@ -165,6 +166,7 @@ public abstract class DisplayObject extends EventDispatcher{
 		updateTransform();
 
 
+
 	}
 
 
@@ -288,39 +290,45 @@ public abstract class DisplayObject extends EventDispatcher{
 	 */
 	public Rect getBound(DisplayObject displayObject)
 	{
-		//update localBound
-		updateLocalBound();
+				//update localBound
+				updateLocalBound();
+				
+				Rect rect=localBound.toRect();
 
-		Bound bound=new Bound();
+				Bound bound=new Bound();
+				Transform transform;
+				if(displayObject==null)
+				{
+					transform=Transform.staticTransform;
+				}
+				else
+				{
+					transform=displayObject.getWorldTransform();
+				}
+				
+				Vector2 vector1=rect.getLeftTopPoint();
+				vector1=localToGlobal(vector1);
+				vector1=transform.applyInverse(vector1);
+				bound.addVector2(vector1);
 
-		Rect rect=localBound.toRect();
+				Vector2 vector2=rect.getRightTopPoint();
+				vector2=localToGlobal(vector2);
+				vector2=transform.applyInverse(vector2);
+				bound.addVector2(vector2);
 
-		//transform rect to target Coordinate
-		Transform transform=displayObject.getLocalTransform();
+				Vector2 vector3=rect.getLeftDownPoint();
+				vector3=localToGlobal(vector3);
+				vector3=transform.applyInverse(vector3);
+				bound.addVector2(vector3);
 
-		Vector2 vector1=rect.getLeftTopPoint();
-		vector1=localToGlobal(vector1);
-		vector1=displayObject.globalToLocal(vector1);
-		bound.addVector2(vector1);
-
-		Vector2 vector2=rect.getRightTopPoint();
-		vector2=localToGlobal(vector2);
-		vector2=displayObject.globalToLocal(vector2);
-		bound.addVector2(vector2);
-
-		Vector2 vector3=rect.getLeftDownPoint();
-		vector3=localToGlobal(vector3);
-		vector3=displayObject.globalToLocal(vector3);
-		bound.addVector2(vector3);
-
-		Vector2 vector4=rect.getRightDownPoint();
-		vector4=localToGlobal(vector4);
-		vector4=displayObject.globalToLocal(vector4);
-		bound.addVector2(vector4);
+				Vector2 vector4=rect.getRightDownPoint();
+				vector4=localToGlobal(vector4);
+				vector4=transform.applyInverse(vector4);
+				bound.addVector2(vector4);
 
 
 
-		return bound.toRect();
+				return bound.toRect();
 	}
 
 
@@ -408,6 +416,24 @@ public abstract class DisplayObject extends EventDispatcher{
 
 	public DisplayObjectContainer getParent() {
 		return parent;
+	}
+
+	/**
+	 * return the width before any rotate and scale
+	 * @return
+	 */
+	public double getRawWidth() {
+		// TODO Auto-generated method stub
+		return width;
+	}
+
+	/**
+	 * return the height before any rotate and scale
+	 * @return
+	 */
+	public double getRawHeight() {
+		// TODO Auto-generated method stub
+		return height;
 	}
 
 

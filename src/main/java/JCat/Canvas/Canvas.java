@@ -16,7 +16,7 @@ public interface Canvas {
 	/**
 	 * draw texture to screen
 	 * @param texture
-	 * @param renderData
+	 * @param renderData 
 	 */
 	void drawTexture(Texture texture, RenderData renderData);
 
@@ -41,4 +41,15 @@ public interface Canvas {
 	 * draw default background,it's called before every time rendering
 	 */
 	void drawDefaultBackground(Color color);
+	/**
+	 * translate canvas
+	 * @param x
+	 * @param y
+	 */
+	void translate(double x, double y);
+	/**
+	 * rotation canvas,in radian
+	 * @param d
+	 */
+	void rotate(double radian);
 }
