@@ -1,24 +1,20 @@
 package JCat.Display;
 
-import java.security.acl.LastOwnerException;
-import java.util.function.Function;
-
 import JCat.Display.Calculation.Bound;
 import JCat.Display.Calculation.Transform;
 import JCat.Event.EventDispatcher;
-import JCat.Math.Matrix;
 import JCat.Math.Rect;
 import JCat.Math.Vector2;
 
 /**
- * baseobject that can be render to screen
+ * base object that can be render to screen
  * @author Administrator
  *
  */
 public abstract class DisplayObject extends EventDispatcher{
 
 	/**
-	 * x position of objecy
+	 * x position of object
 	 */
 	public double x;
 	/**
@@ -64,11 +60,11 @@ public abstract class DisplayObject extends EventDispatcher{
 	 */
 	Stage stage;
 	/**
-	 * localTransform,will be recalcued per frame
+	 * localTransform
 	 */
 	private Transform localTransform;
 	/**
-	 * worldTransform,will be recalcued per frame
+	 * worldTransform
 	 */
 	private Transform worldTransform;
 	/**
@@ -93,7 +89,7 @@ public abstract class DisplayObject extends EventDispatcher{
 	 * @return
 	 */
 	public double getWidth() {
-
+		
 		return getBound(parent).width;
 	}
 
@@ -183,6 +179,9 @@ public abstract class DisplayObject extends EventDispatcher{
 
 	}
 
+	/**
+	 * updateLocalTransform
+	 */
 	private void updateLocalTransform() {
 
 		//update localTransform
@@ -235,7 +234,11 @@ public abstract class DisplayObject extends EventDispatcher{
 
 
 	/**
-	 * auto called before render
+	 * update LocalTransform and world transform,because transform will change every moment,
+	 * so every time you need a transform,the two transform will update
+	 * (a better way is use valid flag to determine whether a new transform was needed
+	 * but for simplicity,i just update it )
+	 * 
 	 */
 	void updateTransform() {
 
@@ -275,18 +278,18 @@ public abstract class DisplayObject extends EventDispatcher{
 	 * update local bound(the display object don't have width and height,so it's abstract)
 	 * bitmap set it localbound to fix texture,displaycontainer set it's bound to fit all it's childs
 	 */
-	abstract void updateBound();
+	abstract void updateLocalBound();
 
 
 	/**
-	 *
+	 *get the bound in the target Coordinate
 	 * @param displayObject
 	 * @return
 	 */
 	public Rect getBound(DisplayObject displayObject)
 	{
 		//update localBound
-		updateBound();
+		updateLocalBound();
 
 		Bound bound=new Bound();
 
@@ -351,8 +354,10 @@ public abstract class DisplayObject extends EventDispatcher{
 	 */
 	public Boolean hitTestPoint(Vector2 vector2)
 	{
-		updateBound();
+		updateLocalBound();
 		Vector2 local=getWorldTransform().applyInverse(vector2);
+	
+		//todo use the exist pixel to detect,because a image may contain transparent pixel
 		return localBound.toRect().contains(local);
 
 
@@ -377,25 +382,19 @@ public abstract class DisplayObject extends EventDispatcher{
 	 * on the contrary,if a object was added to stage or a object in the main display tree
 	 * all it childs will be add to main display tree
 	 * @param stage
-	 * @param addToStage
 	 */
-	void recursiveUpdateStage(Stage stage, boolean addToStage) {
+	void recursiveUpdateStage(Stage stage) {
 
-		if(addToStage==true)
-		{
-			this.stage=stage;
-		}
-		else
-		{
-			this.stage=null;
-		}
+		
+		this.stage=stage;
+		
 
 		if(this instanceof DisplayObjectContainer)
 		{
 			DisplayObjectContainer container=(DisplayObjectContainer) this;
 			for (DisplayObject displayObject : container.getChilds()) {
 
-				displayObject.recursiveUpdateStage(stage,addToStage);
+				displayObject.recursiveUpdateStage(stage);
 			}
 		}
 

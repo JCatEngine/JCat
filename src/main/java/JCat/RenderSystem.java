@@ -1,28 +1,28 @@
 package JCat;
 
 
-import java.awt.TexturePaint;
-import java.awt.image.BufferedImage;
-import java.util.HashSet;
-import java.util.Set;
-
 import JCat.Canvas.Canvas;
 import JCat.Canvas.CanvasFactory;
 import JCat.Canvas.CanvasType;
-import JCat.Canvas.SwingCanvas;
-import JCat.Display.Bitmap;
-import JCat.Display.DisplayObject;
-import JCat.Display.DisplayObjectContainer;
 import JCat.Display.Stage;
 import JCat.Event.EventDispatcher;
 import JCat.Interaction.InteractionManager;
 import JCat.Manager.TextureManager;
-import JCat.Render.RenderData;
 import JCat.Render.Renderer;
-import JCat.Textures.Texture;
+import JCat.Utils.MathTool;
+import JCat.Utils.Ticker;
+import JCat.Utils.Ticker.OnResponceListener;
 
+/**
+ * a simple class assemble a couple of sub system that let 
+ * you make a application easily,but if you want more flexible control,
+ * you can initial sub system and work with then manually
+ * @author Administrator
+ *
+ */
 public class RenderSystem extends EventDispatcher{
 
+	private static final int DEFAULT_FRAMERATE = 40;
 	/**
 	 * draw texture on canvas
 	 */
@@ -36,24 +36,45 @@ public class RenderSystem extends EventDispatcher{
 	 */
 	private Renderer renderer;
 	/**
-	 * image manager
-	 */
-	private TextureManager imageManager=new TextureManager();
-	/**
 	 * interaction manager
 	 */
 	private InteractionManager interactionManager;
-
+	/**
+	 * the ticker will only by initial when input a frameRate param
+	 */
+	private Ticker ticker;
+	
+	
+	/**
+	 * set frameRate
+	 * @return
+	 */
+	public int getFrameRate()
+	{
+		return (int) (1000.0/ticker.getDelay());
+		
+	}
+	
+	/**
+	 * get frameRate
+	 * @param frameRate
+	 */
+	public void setFrameRate(int frameRate) {
+		
+			ticker.setDelay(1000.0/frameRate);
+		
+	}
 
 	/**
-	 * create a render system
+	 * create a render system au not auto-update
 	 * @param width
 	 * @param height
 	 * @param type
 	 */
-	public RenderSystem(int width, int height,CanvasType type) 
+	public RenderSystem(int width, int height,int frameRate,CanvasType type) 
 	{
 		
+	
 		this.root=new Stage(width,height);
 
 		this.renderer=new Renderer();
@@ -62,16 +83,38 @@ public class RenderSystem extends EventDispatcher{
 		
 		this.interactionManager=new InteractionManager(this);
 		
+		this.ticker=new Ticker(1000.0/frameRate);
+		ticker.addListener(new OnResponceListener() {
+
+			@Override
+			public void onResponce() {
+				render();
+				
+			}
+		});
+		
+	}
+	
+	/**
+	 * create a render System
+	 * @param width
+	 * @param height
+	 * @param frameRate
+	 */
+	public RenderSystem(int width, int height,int frameRate) 
+	{
+		this(width,height,frameRate,CanvasType.swing);
+		MathTool.checkPositive(frameRate);
+		MathTool.checkNonZero(frameRate);
 	}
 
 	
-	public RenderSystem(int width, int height) {
-		
-		//use swing as default canvas
-		this(width,height,CanvasType.swing);
-		
-	}
+	
 
+
+	public RenderSystem(int width, int height) {
+		this(width, height, DEFAULT_FRAMERATE);
+	}
 
 	/**
 	 * render once
@@ -118,7 +161,7 @@ public class RenderSystem extends EventDispatcher{
 	 */
 	public TextureManager getImageManager() {
 		// TODO Auto-generated method stub
-		return imageManager;
+		return TextureManager.getInstance();
 	}
 
 	

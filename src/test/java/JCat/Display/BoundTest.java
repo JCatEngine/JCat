@@ -1,4 +1,4 @@
-package JCat;
+package JCat.Display;
 
 import static org.junit.Assert.*;
 

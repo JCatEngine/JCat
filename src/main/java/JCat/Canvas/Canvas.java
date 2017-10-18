@@ -1,5 +1,6 @@
 package JCat.Canvas;
 
+import JCat.Graphics.Color;
 import JCat.Interaction.CanvasKeyListener;
 import JCat.Interaction.CanvasMouseListener;
 import JCat.Render.RenderData;
@@ -36,5 +37,8 @@ public interface Canvas {
 	 * 
 	 */
 	void addKeyListener(CanvasKeyListener listener);
-
+	/**
+	 * draw default background,it's called before every time rendering
+	 */
+	void drawDefaultBackground(Color color);
 }

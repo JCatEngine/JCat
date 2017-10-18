@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import JCat.Ticker.Ticker;
-import JCat.Ticker.Ticker.OnResponceListener;
+import JCat.Utils.Ticker;
+import JCat.Utils.Ticker.OnResponceListener;
 
 public class TickerTest {
 

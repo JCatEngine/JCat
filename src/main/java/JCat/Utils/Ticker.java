@@ -1,4 +1,4 @@
-package JCat.Ticker;
+package JCat.Utils;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class Ticker {
 	/**
 	 * callback delay
 	 */
-	private int delay;
+	private double delay;
 	/**
 	 * is this ticker running or stop?This two state can switch
 	 */
@@ -39,12 +39,12 @@ public class Ticker {
 	
 	/**
 	 * 
-	 * @param delay
+	 * @param d
 	 * @param once
 	 */
-	public Ticker(int delay) {
+	public Ticker(double d) {
 		
-		this.delay=delay;
+		this.delay=d;
 	
 		initLoopThread();
 		
@@ -83,7 +83,7 @@ public class Ticker {
 				{
 				
 					try {
-						Thread.sleep(delay);
+						Thread.sleep((long) delay);
 						if(isRunning)
 						{
 							
@@ -139,6 +139,20 @@ public class Ticker {
 	 */
 	public void removeListener(OnResponceListener listener) {
 		listeners.remove(listener);
+	}
+
+
+
+	public void setDelay(double d) {
+		this.delay=d;
+		
+	}
+
+
+
+	public double getDelay() {
+		// TODO Auto-generated method stub
+		return delay;
 	}
 	
 }

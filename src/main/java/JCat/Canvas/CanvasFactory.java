@@ -1,5 +1,7 @@
 package JCat.Canvas;
 
+import JCat.Graphics.Color;
+
 public class CanvasFactory {
 
 	/**
@@ -15,6 +17,7 @@ public class CanvasFactory {
 		if(type==CanvasType.swing)
 		{
 			 canvas = new SwingCanvas(width, height);
+			
 		}
 		else if(type==CanvasType.javafx)
 		{
@@ -28,7 +31,6 @@ public class CanvasFactory {
 		{
 			throw new RuntimeException("unsupport canvas currently");
 		}
-		
 		
 		return canvas;
 				

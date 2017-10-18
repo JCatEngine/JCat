@@ -19,7 +19,7 @@ public class Bitmap extends DisplayObject{
 	}
 
 	@Override
-	void updateBound() {
+	void updateLocalBound() {
 		
 		//for displayobject,bound is base on origin width,height,and rotation,scale
 		Bound bound=new Bound();

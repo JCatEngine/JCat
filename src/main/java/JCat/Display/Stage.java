@@ -30,7 +30,7 @@ public class Stage extends DisplayObjectContainer{
 		// TODO Auto-generated method stub
 		super.addChildAt(displayObject, index);
 		
-		displayObject.recursiveUpdateStage(this,true);
+		displayObject.recursiveUpdateStage(this);
 		
 	}
 	
@@ -39,12 +39,12 @@ public class Stage extends DisplayObjectContainer{
 		// TODO Auto-generated method stub
 		super.addChild(displayObject);
 		
-		displayObject.recursiveUpdateStage(this,true);
+		displayObject.recursiveUpdateStage(this);
 	}
 
 	
 	@Override
-	void updateBound() {
+	void updateLocalBound() {
 		//the stage has the width and height even it's has no child,because all hitTest need to be triggered at stage
 		localBound=new Bound();
 		localBound.maxX=getStageWidth();

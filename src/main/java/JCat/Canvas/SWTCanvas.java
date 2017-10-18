@@ -1,5 +1,6 @@
 package JCat.Canvas;
 
+import JCat.Graphics.Color;
 import JCat.Interaction.CanvasKeyListener;
 import JCat.Interaction.CanvasMouseListener;
 import JCat.Render.RenderData;
@@ -33,6 +34,12 @@ public class SWTCanvas implements Canvas {
 
 	@Override
 	public void addKeyListener(CanvasKeyListener listener) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void drawDefaultBackground(Color color) {
 		// TODO Auto-generated method stub
 		
 	}

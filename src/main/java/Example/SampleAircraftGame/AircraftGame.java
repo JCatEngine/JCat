@@ -1,27 +1,25 @@
 package Example.SampleAircraftGame;
 
-import java.io.File;
 import java.io.IOException;
 
 import JCat.RenderSystem;
 import JCat.Display.Bitmap;
 import JCat.Display.Sprite;
 import JCat.Display.Stage;
-import JCat.Event.Event;
 import JCat.Event.KeyEvent;
 import JCat.Event.MouseEvent;
-import JCat.Loader.ImageLoader;
-import JCat.Loader.ImageLoader.onAchieveListener;
 import JCat.Textures.Texture;
-import JCat.Ticker.Ticker;
-import JCat.Ticker.Ticker.OnResponceListener;
+import JCat.Utils.ImageLoader;
+import JCat.Utils.Ticker;
+import JCat.Utils.ImageLoader.onAchieveListener;
+import JCat.Utils.Ticker.OnResponceListener;
 
-public class main {
+public class AircraftGame {
 
 	public static void main(String[] args) throws IOException {
 
-		RenderSystem system=new RenderSystem(600, 800);
-		ImageLoader loader=new ImageLoader(system);
+		RenderSystem system=new RenderSystem(600, 800,30);
+		ImageLoader loader=new ImageLoader();
 		loader
 		.add("resources\\aircraft.png")
 		.add("resources\\back.jpeg")

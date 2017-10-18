@@ -17,13 +17,16 @@ public class Bound {
 	public double maxY=-Integer.MAX_VALUE;
 	
 	
+	/**
+	 * to rect
+	 * @return
+	 */
 	public Rect toRect() {
 		// TODO Auto-generated method stub
 		return new Rect(minX, minY, maxX-minX, maxY-minY);
 	}
 
 	/**
-	 * 
 	 * @param vector2
 	 */
 	public void addVector2(Vector2 vector2) {
@@ -37,7 +40,6 @@ public class Bound {
 	}
 
 	/**
-	 * 
 	 * @param rect
 	 */
 	public void addBound(Rect rect) {

@@ -1,4 +1,4 @@
-package JCat.Loader;
+package JCat.Utils;
 
 import java.awt.Image;
 import java.io.File;
@@ -27,8 +27,8 @@ public class ImageLoader {
 	
 	private boolean isRunning=false;
 
-	public ImageLoader(RenderSystem system) {
-		this.cache=system.getImageManager();
+	public ImageLoader() {
+		this.cache=TextureManager.getInstance();
 	}
 
 	public ImageLoader add(String path) {

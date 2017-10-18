@@ -6,6 +6,7 @@ import JCat.Display.DisplayObject;
 import JCat.Display.DisplayObjectContainer;
 import JCat.Display.MovieClip;
 import JCat.Display.Stage;
+import JCat.Graphics.Color;
 import JCat.Textures.Texture;
 
 public class Renderer {
@@ -15,6 +16,8 @@ public class Renderer {
 		//dispatch event before render
 		
 		canvas.preRender();
+		
+		canvas.drawDefaultBackground(Color.ALICEBLUE);
 				
 		renderObject(displayObject,canvas);
 				

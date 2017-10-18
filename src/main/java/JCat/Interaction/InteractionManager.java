@@ -16,6 +16,11 @@ import JCat.Event.KeyEvent;
 import JCat.Event.MouseEvent;
 import JCat.Math.Vector2;
 
+/**
+ * manager system interaction such as key event,mouse event
+ * @author Administrator
+ *
+ */
 public class InteractionManager {
 
 	private Canvas canvas;
@@ -27,6 +32,8 @@ public class InteractionManager {
 		this.canvas=renderSystem.getCanvas();
 		addListeners();
 	}
+	
+	
 
 	/**
 	 * add listener

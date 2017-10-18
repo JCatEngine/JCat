@@ -58,7 +58,7 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 		//set stage
 		if(this.getStage()!=null)
 		{
-			displayObject.recursiveUpdateStage(this.getStage(),true);
+			displayObject.recursiveUpdateStage(this.getStage());
 		}
 
 
@@ -185,7 +185,7 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 
 		displayObject.parent=null;
 		this.childs.remove(displayObject);
-		displayObject.recursiveUpdateStage(null,false);
+		displayObject.recursiveUpdateStage(null);
 		dispatchEvent(new RemovedEvent(displayObject));
 		return displayObject;
 
@@ -226,7 +226,7 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 
 	
 
-	void updateBound() {
+	void updateLocalBound() {
 		Bound bound=new Bound();
 
 		for (DisplayObject displayObject : childs) {

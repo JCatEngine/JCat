@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import JCat.Display.Calculation.Transform;
+import JCat.Graphics.Color;
+import JCat.Graphics.ColorTool;
 import JCat.Interaction.CanvasKeyEvent;
 import JCat.Interaction.CanvasKeyListener;
 import JCat.Interaction.CanvasMouseEvent;
@@ -33,11 +35,13 @@ public class SwingCanvas extends JFrame  implements Canvas{
 	private BufferedImage cache;
 	private CanvasKeyListener canvaskeylistener;
 	private CanvasMouseListener canvasmouselistener;
+	private Graphics2D graphics;
 	
 	
 	public SwingCanvas(int width, int height) {
 	
 		cache=new BufferedImage(width, height, 1);
+		graphics=cache.createGraphics();
 		
 		this.width = width;
 		this.height = height;
@@ -177,19 +181,17 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		
 		double radins= (transform.rotation/180*Math.PI);
 		
-		Graphics2D graphics2d=cache.createGraphics();
-		
+
 		
 		//set graphics to left-top corner of bitmap
-		graphics2d.translate(x, y);
-		graphics2d.rotate(radins);
-		graphics2d.translate(-x, -y);
+		graphics.rotate(radins);
+
 		
 		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float) alpha);
-		graphics2d.setComposite(alphaComposite);
-		graphics2d.drawImage(image, x, y,width,height, null);
+		graphics.setComposite(alphaComposite);
+		graphics.drawImage(image, x, y,width,height, null);
 		
-	
+		graphics.rotate(-radins);
 		
 		
 	}
@@ -219,6 +221,14 @@ public class SwingCanvas extends JFrame  implements Canvas{
 	public void addKeyListener(CanvasKeyListener listener) {
 		
 		this.canvaskeylistener=listener;
+		
+	}
+
+	@Override
+	public void drawDefaultBackground(Color color) {
+		
+		graphics.setColor(ColorTool.toSwingColor(color));
+		graphics.fillRect(0, 0, width, height);
 		
 	}
 
