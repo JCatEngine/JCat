@@ -3,7 +3,7 @@ package Example.Basic;
 import JCat.RenderSystem;
 import JCat.Display.Bitmap;
 import JCat.Display.Sprite;
-import JCat.Display.MovieClip.Animation;
+import JCat.Display.MovieClip.FrameAnimeClip;
 import JCat.Display.MovieClip.MovieClip;
 import JCat.Event.Event;
 import JCat.Event.EventListener;
@@ -38,7 +38,7 @@ public class PlayAnimation {
 		Texture texture3=system.getImageManager().getTextureByName("testAnime3");
 		Texture texture4=system.getImageManager().getTextureByName("testAnime4");
 		
-		Animation animation=new Animation("simpleAnimation", 16);
+		FrameAnimeClip animation=new FrameAnimeClip("simpleAnimation", 16);
 		animation.insertFrame(1, texture1);
 		animation.insertFrame(5, texture2);
 		animation.insertFrame(9, texture3);

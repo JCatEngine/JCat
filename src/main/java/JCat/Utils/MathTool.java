@@ -21,9 +21,22 @@ public class MathTool {
 	public static void checkRange(double min, double max, double value) {
 		if(value<min||value>max)
 		{
-			throw new RuntimeException(value+" out of range");
+			throw new RuntimeException(value+" out of range,min:"+min+" max:"+max);
 		}
 		
+	}
+
+	public static double restrictRange(double min, double max, double value) {
+		if(value<min)
+		{
+			value=min;
+		}
+		else if(value>max)
+		{
+			value=max;
+		}
+		
+		return value;
 	}
 
 	

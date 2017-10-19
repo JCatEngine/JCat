@@ -17,12 +17,10 @@ import JCat.Utils.MathTool;
  * @author Administrator
  *
  */
-public class MovieClip extends InteractiveObject implements AnchorAble{
+public class MovieClip extends InteractiveObject implements AnchorAble,AnimeGroup{
 	
-	private Map<String, Animation> datas=new HashMap<>();
-	private Animation nowAnime;
-	private int nowIndex=1;
-	
+	private Map<String, FrameAnimeClip> datas=new HashMap<>();
+	private FrameAnimeClip nowAnime;
 	
 	public MovieClip()
 	{
@@ -42,11 +40,7 @@ public class MovieClip extends InteractiveObject implements AnchorAble{
 	protected void updateFrame() {	
 		if(nowAnime!=null)
 		{
-			nowIndex++;	
-			if(nowIndex>nowAnime.getMaxFrame())
-			{
-				nowIndex=1;
-			}		
+			nowAnime.update();	
 			
 			Texture texture=getTexture();
 			width=texture.getWidth();
@@ -60,14 +54,13 @@ public class MovieClip extends InteractiveObject implements AnchorAble{
 	 */
 	public void playAnime(String name) 
 	{
-		
-		nowIndex=1;
 		nowAnime=datas.get(name);
+		nowAnime.gotoAndPlay(1);
 		
 	}
 
 
-	public void addAnime(Animation data)
+	public void addAnime(FrameAnimeClip data)
 	{
 		datas.put(data.getName(), data);
 	}
@@ -76,7 +69,7 @@ public class MovieClip extends InteractiveObject implements AnchorAble{
 	
 	public Texture getTexture() {
 		// TODO Auto-generated method stub
-		return nowAnime.getTexture(nowIndex);
+		return nowAnime.getTexture();
 	}
 
 
@@ -149,4 +142,31 @@ public class MovieClip extends InteractiveObject implements AnchorAble{
 		// TODO Auto-generated method stub
 		return height;
 	}
+
+
+	@Override
+	public AnimeClip getCurrentClip() {
+		
+		return nowAnime;
+	}
+
+
+	@Override
+	public int childAnimeCount() {
+		
+		return datas.size();
+	}
+
+
+	@Override
+	public void stopCurrentAnime() {
+		if(nowAnime!=null)
+		{
+			nowAnime.stop();
+		}
+		
+	}
+	
+	
+	
 }

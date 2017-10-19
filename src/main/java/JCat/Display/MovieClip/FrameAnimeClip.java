@@ -7,11 +7,11 @@ import java.util.List;
 import JCat.Textures.Texture;
 
 /**
- * Animation
+ * FrameAnimeClip,which depend on a couple of frame
  * @author Administrator
  *
  */
-public class Animation {
+public class FrameAnimeClip extends AnimeClip {
 
 	public class Frame {
 
@@ -38,21 +38,28 @@ public class Animation {
 	 * max frame
 	 */
 	private int maxFrame;
+	private boolean stop;
+	private int currentFrame=1;
 	
-	public Animation(String name,int maxFrame)
+	public FrameAnimeClip(String name,int maxFrame)
 	{
 		this.name = name;
 		this.maxFrame=maxFrame;
 		
 	}
 	
-	
-	
-	public int getMaxFrame() {
-		return maxFrame;
+	void update()
+	{
+		if(!stop)
+		{
+			currentFrame++;
+			if(currentFrame>getTotalFrames())
+			{
+				currentFrame=1;
+			}
+		}	
 	}
-
-
+	
 
 	public void setName(String name) {
 		this.name = name;
@@ -81,18 +88,18 @@ public class Animation {
 	
 	/**
 	 * calculate the current texture based on the index
-	 * @param nowIndex
+	 * @param currentFrame
 	 * @return
 	 */
-		public Texture getTexture(int nowIndex)
+		public Texture getTexture()
 		{
 			//just return first texture
-			if(nowIndex==1)
+			if(currentFrame==1)
 			{
 				return frames.get(0).texture;
 			}
 			//just return last
-			else if(nowIndex>=frames.get(frames.size()-1).index)
+			else if(currentFrame>=frames.get(frames.size()-1).index)
 			{
 				return frames.get(frames.size()-1).texture;
 			}
@@ -102,7 +109,7 @@ public class Animation {
 				
 				for(int i=0;i<frames.size();i++)
 				{
-					if(nowIndex<frames.get(i).index)
+					if(currentFrame<frames.get(i).index)
 					{
 						if(i-1<0)
 						{
@@ -114,9 +121,51 @@ public class Animation {
 				}
 			}
 			
-			throw new RuntimeException("invalid index "+nowIndex);
+			throw new RuntimeException("invalid index "+currentFrame);
 		}
+
+
+
+	@Override
+	public int getCurrentFrame() {
+		// TODO Auto-generated method stub
+		return currentFrame;
+	}
+
+
+
+	@Override
+	public void stop() {
 		
+		stop=true;
+		
+	}
+
+
+
+	@Override
+	public void play() {
+		stop=false;
+		
+	}
+
+
+
+	@Override
+	public int getTotalFrames() {
+		// TODO Auto-generated method stub
+		return maxFrame;
+	}
+
+	@Override
+	public void gotoAndStop(int index) {
+		checkIndex(1, getTotalFrames(),index);
+		this.currentFrame=index;
+		stop=true;
+		
+	}
+
+	
 		
 		
 	
