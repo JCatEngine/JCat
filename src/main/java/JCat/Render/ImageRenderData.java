@@ -1,6 +1,6 @@
 package JCat.Render;
 
-public class RenderData {
+public class ImageRenderData {
 
 	public double alpha;
 	public double width;

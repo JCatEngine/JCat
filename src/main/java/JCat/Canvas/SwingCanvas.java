@@ -1,27 +1,28 @@
 package JCat.Canvas;
 
 import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import JCat.Display.Calculation.Transform;
-import JCat.Graphics.Color;
 import JCat.Graphics.ColorTool;
 import JCat.Interaction.CanvasKeyEvent;
 import JCat.Interaction.CanvasKeyListener;
 import JCat.Interaction.CanvasMouseEvent;
 import JCat.Interaction.CanvasMouseListener;
-import JCat.Render.RenderData;
+import JCat.Render.ImageRenderData;
+import JCat.Render.TextRenderData;
 import JCat.Textures.Texture;
 
 public class SwingCanvas extends JFrame  implements Canvas{
@@ -162,7 +163,7 @@ public class SwingCanvas extends JFrame  implements Canvas{
 	}
 
 	@Override
-	public void drawTexture(Texture texture, RenderData renderData) {
+	public void drawTexture(Texture texture, ImageRenderData renderData) {
 
 
 		
@@ -172,7 +173,8 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		int height=(int) renderData.height;
 		int x=(int) renderData.x;
 		int y=(int) renderData.y;
-
+		
+		
 		
 		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float) alpha);
 		graphics.setComposite(alphaComposite);
@@ -211,7 +213,7 @@ public class SwingCanvas extends JFrame  implements Canvas{
 	}
 
 	@Override
-	public void drawDefaultBackground(Color color) {
+	public void drawDefaultBackground(JCat.Graphics.Color color) {
 		
 		graphics.setColor(ColorTool.toSwingColor(color));
 		graphics.fillRect(0, 0, width, height);
@@ -228,6 +230,59 @@ public class SwingCanvas extends JFrame  implements Canvas{
 	public void rotate(double radian) {
 		graphics.rotate(radian);
 		
+	}
+
+	@Override
+	public void drawText(String text, TextRenderData renderData) {
+		
+		
+		double alpha=renderData.alpha;
+		int style = 0;
+		switch (renderData.style) {
+		case BOLD:
+			style=Font.BOLD;
+			break;
+		case ITALIC:
+			style=Font.ITALIC;
+			break;
+		case PLAIN:
+			style=Font.PLAIN;
+			break;
+		default:
+			throw new RuntimeException("unsupported text style:"+renderData.style);
+		}
+		
+		double size=renderData.size;
+		Color color=ColorTool.toSwingColor(renderData.color);
+		
+		Font font=new Font("Arial", style, (int) size);
+		graphics.setFont(font);
+		graphics.setColor(color);
+
+			
+		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float) alpha);
+		graphics.setComposite(alphaComposite);
+		graphics.drawString(text, 0, 0);
+		
+		
+	}
+
+	@Override
+	public double getStringWidth(String text) {
+		 FontMetrics fontMetrics = graphics.getFontMetrics();
+
+		 int width = fontMetrics.stringWidth(text);
+		 
+		return width;
+	}
+
+	@Override
+	public double getStringHeight(String text) {
+		FontMetrics fontMetrics = graphics.getFontMetrics();
+
+		int height = fontMetrics.stringWidth(text);
+		 
+		return height;
 	}
 
 }

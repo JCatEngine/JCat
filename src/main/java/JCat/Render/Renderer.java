@@ -1,5 +1,6 @@
 package JCat.Render;
 
+import Example.Basic.Text;
 import JCat.Canvas.Canvas;
 import JCat.Display.AnchorAble;
 import JCat.Display.Bitmap;
@@ -7,6 +8,7 @@ import JCat.Display.DisplayObject;
 import JCat.Display.DisplayObjectContainer;
 import JCat.Display.Stage;
 import JCat.Display.MovieClip.MovieClip;
+import JCat.Display.Text.SimpleText;
 import JCat.Graphics.Color;
 import JCat.Textures.Texture;
 
@@ -61,10 +63,30 @@ public class Renderer {
 			{
 				Texture texture=bitmap.getTexture();
 				
-				RenderData renderData=createRenderData(bitmap,bitmap.getTexture(),anchorX,anchorY);
+				ImageRenderData renderData=createRenderData(bitmap,bitmap.getTexture(),anchorX,anchorY);
 				//render the texture to screen
 				canvas.drawTexture(texture,renderData);
+				
 			}
+			
+		}
+		//render text
+		else if(displayObject instanceof SimpleText)
+		{
+			SimpleText simpleText=(SimpleText) displayObject;
+			if(simpleText.visible)
+			{
+				String text=simpleText.getText();
+				
+				TextRenderData renderData=createRenderData(simpleText);
+				//render the texture to screen
+				canvas.drawText(text,renderData);
+				
+				simpleText.setWidth(canvas.getStringWidth(simpleText.getText()));
+				simpleText.setHeight(canvas.getStringHeight(simpleText.getText()));
+			}
+			
+			
 			
 		}
 		
@@ -77,7 +99,7 @@ public class Renderer {
 			{
 				Texture texture=movieClip.getTexture();
 				
-				RenderData renderData=createRenderData(movieClip,texture,anchorX,anchorY);
+				ImageRenderData renderData=createRenderData(movieClip,texture,anchorX,anchorY);
 				//render the texture to screen
 				canvas.drawTexture(texture,renderData);
 			}
@@ -103,9 +125,20 @@ public class Renderer {
 	}
 
 
-	private RenderData createRenderData(DisplayObject displayObject, Texture texture, double anchorX, double anchorY) {
+	private TextRenderData createRenderData(SimpleText simpleText) {
+		TextRenderData renderData=new TextRenderData();
+		renderData.alpha=simpleText.getWorldAlpha();
+		renderData.color=simpleText.getColor();
+		renderData.size=simpleText.getFontSize();
+		renderData.style=simpleText.getStyle();
 		
-		RenderData renderData=new RenderData();
+		return renderData;
+	}
+
+
+	private ImageRenderData createRenderData(DisplayObject displayObject, Texture texture, double anchorX, double anchorY) {
+		
+		ImageRenderData renderData=new ImageRenderData();
 		renderData.alpha=displayObject.getWorldAlpha();
 		//be notici there are not set the width of bitmap!
 		//because rotation was be dealed before,so just return the width*scale will be fine

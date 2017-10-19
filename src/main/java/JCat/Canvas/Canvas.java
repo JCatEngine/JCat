@@ -3,7 +3,8 @@ package JCat.Canvas;
 import JCat.Graphics.Color;
 import JCat.Interaction.CanvasKeyListener;
 import JCat.Interaction.CanvasMouseListener;
-import JCat.Render.RenderData;
+import JCat.Render.ImageRenderData;
+import JCat.Render.TextRenderData;
 import JCat.Textures.Texture;
 
 /**
@@ -18,7 +19,7 @@ public interface Canvas {
 	 * @param texture
 	 * @param renderData 
 	 */
-	void drawTexture(Texture texture, RenderData renderData);
+	void drawTexture(Texture texture, ImageRenderData renderData);
 
 	/**
 	 * called before render
@@ -52,4 +53,24 @@ public interface Canvas {
 	 * @param d
 	 */
 	void rotate(double radian);
+
+	/**
+	 * 
+	 * @param text
+	 * @param renderData
+	 */
+	void drawText(String text, TextRenderData renderData);
+
+	/**
+	 * 
+	 * @param string
+	 * @return
+	 */
+	double getStringWidth(String tetxt);
+	/**
+	 * 
+	 * @param text
+	 * @return
+	 */
+	double getStringHeight(String text);
 }
