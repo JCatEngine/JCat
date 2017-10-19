@@ -22,8 +22,8 @@ public class TextRenderer extends BaseRenderer{
 		renderData.size = simpleText.getFontSize();
 		renderData.style = simpleText.getStyle();
 		renderData.fontName=simpleText.getFontName();
-		renderData.x=-anchorX;
-		renderData.y=-anchorY;
+		renderData.offsetX=-anchorX;
+		renderData.offsetY=-anchorY;
 		renderData.width=simpleText.getRawWidth();
 		renderData.height=simpleText.getRawHeight();
 		return renderData;

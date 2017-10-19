@@ -25,8 +25,8 @@ public class TextureRenderer extends BaseRenderer{
 		//because rotation was be dealed before,so just return the width*scale will be fine
 		renderData.width=texture.getImage().getWidth(null)*displayObject.getScaleX();
 		renderData.height=texture.getImage().getHeight(null)*displayObject.getScaleY();
-		renderData.x=-anchorX;
-		renderData.y=-anchorY;
+		renderData.offsetX=-anchorX;
+		renderData.offsetY=-anchorY;
 		
 		return renderData;
 	}

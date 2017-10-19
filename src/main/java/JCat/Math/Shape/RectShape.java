@@ -93,12 +93,11 @@ public class RectShape implements BaseShape {
 		return new Vector2(left + Math.random() * getWidth(), top + Math.random() * getHeight());
 	}
 
-	private double getHeight() {
-		// TODO Auto-generated method stub
+	public double getHeight() {
 		return bottom - top;
 	}
 
-	private double getWidth() {
+	public double getWidth() {
 		// TODO Auto-generated method stub
 		return right - left;
 	}

@@ -6,7 +6,6 @@ import JCat.Graphics.Shape.Circle;
 import JCat.Graphics.Shape.Line;
 import JCat.Graphics.Shape.Rect;
 import JCat.Render.RenderData.ShapeRenderData;
-import JCat.Render.RenderData.TextRenderData;
 
 
 public class ShapeRenderer extends BaseRenderer{
@@ -36,10 +35,12 @@ public class ShapeRenderer extends BaseRenderer{
 		ShapeRenderData renderData = new ShapeRenderData();
 		renderData.alpha = baseShape.getWorldAlpha();
 		renderData.color = baseShape.getColor();
-		renderData.x=-anchorX;
-		renderData.y=-anchorY;
-		renderData.width=baseShape.getRawWidth();
-		renderData.height=baseShape.getRawHeight();
+		renderData.offsetX=-anchorX;
+		renderData.offsetY=-anchorY;
+		//be notice there are not set the width of bitmap!
+		//because rotation was be dealed before,so just return the width*scale will be fine
+		renderData.width=baseShape.getRawWidth()*baseShape.getScaleX();
+		renderData.height=baseShape.getRawHeight()*baseShape.getScaleY();
 		
 		return renderData;
 	}

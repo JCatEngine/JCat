@@ -173,8 +173,8 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		double alpha=renderData.alpha;
 		int width=(int) renderData.width;
 		int height=(int) renderData.height;
-		int x=(int) renderData.x;
-		int y=(int) renderData.y;
+		int x=(int) renderData.offsetX;
+		int y=(int) renderData.offsetY;
 		
 		
 		
@@ -242,8 +242,8 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		int style = convertFontStyle(renderData.style);
 		double size=renderData.size;
 		Color color=ColorTool.toSwingColor(renderData.color);
-		int x=(int) renderData.x;
-		int y=(int) renderData.y;
+		int x=(int) renderData.offsetX;
+		int y=(int) renderData.offsetY;
 		
 		//the stupid swint that will draw your String using y as the bottom line
 		//to make it work right,you need to add height of text
@@ -317,37 +317,47 @@ public class SwingCanvas extends JFrame  implements Canvas{
 	@Override
 	public void drawLine(ShapeRenderData renderData) {
 		graphics.setColor(ColorTool.toSwingColor(renderData.color));
-		int x1=(int) renderData.x1;
+		double alpha=renderData.alpha;
+		int x1= (int) (renderData.x1+renderData.offsetX);
 		int x2=(int) (x1+renderData.width);
-		int y1=(int) renderData.y1;
+		int y1=(int) (renderData.y1+renderData.offsetY);
 		int y2=(int) (y1+renderData.height);
 		
+		
+		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float) alpha);
+		graphics.setComposite(alphaComposite);
 		graphics.drawLine(x1, y1, x2, y2);
 	}
 
 	@Override
 	public void drawRect(ShapeRenderData renderData) {
 		graphics.setColor(ColorTool.toSwingColor(renderData.color));
-		
-		int x=(int) renderData.x1;
-		int y=(int) renderData.y1;
+		double alpha=renderData.alpha;
+		int x=(int) (renderData.x1+renderData.offsetX);
+		int y= (int) (renderData.y1+renderData.offsetY);
 		int width=(int) renderData.width;
 		int height=(int) renderData.height;
 		
-		graphics.drawRect(x, y, width, height);
+		
+		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float) alpha);
+		graphics.setComposite(alphaComposite);
+		graphics.fillRect(x, y, width, height);
 		
 	}
 
 	@Override
 	public void drawCircle(ShapeRenderData renderData) {
 		graphics.setColor(ColorTool.toSwingColor(renderData.color));
-		
-		int x=(int) renderData.x1;
-		int y=(int) renderData.y1;
+		double alpha=renderData.alpha;
+		int x=(int) (renderData.x1+renderData.offsetX);
+		int y= (int) (renderData.y1+renderData.offsetY);
 		int width=(int) renderData.width;
 		int height=(int) renderData.height;
 		
-		graphics.drawOval(x, y, width, height);
+		
+		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float) alpha);
+		graphics.setComposite(alphaComposite);
+		graphics.fillOval(x, y, width, height);
 		
 	}
 

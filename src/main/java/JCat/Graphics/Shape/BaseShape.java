@@ -2,18 +2,31 @@ package JCat.Graphics.Shape;
 
 
 
+import JCat.Display.AnchorAble;
+import JCat.Display.Calculation.Bound;
 import JCat.Graphics.Color;
-import JCat.Graphics.Graphics;
 import JCat.Interaction.InteractiveObject;
 import JCat.Utils.MathTool;
 
-public class BaseShape extends InteractiveObject {
+public class BaseShape extends InteractiveObject implements AnchorAble{
 
 	private Color color=Color.BISQUE;
 
 	@Override
 	protected void updateLocalBound() {
-		// TODO Auto-generated method stub
+
+		
+		//for displayobject,bound is base on origin width,height,and rotation,scale
+		Bound bound=new Bound();
+		
+		//localbound x,y always is 0
+		bound.minX=0;
+		bound.minY=0;
+		bound.maxX=width+bound.minX;
+		bound.maxY=height+bound.minY;
+		
+		localBound=bound;
+	
 
 	}
 
@@ -61,7 +74,7 @@ public class BaseShape extends InteractiveObject {
 	 * @return
 	 */
 	public double getRawWidth() {
-		
+
 		return width;
 	}
 
