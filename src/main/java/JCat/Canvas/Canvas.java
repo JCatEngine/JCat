@@ -1,6 +1,7 @@
 package JCat.Canvas;
 
 import JCat.Display.Texture;
+import JCat.Display.Text.FontStyle;
 import JCat.Graphics.Color;
 import JCat.Interaction.CanvasKeyListener;
 import JCat.Interaction.CanvasMouseListener;
@@ -63,14 +64,20 @@ public interface Canvas {
 
 	/**
 	 * 
+	 * @param fontName 
+	 * @param style 
+	 * @param fontSize 
 	 * @param string
 	 * @return
 	 */
-	double getStringWidth(String tetxt);
+	double getStringWidth(String text, double fontSize, FontStyle style, String fontName);
 	/**
 	 * 
 	 * @param text
+	 * @param fontName 
+	 * @param style 
+	 * @param fontSize 
 	 * @return
 	 */
-	double getStringHeight(String text);
+	double getStringHeight(String text, double fontSize, FontStyle style, String fontName);
 }

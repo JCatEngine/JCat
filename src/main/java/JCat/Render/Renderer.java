@@ -13,8 +13,6 @@ import JCat.Event.EventManager;
 import JCat.Event.PostRenderEvent;
 import JCat.Event.PreRenderEvent;
 import JCat.Graphics.Color;
-import JCat.Render.RenderData.TextureRenderData;
-import JCat.Render.RenderData.TextRenderData;
 
 public class Renderer {
 
@@ -74,7 +72,7 @@ public class Renderer {
 			anchorX = anchorAble.getAnchorX() * anchorAble.getRawWidth() * displayObject.getScaleX();
 			anchorY = anchorAble.getAnchorY() * anchorAble.getRawHeight() * displayObject.getScaleY();
 		}
-
+		//translate to anchor point
 		canvas.translate(anchorX, anchorY);
 		// rotate
 		canvas.rotate(displayObject.rotation / 180 * Math.PI);
@@ -91,11 +89,7 @@ public class Renderer {
 			// render text
 			else if (displayObject instanceof SimpleText) {
 				SimpleText simpleText = (SimpleText) displayObject;
-
-				String text = simpleText.getText();
-				textRenderer.render(simpleText,canvas);
-				
-
+				textRenderer.render(simpleText,anchorX,anchorY,canvas);
 			}
 
 			// render the current frame of the movieclip

@@ -17,13 +17,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import JCat.Display.Texture;
+import JCat.Display.Text.FontStyle;
 import JCat.Graphics.ColorTool;
 import JCat.Interaction.CanvasKeyEvent;
 import JCat.Interaction.CanvasKeyListener;
 import JCat.Interaction.CanvasMouseEvent;
 import JCat.Interaction.CanvasMouseListener;
-import JCat.Render.RenderData.TextureRenderData;
 import JCat.Render.RenderData.TextRenderData;
+import JCat.Render.RenderData.TextureRenderData;
 
 public class SwingCanvas extends JFrame  implements Canvas{
 
@@ -237,50 +238,76 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		
 		
 		double alpha=renderData.alpha;
-		int style = 0;
-		switch (renderData.style) {
-		case BOLD:
-			style=Font.BOLD;
-			break;
-		case ITALIC:
-			style=Font.ITALIC;
-			break;
-		case PLAIN:
-			style=Font.PLAIN;
-			break;
-		default:
-			throw new RuntimeException("unsupported text style:"+renderData.style);
-		}
-		
+		int style = convertFontStyle(renderData.style);
 		double size=renderData.size;
 		Color color=ColorTool.toSwingColor(renderData.color);
+		int x=(int) renderData.x;
+		int y=(int) renderData.y;
 		
-		Font font=new Font("Arial", style, (int) size);
+		//the stupid swint that will draw your String using y as the bottom line
+		//to make it work right,you need to add height of text
+		int realY=(int) (y+renderData.height);
+		
+		Font font=new Font(renderData.fontName, style, (int) size);
 		graphics.setFont(font);
 		graphics.setColor(color);
 
 			
 		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float) alpha);
 		graphics.setComposite(alphaComposite);
-		graphics.drawString(text, 0, 0);
+		graphics.drawString(text, x, realY);
 		
 		
 	}
 
+	
+
 	@Override
-	public double getStringWidth(String text) {
+	public double getStringWidth(String text, double fontSize, FontStyle style, String fontName) {
+		
+		//just for calculation of text width and height
+		 applyTempFontSet(fontSize,style,fontName);
 		 FontMetrics fontMetrics = graphics.getFontMetrics();
 
 		 int width = fontMetrics.stringWidth(text);
 		 
+		
+		 
 		return width;
 	}
 
+	private int convertFontStyle(FontStyle style) {
+		int result=0;
+		
+		switch (style) {
+		case BOLD:
+			result=Font.BOLD;
+			break;
+		case ITALIC:
+			result=Font.ITALIC;
+			break;
+		case PLAIN:
+			result=Font.PLAIN;
+			break;
+		default:
+			throw new RuntimeException("unsupported text style:"+style);
+		}
+		
+		return  result;
+	}
+
+	private void applyTempFontSet(double fontSize, FontStyle style, String fontName) {
+		Font font=new Font(fontName, convertFontStyle(style), (int)fontSize);
+		graphics.setFont(font);
+		
+	}
+
 	@Override
-	public double getStringHeight(String text) {
+	public double getStringHeight(String text, double fontSize, FontStyle style, String fontName) {
+		 applyTempFontSet(fontSize,style,fontName);
 		FontMetrics fontMetrics = graphics.getFontMetrics();
 
-		int height = fontMetrics.stringWidth(text);
+		int height = fontMetrics.getAscent()-fontMetrics.getDescent();
 		 
 		return height;
 	}

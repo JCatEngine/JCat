@@ -15,13 +15,17 @@ public static void main(String[] args) {
 	simpleText.setColor(Color.AQUA);
 	
 	
-	simpleText.x=system.getStage().getStageWidth()/2;
-	simpleText.y=system.getStage().getStageHeight()/2;
+
+	simpleText.x=(system.getStage().getStageWidth()-simpleText.getWidth())/2;
+	simpleText.y=(system.getStage().getStageHeight()-simpleText.getHeight())/2;
+	simpleText.setAnchorX(0.5);
+	simpleText.setAnchorY(0.5);
+	
 	simpleText.addEventListener(Event.UPDATE, new EventListener() {
 		
 		@Override
 		public void onResponce(Event event) {
-			//simpleText.rotation+=5;
+			simpleText.rotation+=5;
 		}
 	});
 	

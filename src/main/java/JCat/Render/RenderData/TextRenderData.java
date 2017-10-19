@@ -8,5 +8,8 @@ public class TextRenderData extends BaseRenderData{
 	public FontStyle style;
 	public double size;
 	public Color color;
+	public String fontName;
+	public double width;
+	public double height;
 
 }

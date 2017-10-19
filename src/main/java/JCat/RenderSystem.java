@@ -8,6 +8,7 @@ import JCat.Display.Stage;
 import JCat.Event.EventDispatcher;
 import JCat.Event.EventManager;
 import JCat.Event.UpdateEvent;
+import JCat.Graphics.Graphics;
 import JCat.Interaction.InteractionManager;
 import JCat.Manager.TextureManager;
 import JCat.Render.Renderer;
@@ -95,6 +96,8 @@ public class RenderSystem extends EventDispatcher{
 				
 			}
 		});
+		
+		Graphics.getInstace().setCanvas(canvas);
 		
 	}
 	
