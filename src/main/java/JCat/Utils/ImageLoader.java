@@ -8,8 +8,8 @@ import java.util.LinkedList;
 import javax.imageio.ImageIO;
 
 import JCat.RenderSystem;
+import JCat.Display.Texture;
 import JCat.Manager.TextureManager;
-import JCat.Textures.Texture;
 
 public class ImageLoader {
 

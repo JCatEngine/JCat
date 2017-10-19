@@ -2,10 +2,10 @@ package Example.Basic;
 
 import JCat.RenderSystem;
 import JCat.Display.Bitmap;
+import JCat.Display.Texture;
 import JCat.Event.Event;
 import JCat.Event.EventListener;
 import JCat.Event.MouseEvent;
-import JCat.Textures.Texture;
 import JCat.Utils.ImageLoader;
 import JCat.Utils.ImageLoader.onAchieveListener;
 

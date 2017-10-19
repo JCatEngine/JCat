@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import JCat.Textures.Texture;
+import JCat.Display.Texture;
 
 /**
  * FrameAnimeClip,which depend on a couple of frame

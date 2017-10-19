@@ -2,7 +2,6 @@ package JCat.Display;
 
 import JCat.Display.Calculation.Bound;
 import JCat.Interaction.InteractiveObject;
-import JCat.Textures.Texture;
 import JCat.Utils.MathTool;
 
 public class Bitmap extends InteractiveObject implements AnchorAble{

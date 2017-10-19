@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import JCat.Textures.Texture;
+import JCat.Display.Texture;
 
 /**
  * a instace,used to cache image

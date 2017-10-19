@@ -3,11 +3,11 @@ package Example.Basic;
 import JCat.RenderSystem;
 import JCat.Display.Bitmap;
 import JCat.Display.Sprite;
+import JCat.Display.Texture;
 import JCat.Display.MovieClip.FrameAnimeClip;
 import JCat.Display.MovieClip.MovieClip;
 import JCat.Event.Event;
 import JCat.Event.EventListener;
-import JCat.Textures.Texture;
 import JCat.Utils.ImageLoader;
 import JCat.Utils.ImageLoader.onAchieveListener;
 

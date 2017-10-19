@@ -19,6 +19,16 @@ public class Event {
 	 * 
 	 */
 	public static final String UPDATE = "update";
+
+	/**
+	 * 
+	 */
+	public static final String PRE_RENDER = "preRender";
+
+	/**
+	 * 
+	 */
+	public static final String POST_RENDER = "postRender";
 	
 	
 	/**

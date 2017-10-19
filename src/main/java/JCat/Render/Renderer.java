@@ -1,32 +1,45 @@
 package JCat.Render;
 
-import Example.Basic.Text;
 import JCat.Canvas.Canvas;
 import JCat.Display.AnchorAble;
 import JCat.Display.Bitmap;
 import JCat.Display.DisplayObject;
 import JCat.Display.DisplayObjectContainer;
 import JCat.Display.Stage;
+import JCat.Display.Texture;
 import JCat.Display.MovieClip.MovieClip;
 import JCat.Display.Text.SimpleText;
+import JCat.Event.EventManager;
+import JCat.Event.PostRenderEvent;
+import JCat.Event.PreRenderEvent;
 import JCat.Graphics.Color;
-import JCat.Textures.Texture;
 
 public class Renderer {
 
-	public void render(DisplayObject displayObject, Canvas canvas) {
+	/**
+	 * render object tree to canvas
+	 * @param stage
+	 * @param canvas
+	 */
+	public void render(Stage stage, Canvas canvas) {
 		
 		//dispatch event before render
+		EventManager.boardCast(stage,new PreRenderEvent());
 		
+		//pre render state,canvas need to init sth
 		canvas.preRender();
 		
+		//draw back ground color
 		canvas.drawDefaultBackground(Color.ALICEBLUE);
-				
-		renderObject(displayObject,canvas);
-				
+		
+		//start render object recursively
+		renderObject(stage,canvas);
+		
+		//post render state,canvas need to clear sth
 		canvas.postRender();
-				
+		
 		//dispatch event after render
+		EventManager.boardCast(stage, new PostRenderEvent());
 		
 	}
 

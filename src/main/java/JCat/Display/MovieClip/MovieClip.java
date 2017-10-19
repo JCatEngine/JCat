@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import JCat.Display.AnchorAble;
+import JCat.Display.Texture;
 import JCat.Display.Calculation.Bound;
 import JCat.Event.Event;
 import JCat.Event.EventListener;
 import JCat.Interaction.InteractiveObject;
-import JCat.Textures.Texture;
 import JCat.Utils.MathTool;
 
 

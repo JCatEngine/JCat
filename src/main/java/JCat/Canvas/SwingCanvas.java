@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import JCat.Display.Texture;
 import JCat.Graphics.ColorTool;
 import JCat.Interaction.CanvasKeyEvent;
 import JCat.Interaction.CanvasKeyListener;
@@ -23,7 +24,6 @@ import JCat.Interaction.CanvasMouseEvent;
 import JCat.Interaction.CanvasMouseListener;
 import JCat.Render.ImageRenderData;
 import JCat.Render.TextRenderData;
-import JCat.Textures.Texture;
 
 public class SwingCanvas extends JFrame  implements Canvas{
 

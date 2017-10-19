@@ -124,9 +124,7 @@ public class RenderSystem extends EventDispatcher{
 	 */
 	public void render()
 	{
-	
 		renderer.render(root,canvas);
-
 	}
 	
 

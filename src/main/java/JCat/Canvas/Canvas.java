@@ -1,11 +1,11 @@
 package JCat.Canvas;
 
+import JCat.Display.Texture;
 import JCat.Graphics.Color;
 import JCat.Interaction.CanvasKeyListener;
 import JCat.Interaction.CanvasMouseListener;
 import JCat.Render.ImageRenderData;
 import JCat.Render.TextRenderData;
-import JCat.Textures.Texture;
 
 /**
  * a canvas have ability to draw texture and receive origin event

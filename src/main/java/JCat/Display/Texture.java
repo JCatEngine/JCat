@@ -1,4 +1,4 @@
-package JCat.Textures;
+package JCat.Display;
 
 import java.awt.Image;
 
