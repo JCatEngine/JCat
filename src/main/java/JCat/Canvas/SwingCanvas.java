@@ -23,6 +23,7 @@ import JCat.Interaction.CanvasKeyEvent;
 import JCat.Interaction.CanvasKeyListener;
 import JCat.Interaction.CanvasMouseEvent;
 import JCat.Interaction.CanvasMouseListener;
+import JCat.Render.RenderData.ShapeRenderData;
 import JCat.Render.RenderData.TextRenderData;
 import JCat.Render.RenderData.TextureRenderData;
 
@@ -258,6 +259,7 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		graphics.drawString(text, x, realY);
 		
 		
+		
 	}
 
 	
@@ -304,12 +306,49 @@ public class SwingCanvas extends JFrame  implements Canvas{
 
 	@Override
 	public double getStringHeight(String text, double fontSize, FontStyle style, String fontName) {
-		 applyTempFontSet(fontSize,style,fontName);
+		applyTempFontSet(fontSize,style,fontName);
 		FontMetrics fontMetrics = graphics.getFontMetrics();
 
 		int height = fontMetrics.getAscent()-fontMetrics.getDescent();
 		 
 		return height;
+	}
+
+	@Override
+	public void drawLine(ShapeRenderData renderData) {
+		graphics.setColor(ColorTool.toSwingColor(renderData.color));
+		int x1=(int) renderData.x1;
+		int x2=(int) (x1+renderData.width);
+		int y1=(int) renderData.y1;
+		int y2=(int) (y1+renderData.height);
+		
+		graphics.drawLine(x1, y1, x2, y2);
+	}
+
+	@Override
+	public void drawRect(ShapeRenderData renderData) {
+		graphics.setColor(ColorTool.toSwingColor(renderData.color));
+		
+		int x=(int) renderData.x1;
+		int y=(int) renderData.y1;
+		int width=(int) renderData.width;
+		int height=(int) renderData.height;
+		
+		graphics.drawRect(x, y, width, height);
+		
+	}
+
+	@Override
+	public void drawCircle(ShapeRenderData renderData) {
+		graphics.setColor(ColorTool.toSwingColor(renderData.color));
+		
+		int x=(int) renderData.x1;
+		int y=(int) renderData.y1;
+		int width=(int) renderData.width;
+		int height=(int) renderData.height;
+		
+		graphics.drawOval(x, y, width, height);
+		
 	}
 
 }

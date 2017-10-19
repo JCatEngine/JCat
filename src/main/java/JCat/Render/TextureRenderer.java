@@ -21,7 +21,7 @@ public class TextureRenderer extends BaseRenderer{
 		
 		TextureRenderData renderData=new TextureRenderData();
 		renderData.alpha=displayObject.getWorldAlpha();
-		//be notici there are not set the width of bitmap!
+		//be notice there are not set the width of bitmap!
 		//because rotation was be dealed before,so just return the width*scale will be fine
 		renderData.width=texture.getImage().getWidth(null)*displayObject.getScaleX();
 		renderData.height=texture.getImage().getHeight(null)*displayObject.getScaleY();

@@ -3,7 +3,7 @@ package JCat.Math.Shape;
 import JCat.Math.Vector2;
 import JCat.Utils.MathTool;
 
-public class OvalShape implements BaseShape {
+public class CircleShape implements BaseShape {
 
 	private Vector2 _center;
 	private double _radius;
@@ -21,7 +21,7 @@ public class OvalShape implements BaseShape {
 	 *            from the zone. If this parameter is not set then all points inside
 	 *            the outer radius are included in the zone.
 	 */
-	public OvalShape(Vector2 center, double radius) {
+	public CircleShape(Vector2 center, double radius) {
 		this._center = center;
 		this._radius = radius;
 

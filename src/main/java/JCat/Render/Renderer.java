@@ -13,6 +13,7 @@ import JCat.Event.EventManager;
 import JCat.Event.PostRenderEvent;
 import JCat.Event.PreRenderEvent;
 import JCat.Graphics.Color;
+import JCat.Graphics.Shape.BaseShape;
 
 public class Renderer {
 
@@ -91,7 +92,12 @@ public class Renderer {
 				SimpleText simpleText = (SimpleText) displayObject;
 				textRenderer.render(simpleText,anchorX,anchorY,canvas);
 			}
-
+			//render shape
+			else if(displayObject instanceof BaseShape)
+			{
+				BaseShape baseShape = (BaseShape) displayObject;
+				shapeRenderer.render(baseShape,anchorX,anchorY,canvas);
+			}
 			// render the current frame of the movieclip
 			else if (displayObject instanceof MovieClip) {
 				MovieClip movieClip = (MovieClip) displayObject;

@@ -6,6 +6,7 @@ import JCat.Graphics.Color;
 import JCat.Interaction.CanvasKeyListener;
 import JCat.Interaction.CanvasMouseListener;
 import JCat.Render.RenderData.TextureRenderData;
+import JCat.Render.RenderData.ShapeRenderData;
 import JCat.Render.RenderData.TextRenderData;
 
 /**
@@ -80,4 +81,22 @@ public interface Canvas {
 	 * @return
 	 */
 	double getStringHeight(String text, double fontSize, FontStyle style, String fontName);
+
+	/**
+	 * 
+	 * @param renderData
+	 */
+	void drawLine(ShapeRenderData renderData);
+
+	/**
+	 * 
+	 * @param renderData
+	 */
+	void drawRect(ShapeRenderData renderData);
+
+	/**
+	 * 
+	 * @param renderData
+	 */
+	void drawCircle(ShapeRenderData renderData);
 }
