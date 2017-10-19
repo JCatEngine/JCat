@@ -4,8 +4,8 @@ import JCat.Display.Texture;
 import JCat.Graphics.Color;
 import JCat.Interaction.CanvasKeyListener;
 import JCat.Interaction.CanvasMouseListener;
-import JCat.Render.ImageRenderData;
-import JCat.Render.TextRenderData;
+import JCat.Render.RenderData.TextureRenderData;
+import JCat.Render.RenderData.TextRenderData;
 
 /**
  * a canvas have ability to draw texture and receive origin event
@@ -19,7 +19,7 @@ public interface Canvas {
 	 * @param texture
 	 * @param renderData 
 	 */
-	void drawTexture(Texture texture, ImageRenderData renderData);
+	void drawTexture(Texture texture, TextureRenderData renderData);
 
 	/**
 	 * called before render

@@ -22,8 +22,8 @@ import JCat.Interaction.CanvasKeyEvent;
 import JCat.Interaction.CanvasKeyListener;
 import JCat.Interaction.CanvasMouseEvent;
 import JCat.Interaction.CanvasMouseListener;
-import JCat.Render.ImageRenderData;
-import JCat.Render.TextRenderData;
+import JCat.Render.RenderData.TextureRenderData;
+import JCat.Render.RenderData.TextRenderData;
 
 public class SwingCanvas extends JFrame  implements Canvas{
 
@@ -163,7 +163,7 @@ public class SwingCanvas extends JFrame  implements Canvas{
 	}
 
 	@Override
-	public void drawTexture(Texture texture, ImageRenderData renderData) {
+	public void drawTexture(Texture texture, TextureRenderData renderData) {
 
 
 		

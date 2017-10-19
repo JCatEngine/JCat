@@ -1,11 +1,10 @@
-package JCat.Render;
+package JCat.Render.RenderData;
 
 import JCat.Display.Text.FontStyle;
 import JCat.Graphics.Color;
 
-public class TextRenderData {
+public class TextRenderData extends BaseRenderData{
 
-	public double alpha;
 	public FontStyle style;
 	public double size;
 	public Color color;
