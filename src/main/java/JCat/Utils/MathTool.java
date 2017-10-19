@@ -39,6 +39,15 @@ public class MathTool {
 		return value;
 	}
 
-	
+	/**
+	 *random return 1 or -1 
+	 * @return 
+	 * 
+	 */		
+	public static double randomZF()
+	{
+		
+		return Math.random()>=0.5?1:-1;
+	}
 
 }

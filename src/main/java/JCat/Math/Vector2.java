@@ -61,7 +61,7 @@ public class Vector2 {
 	 * @return 
 	 * 
 	 */		
-	public static Number getDistance(Vector2 v1,Vector2 v2)
+	public static double getDistance(Vector2 v1,Vector2 v2)
 	{
 		
 		double xx=v1.x-v2.x;

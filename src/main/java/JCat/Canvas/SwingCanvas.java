@@ -252,7 +252,7 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		graphics.setFont(font);
 		graphics.setColor(color);
 
-			
+		
 		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float) alpha);
 		graphics.setComposite(alphaComposite);
 		graphics.drawString(text, x, realY);
