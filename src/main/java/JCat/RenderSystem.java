@@ -168,6 +168,15 @@ public class RenderSystem extends EventDispatcher{
 		return TextureManager.getInstance();
 	}
 
+
+	public InteractionManager getInteractionManager() {
+		return interactionManager;
+	}
+
+	public Ticker getTicker() {
+		return ticker;
+	}
+
 	
 	
 }

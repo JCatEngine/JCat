@@ -49,5 +49,15 @@ public class MathTool {
 		
 		return Math.random()>=0.5?1:-1;
 	}
+	
+	public static double random(double min,double max)
+	{
+	
+		return Math.random()*(max-min)+min;
+	}
+	
 
+	
+	
+	
 }

@@ -1,5 +1,6 @@
 package JCat.Math.Shape;
 
+import JCat.Math.Rect;
 import JCat.Math.Vector2;
 
 public class RectShape implements BaseShape {
@@ -32,6 +33,10 @@ public class RectShape implements BaseShape {
 		this.right = right;
 		this.bottom = bottom;
 
+	}
+	
+	public RectShape(Rect rect) {
+		this(rect.x, rect.x+rect.width, rect.y, rect.y+rect.height);
 	}
 
 	public double getLeft() {
