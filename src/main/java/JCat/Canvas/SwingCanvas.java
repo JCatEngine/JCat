@@ -167,8 +167,6 @@ public class SwingCanvas extends JFrame  implements Canvas{
 	@Override
 	public void drawTexture(Texture texture, TextureRenderData renderData) {
 
-
-		
 		Image image=texture.getImage();
 		double alpha=renderData.alpha;
 		int width=(int) renderData.width;
