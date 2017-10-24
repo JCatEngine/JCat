@@ -76,8 +76,6 @@ public class RenderSystem extends EventDispatcher{
 	 */
 	public RenderSystem(int width, int height,int frameRate,CanvasType type) 
 	{
-		
-	
 		this.root=new Stage(width,height);
 
 		this.renderer=new Renderer();

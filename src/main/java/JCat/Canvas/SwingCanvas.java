@@ -83,7 +83,7 @@ public class SwingCanvas extends JFrame  implements Canvas{
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				
+
 				canvaskeylistener.keyUp(createKeyEvent(e));
 			}
 			

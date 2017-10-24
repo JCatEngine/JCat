@@ -26,6 +26,8 @@ public class Basic {
 
 	protected static void loadAchieve() {
 		
+		
+		
 		RenderSystem system=new RenderSystem(800, 600);
 		Texture texture=system.getImageManager().getTextureByName("bunny");
 		Bitmap bitmap=new Bitmap(texture);
