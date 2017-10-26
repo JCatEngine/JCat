@@ -5,7 +5,7 @@ import JCat.Display.Bitmap;
 import JCat.Display.Sprite;
 import JCat.Display.Texture;
 import JCat.Display.MovieClip.FrameAnimeClip;
-import JCat.Display.MovieClip.FrameMovieClip;
+import JCat.Display.MovieClip.MovieClip;
 import JCat.Event.Event;
 import JCat.Event.EventListener;
 import JCat.Utils.ImageLoader;
@@ -46,7 +46,7 @@ public class PlayAnimation {
 		
 		//System.out.println(animation.getTexture(3)==texture2);
 		
-		FrameMovieClip movieClip=new FrameMovieClip();
+		MovieClip movieClip=new MovieClip();
 		movieClip.addAnime(animation);
 		
 		movieClip.x=system.getStage().getStageWidth()/2;

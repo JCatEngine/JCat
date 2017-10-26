@@ -3,7 +3,7 @@ package Example.Basic;
 import JCat.RenderSystem;
 import JCat.Display.Texture;
 import JCat.Display.MovieClip.FrameAnimeClip;
-import JCat.Display.MovieClip.FrameMovieClip;
+import JCat.Display.MovieClip.MovieClip;
 import JCat.Utils.ImageLoader;
 import JCat.Utils.ImageLoader.onAchieveListener;
 
@@ -26,6 +26,7 @@ public class PlayAnimation2 {
 
 	protected static void loadAchieve() {
 		RenderSystem system=new RenderSystem(800, 600,20);
+		
 		system.getImageManager().sliceTexture("move",3,2);
 		Texture texture1=system.getImageManager().getTextureByName("move00");
 		Texture texture2=system.getImageManager().getTextureByName("move10");
@@ -37,7 +38,7 @@ public class PlayAnimation2 {
 		animation.insertFrame(5, texture3);
 		
 		
-		FrameMovieClip movieClip=new FrameMovieClip();
+		MovieClip movieClip=new MovieClip();
 		movieClip.addAnime(animation);
 		
 		movieClip.x=system.getStage().getStageWidth()/2;

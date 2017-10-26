@@ -171,7 +171,12 @@ public class TextureManager {
 		}
 		
 		Texture newTexture=texture.subTexture(xPos,yPos,partWidth,partHeight);
-		addToCache(newTexture,newName,false);
+		//if this do not exist,then add it
+		if(getTextureByName(newName)==null)
+		{
+			addToCache(newTexture,newName,false);
+		}
+		
 		
 	}
 

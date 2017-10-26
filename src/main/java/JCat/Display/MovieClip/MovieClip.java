@@ -17,12 +17,12 @@ import JCat.Utils.MathTool;
  * @author Administrator
  *
  */
-public class FrameMovieClip extends AnimeGroup implements AnchorAble{
+public class MovieClip extends AnimeGroup implements AnchorAble{
 	
 	private Map<String, FrameAnimeClip> datas=new HashMap<>();
 	private FrameAnimeClip nowAnime;
 	
-	public FrameMovieClip()
+	public MovieClip()
 	{
 		
 		this.addEventListener(Event.UPDATE, new EventListener() {

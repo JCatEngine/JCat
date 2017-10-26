@@ -7,7 +7,7 @@ import JCat.Display.DisplayObject;
 import JCat.Display.DisplayObjectContainer;
 import JCat.Display.Stage;
 import JCat.Display.Texture;
-import JCat.Display.MovieClip.FrameMovieClip;
+import JCat.Display.MovieClip.MovieClip;
 import JCat.Display.MovieClip.SliceMovieClip;
 import JCat.Display.Text.SimpleText;
 import JCat.Event.EventManager;
@@ -104,8 +104,8 @@ public class Renderer {
 				shapeRenderer.render(baseShape,anchorX,anchorY,canvas);
 			}
 			// render the current frame of the movieclip
-			else if (displayObject instanceof FrameMovieClip) {
-				FrameMovieClip movieClip = (FrameMovieClip) displayObject;
+			else if (displayObject instanceof MovieClip) {
+				MovieClip movieClip = (MovieClip) displayObject;
 				Texture texture = movieClip.getTexture();
 				textureRenderer.render(movieClip, texture, anchorX, anchorY, canvas);
 			}
