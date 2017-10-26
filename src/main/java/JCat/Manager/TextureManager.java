@@ -106,4 +106,10 @@ public class TextureManager {
 		caches.clear();
 	}
 
+	
+	public void sliceTexture(String name, int xAmount, int yAmount) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

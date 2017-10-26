@@ -13,6 +13,11 @@ import JCat.Display.Texture;
  */
 public class FrameAnimeClip extends AnimeClip {
 
+	public FrameAnimeClip(String name, int maxFrame) {
+		super(name, maxFrame);
+		// TODO Auto-generated constructor stub
+	}
+
 	public class Frame {
 
 		public int index;
@@ -26,39 +31,16 @@ public class FrameAnimeClip extends AnimeClip {
 
 	}
 
-	/**
-	 * name of the anime
-	 */
-	private String name;
+	
 	/**
 	 * frames
 	 */
 	private List<Frame> frames=new ArrayList<>();
-	/**
-	 * max frame
-	 */
-	private int maxFrame;
-	private boolean stop;
-	private int currentFrame=1;
 	
-	public FrameAnimeClip(String name,int maxFrame)
-	{
-		this.name = name;
-		this.maxFrame=maxFrame;
-		
-	}
 	
-	void update()
-	{
-		if(!stop)
-		{
-			currentFrame++;
-			if(currentFrame>getTotalFrames())
-			{
-				currentFrame=1;
-			}
-		}	
-	}
+	
+	
+
 	
 
 	public void setName(String name) {
@@ -126,44 +108,7 @@ public class FrameAnimeClip extends AnimeClip {
 
 
 
-	@Override
-	public int getCurrentFrame() {
-		// TODO Auto-generated method stub
-		return currentFrame;
-	}
-
-
-
-	@Override
-	public void stop() {
-		
-		stop=true;
-		
-	}
-
-
-
-	@Override
-	public void play() {
-		stop=false;
-		
-	}
-
-
-
-	@Override
-	public int getTotalFrames() {
-		// TODO Auto-generated method stub
-		return maxFrame;
-	}
-
-	@Override
-	public void gotoAndStop(int index) {
-		checkIndex(1, getTotalFrames(),index);
-		this.currentFrame=index;
-		stop=true;
-		
-	}
+	
 
 	
 		

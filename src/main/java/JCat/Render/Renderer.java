@@ -7,7 +7,8 @@ import JCat.Display.DisplayObject;
 import JCat.Display.DisplayObjectContainer;
 import JCat.Display.Stage;
 import JCat.Display.Texture;
-import JCat.Display.MovieClip.MovieClip;
+import JCat.Display.MovieClip.FrameMovieClip;
+import JCat.Display.MovieClip.SliceMovieClip;
 import JCat.Display.Text.SimpleText;
 import JCat.Event.EventManager;
 import JCat.Event.PostRenderEvent;
@@ -103,11 +104,16 @@ public class Renderer {
 				shapeRenderer.render(baseShape,anchorX,anchorY,canvas);
 			}
 			// render the current frame of the movieclip
-			else if (displayObject instanceof MovieClip) {
-				MovieClip movieClip = (MovieClip) displayObject;
+			else if (displayObject instanceof FrameMovieClip) {
+				FrameMovieClip movieClip = (FrameMovieClip) displayObject;
 				Texture texture = movieClip.getTexture();
 				textureRenderer.render(movieClip, texture, anchorX, anchorY, canvas);
-
+			}
+			else if(displayObject instanceof SliceMovieClip)
+			{
+//				SliceMovieClip movieClip = (SliceMovieClip) displayObject;
+//				Texture texture = movieClip.getTexture();
+//				textureRenderer.render(movieClip, texture, anchorX, anchorY, canvas);
 			}
 
 			// if it's a container,render it's childs

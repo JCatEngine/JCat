@@ -55,8 +55,6 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		this.width = width;
 		this.height = height;
 		
-		
-		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setPreferredSize(new Dimension(width, height));
 		

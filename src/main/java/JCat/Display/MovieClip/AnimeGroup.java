@@ -1,6 +1,8 @@
 package JCat.Display.MovieClip;
 
-public interface AnimeGroup {
+import JCat.Interaction.InteractiveObject;
+
+public abstract class AnimeGroup extends InteractiveObject{
 	
 	/**
 	 *play child anime by name,be notice 
