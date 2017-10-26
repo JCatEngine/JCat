@@ -39,12 +39,10 @@ public class Rect {
 		}
 		
 		/**
-		 * 
 		 * @param	x
 		 * @param	y
 		 * @param	width
 		 * @param	height
-		 * @param	inputPoint 如果为true 则输入的后两个按照x y坐标而不是宽高来解释
 		 */
 		public Rect(double x, double y, double width, double height)
 		{

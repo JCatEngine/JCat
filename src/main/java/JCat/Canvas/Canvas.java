@@ -5,6 +5,7 @@ import JCat.Display.Text.FontStyle;
 import JCat.Graphics.Color;
 import JCat.Interaction.CanvasKeyListener;
 import JCat.Interaction.CanvasMouseListener;
+import JCat.Math.Rect;
 import JCat.Render.RenderData.TextureRenderData;
 import JCat.Render.RenderData.ShapeRenderData;
 import JCat.Render.RenderData.TextRenderData;
@@ -105,4 +106,5 @@ public interface Canvas {
 	 * @param scaleY
 	 */
 	void scale(double scaleX, double scaleY);
+
 }

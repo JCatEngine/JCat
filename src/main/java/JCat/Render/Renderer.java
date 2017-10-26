@@ -80,7 +80,7 @@ public class Renderer {
 		canvas.scale(displayObject.getScaleX(), displayObject.getScaleY());
 		//rotate
 		canvas.rotate(displayObject.rotation / 180 * Math.PI);
-	
+		
 
 		if (displayObject.visible) {
 
@@ -120,14 +120,16 @@ public class Renderer {
 				}
 			}
 		}
-
+		
+		
+		
 		//restore
 		canvas.rotate(-displayObject.rotation / 180 * Math.PI);
 		canvas.scale(1.0/displayObject.getScaleX(), 1.0/displayObject.getScaleY());
 		canvas.translate(-anchorX, -anchorY);
 		canvas.translate(-displayObject.x, -displayObject.y);
 		
-
+		
 	}
 
 	

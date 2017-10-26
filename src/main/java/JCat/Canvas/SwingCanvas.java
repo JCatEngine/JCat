@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -25,6 +26,8 @@ import JCat.Interaction.CanvasKeyListener;
 import JCat.Interaction.CanvasMouseEvent;
 import JCat.Interaction.CanvasMouseListener;
 import JCat.Interaction.MouseButton;
+import JCat.Math.Rect;
+import JCat.Render.Mask;
 import JCat.Render.RenderData.ShapeRenderData;
 import JCat.Render.RenderData.TextRenderData;
 import JCat.Render.RenderData.TextureRenderData;
@@ -222,7 +225,7 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float) alpha);
 		graphics.setComposite(alphaComposite);
 		graphics.drawImage(image, x, y,width,height, null);
-		
+	
 		
 		
 	}
@@ -408,5 +411,7 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		graphics.scale(scaleX, scaleY);
 		
 	}
+
+	
 
 }

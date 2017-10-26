@@ -81,7 +81,10 @@ public abstract class DisplayObject extends EventDispatcher{
 	 * localBound
 	 */
 	protected Bound localBound;
-
+	/**
+	 * mask,only support rect mask currently(can't rotate)
+	 */
+	protected Rect mask;
 
 
 	/**
@@ -421,6 +424,16 @@ public abstract class DisplayObject extends EventDispatcher{
 
 	public DisplayObjectContainer getParent() {
 		return parent;
+	}
+
+
+	public Rect getMask() {
+		return mask;
+	}
+
+
+	public void setMask(Rect mask) {
+		this.mask = mask;
 	}
 
 	
