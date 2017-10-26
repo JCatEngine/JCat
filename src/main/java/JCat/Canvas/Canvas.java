@@ -99,4 +99,10 @@ public interface Canvas {
 	 * @param renderData
 	 */
 	void drawCircle(ShapeRenderData renderData);
+	/**
+	 * scale
+	 * @param scaleX
+	 * @param scaleY
+	 */
+	void scale(double scaleX, double scaleY);
 }

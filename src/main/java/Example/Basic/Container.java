@@ -49,6 +49,9 @@ public class Container {
 			@Override
 			public void onResponce(Event event) {
 				sprite.rotation+=5;
+				
+				sprite.setScaleX(sprite.getScaleX()+0.01);
+				sprite.setScaleY(sprite.getScaleY()+0.01);
 			}
 		});
 		

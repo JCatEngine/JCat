@@ -61,7 +61,8 @@ public class Renderer {
 	 * @param displayObject
 	 * @param canvas
 	 */
-	private void renderObject(DisplayObject displayObject, Canvas canvas) {
+	private void renderObject(DisplayObject displayObject, Canvas canvas) {	
+		
 		// move to left-top corner(default zero point)
 		canvas.translate(displayObject.x, displayObject.y);
 		// move to anchor(only the bitmap support it..)
@@ -75,8 +76,11 @@ public class Renderer {
 		}
 		//translate to anchor point
 		canvas.translate(anchorX, anchorY);
-		// rotate
+		//scale
+		canvas.scale(displayObject.getScaleX(), displayObject.getScaleY());
+		//rotate
 		canvas.rotate(displayObject.rotation / 180 * Math.PI);
+	
 
 		if (displayObject.visible) {
 
@@ -117,9 +121,12 @@ public class Renderer {
 			}
 		}
 
+		//restore
 		canvas.rotate(-displayObject.rotation / 180 * Math.PI);
+		canvas.scale(1.0/displayObject.getScaleX(), 1.0/displayObject.getScaleY());
 		canvas.translate(-anchorX, -anchorY);
 		canvas.translate(-displayObject.x, -displayObject.y);
+		
 
 	}
 

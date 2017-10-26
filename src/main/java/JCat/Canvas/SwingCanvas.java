@@ -179,7 +179,7 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float) alpha);
 		graphics.setComposite(alphaComposite);
 		graphics.drawImage(image, x, y,width,height, null);
-
+		
 		
 		
 	}
@@ -356,6 +356,13 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float) alpha);
 		graphics.setComposite(alphaComposite);
 		graphics.fillOval(x, y, width, height);
+		
+	}
+
+	@Override
+	public void scale(double scaleX, double scaleY) {
+		
+		graphics.scale(scaleX, scaleY);
 		
 	}
 
