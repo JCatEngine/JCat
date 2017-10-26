@@ -3,7 +3,6 @@ package JCat.Display.Text;
 import JCat.Display.AnchorAble;
 import JCat.Display.Calculation.Bound;
 import JCat.Graphics.Color;
-import JCat.Graphics.Graphics;
 import JCat.Utils.MathTool;
 
 /**
@@ -154,7 +153,7 @@ public class SimpleText extends BaseText implements AnchorAble{
 	 * @return
 	 */
 	public double getRawWidth() {
-		double width=Graphics.getInstace().getStringWidth(getText(),fontSize,style,fontName);
+		double width=TextManager.getInstace().getStringWidth(getText(),fontSize,style,fontName);
 		return width;
 	}
 
@@ -163,7 +162,7 @@ public class SimpleText extends BaseText implements AnchorAble{
 	 * @return
 	 */
 	public double getRawHeight() {
-		double height=Graphics.getInstace().getStringHeight(getText(),fontSize,style,fontName);
+		double height=TextManager.getInstace().getStringHeight(getText(),fontSize,style,fontName);
 		return height;
 	}
 

@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
@@ -23,6 +24,7 @@ import JCat.Interaction.CanvasKeyEvent;
 import JCat.Interaction.CanvasKeyListener;
 import JCat.Interaction.CanvasMouseEvent;
 import JCat.Interaction.CanvasMouseListener;
+import JCat.Interaction.MouseButton;
 import JCat.Render.RenderData.ShapeRenderData;
 import JCat.Render.RenderData.TextRenderData;
 import JCat.Render.RenderData.TextureRenderData;
@@ -94,7 +96,20 @@ public class SwingCanvas extends JFrame  implements Canvas{
 				
 			}
 		});
-		
+		panel.addMouseMotionListener(new MouseMotionListener() {
+			
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				canvasmouselistener.mouseMove(createMouseEvent(e));
+				
+			}
+			
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				canvasmouselistener.mouseMove(createMouseEvent(e));
+				
+			}
+		});
 		
 		panel.addMouseListener(new MouseListener() {
 			
@@ -128,7 +143,7 @@ public class SwingCanvas extends JFrame  implements Canvas{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
+				canvasmouselistener.mouseClick(createMouseEvent(e));
 				
 			}
 		});
@@ -145,12 +160,37 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		CanvasMouseEvent canvasMouseEvent=new CanvasMouseEvent();
 		canvasMouseEvent.x=e.getX();
 		canvasMouseEvent.y=e.getY();
+		canvasMouseEvent.clickCount=e.getClickCount();
+		canvasMouseEvent.button=getMouseButton(e);
+				
 		
 		
 		return canvasMouseEvent;
 	}
 
 	
+	private MouseButton getMouseButton(MouseEvent e) {
+		
+		if(e.getButton()==MouseEvent.NOBUTTON)
+		{
+			return MouseButton.NONE;
+		}
+		else if(e.getButton()==MouseEvent.BUTTON1)
+		{
+			return MouseButton.LEFT;
+		}
+		else if(e.getButton()==MouseEvent.BUTTON2)
+		{
+			return MouseButton.CENTER;
+		}
+		else if(e.getButton()==MouseEvent.BUTTON3)
+		{
+			return MouseButton.RIGHT;
+		}
+		throw new RuntimeException("error");
+		
+	}
+
 	/**
 	 * convert swing key event to Jcat key event
 	 * @param e
@@ -160,6 +200,7 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		
 		CanvasKeyEvent canvasKeyEvent=new CanvasKeyEvent();
 		canvasKeyEvent.keycode=e.getKeyCode();
+		
 
 		return canvasKeyEvent;
 	}

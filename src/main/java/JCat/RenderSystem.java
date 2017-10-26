@@ -5,10 +5,10 @@ import JCat.Canvas.Canvas;
 import JCat.Canvas.CanvasFactory;
 import JCat.Canvas.CanvasType;
 import JCat.Display.Stage;
+import JCat.Display.Text.TextManager;
 import JCat.Event.EventDispatcher;
 import JCat.Event.EventManager;
 import JCat.Event.UpdateEvent;
-import JCat.Graphics.Graphics;
 import JCat.Interaction.InteractionManager;
 import JCat.Manager.TextureManager;
 import JCat.Render.Renderer;
@@ -90,12 +90,13 @@ public class RenderSystem extends EventDispatcher{
 			@Override
 			public void onResponce() {
 				EventManager.boardCast(root, new UpdateEvent());
+				interactionManager.dealEvent();
 				render();
 				
 			}
 		});
 		
-		Graphics.getInstace().setCanvas(canvas);
+		TextManager.getInstace().setCanvas(canvas);
 		
 	}
 	

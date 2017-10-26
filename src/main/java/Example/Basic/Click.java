@@ -32,10 +32,10 @@ public class Click {
 		Bitmap bitmap=new Bitmap(texture);
 		bitmap.x=system.getStage().getStageWidth()/2;
 		bitmap.y=system.getStage().getStageHeight()/2;
-		bitmap.addEventListener(MouseEvent.MOUSE_UP, new EventListener() {
+		bitmap.addEventListener(MouseEvent.MOUSE_UP, new EventListener<MouseEvent>() {
 			
 			@Override
-			public void onResponce(Event event) {
+			public void onResponce(MouseEvent event) {
 				bitmap.setScaleX(bitmap.getScaleX()*1.5);
 				bitmap.setScaleY(bitmap.getScaleY()*1.5);
 			}

@@ -224,7 +224,9 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 	 */
 	public LinkedList<DisplayObject> getChilds() {
 		LinkedList<DisplayObject> linkedList=new LinkedList<>();
-		childs.forEach(d->linkedList.add(d));
+		for (DisplayObject displayObject : childs) {
+			linkedList.add(displayObject);
+		}
 		return linkedList;
 	}
 

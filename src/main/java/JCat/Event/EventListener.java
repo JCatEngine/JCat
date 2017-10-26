@@ -1,6 +1,6 @@
 package JCat.Event;
 
-public interface EventListener {
+public interface EventListener<T extends Event> {
 
-	void onResponce(Event event);
+	void onResponce(T event);
 }

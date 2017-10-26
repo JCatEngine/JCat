@@ -54,15 +54,7 @@ public class PlayAnimation {
 		
 		movieClip.setAnchorX(0.5);
 		movieClip.setAnchorY(0.5);
-		
-		movieClip.addEventListener(Event.UPDATE, new EventListener() {
-			
-			@Override
-			public void onResponce(Event event) {
-				movieClip.rotation+=5;
-				
-			}
-		});
+	
 		
 		movieClip.playAnime("simpleAnimation");
 		

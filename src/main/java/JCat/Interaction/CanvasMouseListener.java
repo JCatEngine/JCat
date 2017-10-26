@@ -6,7 +6,9 @@ public interface CanvasMouseListener {
 
 	public void mouseDown(CanvasMouseEvent event);
 
-	
+	public void mouseMove(CanvasMouseEvent event);
+
+	public void mouseClick(CanvasMouseEvent event);
 
 
 
