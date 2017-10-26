@@ -1,5 +1,7 @@
 package JCat.Manager;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,17 +58,26 @@ public class TextureManager {
 		return list.size()==1?list.get(0).texture:null;
 	}
 
+	
 	/**
 	 * 
 	 * @param texture
-	 * @param path
+	 * @param name
+	 * @param isPath
 	 */
-	public void addToCache(Texture texture, String path) {
+	public void addToCache(Texture texture, String name,boolean isPath) {
 		
 		TextureData textureData=new TextureData();
 		textureData.texture=texture;
-		textureData.path=path;
-		textureData.name=pathToName(path);
+		if(isPath)
+		{
+			textureData.path=name;
+			textureData.name=pathToName(name);
+		}
+		else
+		{
+			textureData.name=name;
+		}
 		
 		caches.add(textureData);
 		
@@ -107,8 +118,60 @@ public class TextureManager {
 	}
 
 	
+	/**
+	 * slice texture to sub texture,and auto renameIt,add it to cache
+	 * @param name texture name
+	 * @param xAmount
+	 * @param yAmount
+	 */
 	public void sliceTexture(String name, int xAmount, int yAmount) {
-		// TODO Auto-generated method stub
+		
+		Texture texture=getTextureByName(name);
+		if(texture==null)
+		{
+			throw new RuntimeException(name+" texture isn't exist!");
+		}
+		
+		int partWidth=texture.getWidth()/xAmount;
+		int partHeight=texture.getHeight()/yAmount;
+		
+		for(int x=0;x<xAmount;x++)
+		{
+			for(int y=0;y<yAmount;y++)
+			{
+				int xPos=x*partWidth;
+				int yPos=y*partHeight;
+				String autoNewName=name+x+y;
+				
+				sliceTexture(name,xPos,yPos,partWidth,partHeight,autoNewName);
+			}
+		}
+		
+		
+		
+		
+	}
+
+
+	/**
+	 * slice texture(be notice the sub texture can't be search by path,because it's do not have a path
+	 * only the mainTexture can be searched by path)
+	 * @param name
+	 * @param xPos
+	 * @param yPos
+	 * @param partWidth
+	 * @param partHeight
+	 * @param newName
+	 */
+	public void sliceTexture(String name, int xPos, int yPos, int partWidth, int partHeight, String newName) {
+		Texture texture=getTextureByName(name);
+		if(texture==null)
+		{
+			throw new RuntimeException(name+" texture isn't exist!");
+		}
+		
+		Texture newTexture=texture.subTexture(xPos,yPos,partWidth,partHeight);
+		addToCache(newTexture,newName,false);
 		
 	}
 

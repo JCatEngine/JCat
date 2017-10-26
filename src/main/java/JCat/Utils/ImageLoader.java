@@ -1,6 +1,7 @@
 package JCat.Utils;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -72,9 +73,9 @@ public class ImageLoader {
 					{
 						
 						try {
-							Image image=ImageIO.read(new File(path));
+							BufferedImage image=ImageIO.read(new File(path));
 							Texture texture=new Texture(image);
-							cache.addToCache(texture,path);
+							cache.addToCache(texture,path,true);
 							
 						} catch (IOException e) {
 							// TODO Auto-generated catch block

@@ -4,7 +4,6 @@ import JCat.RenderSystem;
 import JCat.Display.Texture;
 import JCat.Display.MovieClip.FrameAnimeClip;
 import JCat.Display.MovieClip.FrameMovieClip;
-import JCat.Display.MovieClip.SliceAnimeClip;
 import JCat.Utils.ImageLoader;
 import JCat.Utils.ImageLoader.onAchieveListener;
 
@@ -26,17 +25,17 @@ public class PlayAnimation2 {
 	}
 
 	protected static void loadAchieve() {
-		RenderSystem system=new RenderSystem(800, 600);
-		Texture texture1=system.getImageManager().getTextureByName("move");
-		//slice it
+		RenderSystem system=new RenderSystem(800, 600,20);
 		system.getImageManager().sliceTexture("move",3,2);
+		Texture texture1=system.getImageManager().getTextureByName("move00");
+		Texture texture2=system.getImageManager().getTextureByName("move10");
+		Texture texture3=system.getImageManager().getTextureByName("move20");
 		
-//		SliceAnimeClip sliceClip=new SliceAnimeClip(3,2,"move",6,texture1);
-//		sliceClip.setClice(1,0,0);
-//		sliceClip.setClice(3,1,0);
-//		sliceClip.setClice(5,2,0);
+		FrameAnimeClip animation=new FrameAnimeClip("move",6);
+		animation.insertFrame(1, texture1);
+		animation.insertFrame(3, texture2);
+		animation.insertFrame(5, texture3);
 		
-		//System.out.println(animation.getTexture(3)==texture2);
 		
 		FrameMovieClip movieClip=new FrameMovieClip();
 		movieClip.addAnime(animation);
@@ -48,7 +47,7 @@ public class PlayAnimation2 {
 		movieClip.setAnchorY(0.5);
 	
 		
-		movieClip.playAnime("simpleAnimation");
+		movieClip.playAnime("move");
 		
 		system.getStage().addChild(movieClip);
 		
