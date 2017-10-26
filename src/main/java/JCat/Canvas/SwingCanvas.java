@@ -200,6 +200,8 @@ public class SwingCanvas extends JFrame  implements Canvas{
 		
 		CanvasKeyEvent canvasKeyEvent=new CanvasKeyEvent();
 		canvasKeyEvent.keycode=e.getKeyCode();
+		canvasKeyEvent.keychar=e.getKeyChar()+"";
+
 		
 
 		return canvasKeyEvent;

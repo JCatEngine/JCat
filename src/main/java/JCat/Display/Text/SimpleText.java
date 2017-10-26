@@ -13,7 +13,7 @@ import JCat.Utils.MathTool;
 public class SimpleText extends BaseText implements AnchorAble{
 
 	private String fontName="Arial";
-	private String text;
+	private String text="";
 	private double fontSize=12;
 	private Color color=Color.BLACK;
 	private FontStyle style=FontStyle.PLAIN;

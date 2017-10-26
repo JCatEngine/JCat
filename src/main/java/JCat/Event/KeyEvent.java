@@ -16,6 +16,10 @@ public class KeyEvent extends Event{
 	 * keycode of the event,compare with the field in Keycode class to know which key 
 	 */
 	public int keyCode;
+	/**
+	 * key char
+	 */
+	public String keyChar;
 	
 	
 	public KeyEvent(String type) {
@@ -29,6 +33,7 @@ public class KeyEvent extends Event{
 		
 		KeyEvent event=new KeyEvent(type);
 		event.keyCode=keyCode;
+		event.keyChar=keyChar;
 		defaultClone(event);
 		
 		return event;

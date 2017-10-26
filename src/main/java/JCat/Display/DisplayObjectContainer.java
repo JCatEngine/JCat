@@ -43,16 +43,20 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 			displayObject.parent.removeChild(displayObject);
 
 		}
+		
+		synchronized (childs) {
+			
+			if(index==childs.size())
+			{
+				childs.add(displayObject);
 
-		if(index==childs.size())
-		{
-			childs.add(displayObject);
-
+			}
+			else
+			{
+				childs.add(index, displayObject);
+			}
 		}
-		else
-		{
-			childs.add(index, displayObject);
-		}
+		
 
 		//dispatch added event
 		dispatchEvent(new AddedEvent(displayObject));
@@ -224,9 +228,12 @@ abstract public class DisplayObjectContainer extends InteractiveObject{
 	 */
 	public LinkedList<DisplayObject> getChilds() {
 		LinkedList<DisplayObject> linkedList=new LinkedList<>();
-		for (DisplayObject displayObject : childs) {
-			linkedList.add(displayObject);
+		synchronized (childs) {
+			for (DisplayObject displayObject : childs) {
+				linkedList.add(displayObject);
+			}
 		}
+		
 		return linkedList;
 	}
 

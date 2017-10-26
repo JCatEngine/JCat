@@ -128,7 +128,7 @@ public class Rect {
 			return vector2.x>=getMinX()&&vector2.x<=getMaxX()&&vector2.y>=getMinY()&&vector2.y<=getMaxY();
 		}
 
-		public Boolean hitTest(Rect rect) {
+		public boolean hitTest(Rect rect) {
 			
 			
 			if(this.contains(rect.getLeftDownPoint()))
@@ -175,7 +175,7 @@ public class Rect {
 			}
 			
 			
-			return null;
+			return false;
 		}
 
 		@Override

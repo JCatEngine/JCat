@@ -6,7 +6,6 @@ import JCat.Display.Sprite;
 import JCat.Display.Texture;
 import JCat.Event.Event;
 import JCat.Event.EventListener;
-import JCat.Math.Vector2;
 import JCat.Utils.ImageLoader;
 import JCat.Utils.ImageLoader.onAchieveListener;
 

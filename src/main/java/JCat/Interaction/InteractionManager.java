@@ -7,8 +7,6 @@ import JCat.RenderSystem;
 import JCat.Canvas.Canvas;
 import JCat.Display.DisplayObject;
 import JCat.Display.DisplayObjectContainer;
-import JCat.Display.Stage;
-import JCat.Event.Event;
 import JCat.Event.EventDispatcher;
 import JCat.Event.EventManager;
 import JCat.Event.KeyEvent;
@@ -208,6 +206,7 @@ public class InteractionManager {
 
 		KeyEvent keyEvent = new KeyEvent(type);
 		keyEvent.keyCode = event.keycode;
+		keyEvent.keyChar = event.keychar;
 
 		return keyEvent;
 	}

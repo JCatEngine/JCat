@@ -349,8 +349,13 @@ public abstract class DisplayObject extends EventDispatcher{
 	 */
 	public Boolean hitTestObject(DisplayObject displayObject)
 	{
-
-		throw new RuntimeException("undo");
+		updateLocalBound();
+		
+		Rect rect=this.getBound(this.stage);
+		Rect rect2=displayObject.getBound(this.stage);
+		
+		
+		return rect.hitTest(rect2);
 
 
 	}
