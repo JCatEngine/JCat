@@ -8,12 +8,12 @@ import JCat.Display.MovieClip.FrameAnimeClip;
 import JCat.Display.MovieClip.MovieClip;
 import JCat.Event.Event;
 import JCat.Event.EventListener;
-import JCat.Utils.ImageLoader;
-import JCat.Utils.ImageLoader.onAchieveListener;
+import JCat.Utils.Loader;
+import JCat.Utils.Loader.onAchieveListener;
 
 public class PlayAnimation {
 	public static void main(String[] args) {
-		ImageLoader loader=new ImageLoader();
+		Loader loader=new Loader();
 		loader
 		.add("resources\\testAnime1.png")
 		.add("resources\\testAnime2.png")
@@ -22,7 +22,7 @@ public class PlayAnimation {
 		.start(new onAchieveListener() {
 
 			@Override
-			public void onAchieve(ImageLoader loader) {
+			public void onAchieve(Loader loader) {
 				
 				loadAchieve();
 			}

@@ -12,12 +12,12 @@ import JCat.RenderSystem;
 import JCat.Display.Texture;
 import JCat.Manager.TextureManager;
 
-public class ImageLoader {
+public class Loader {
 
 	
 	public interface onAchieveListener
 	{
-		public void onAchieve(ImageLoader loader);
+		public void onAchieve(Loader loader);
 	}
 	
 	private TextureManager cache;
@@ -28,11 +28,11 @@ public class ImageLoader {
 	
 	private boolean isRunning=false;
 
-	public ImageLoader() {
+	public Loader() {
 		this.cache=TextureManager.getInstance();
 	}
 
-	public ImageLoader add(String path) {
+	public Loader add(String path) {
 		
 		if(isRunning)
 		{
@@ -69,24 +69,34 @@ public class ImageLoader {
 				for (String path : paths) {
 					
 					checkPathExist(path);
-					if(cache.getTextureByPath(path)==null)
+					//load data file
+					if(path.endsWith("dgsb"))
 					{
-						
-						try {
-							BufferedImage image=ImageIO.read(new File(path));
-							Texture texture=new Texture(image);
-							cache.addToCache(texture,path,true);
-							
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						
+						new Parser(Loader.this).parse(path);
 					}
+					//load normal image
+					else
+					{
+						if(cache.getTextureByPath(path)==null)
+						{
+							
+							try {
+								BufferedImage image=ImageIO.read(new File(path));
+								Texture texture=new Texture(image);
+								cache.addToCache(texture,path,true);
+								
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+						}
+					}
+					
 					
 				}
 				
-				listener.onAchieve(ImageLoader.this);
+				listener.onAchieve(Loader.this);
 				
 				
 			}

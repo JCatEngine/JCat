@@ -2,11 +2,14 @@ package JCat.Manager;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import JCat.Display.Texture;
+import JCat.Display.MovieClip.FrameAnimeClip;
 
 /**
  * a instace,used to cache image
@@ -43,8 +46,8 @@ public class TextureManager {
 		
 	}
 	
-	private LinkedList<TextureData> caches=new LinkedList<>();
-
+	private LinkedList<TextureData> textureDatascaches=new LinkedList<>();
+	private Map<String,FrameAnimeClip>  fMap=new HashMap<>();
 	
 	/**
 	 * try get a texture from cache,by it load path
@@ -53,7 +56,7 @@ public class TextureManager {
 	 */
 	public Texture getTextureByPath(String path) {
 		
-		List<TextureData> list=caches.stream().filter(t->t.path.equals(path)).collect(Collectors.toList());
+		List<TextureData> list=textureDatascaches.stream().filter(t->t.path.equals(path)).collect(Collectors.toList());
 		
 		return list.size()==1?list.get(0).texture:null;
 	}
@@ -79,7 +82,7 @@ public class TextureManager {
 			textureData.name=name;
 		}
 		
-		caches.add(textureData);
+		textureDatascaches.add(textureData);
 		
 	}
 	
@@ -104,7 +107,7 @@ public class TextureManager {
 	 */
 	public Texture getTextureByName(String name)
 	{
-		List<TextureData> list=caches.stream().filter(t->t.name.equals(name)).collect(Collectors.toList());
+		List<TextureData> list=textureDatascaches.stream().filter(t->t.name.equals(name)).collect(Collectors.toList());
 		
 		return list.size()==1?list.get(0).texture:null;
 	}
@@ -114,7 +117,7 @@ public class TextureManager {
 	 */
 	public void releaseAll()
 	{
-		caches.clear();
+		textureDatascaches.clear();
 	}
 
 	
@@ -178,6 +181,24 @@ public class TextureManager {
 		}
 		
 		
+	}
+
+
+	public void addToCache(FrameAnimeClip frameAnimeClip) {
+		
+		fMap.put(frameAnimeClip.getName(), frameAnimeClip);
+		
+	}
+
+
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public FrameAnimeClip getAnimeclipByName(String name) {
+		// TODO Auto-generated method stub
+		return fMap.get(name);
 	}
 
 }

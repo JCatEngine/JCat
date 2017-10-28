@@ -8,17 +8,17 @@ import JCat.Event.Event;
 import JCat.Event.EventListener;
 import JCat.Graphics.Color;
 import JCat.Graphics.Shape.Rect;
-import JCat.Utils.ImageLoader;
-import JCat.Utils.ImageLoader.onAchieveListener;
+import JCat.Utils.Loader;
+import JCat.Utils.Loader.onAchieveListener;
 
 public class Sample1 {
 	public static void main(String[] args) {
 
-		ImageLoader loader = new ImageLoader();
+		Loader loader = new Loader();
 		loader.add("resources\\bunny.png").start(new onAchieveListener() {
 
 			@Override
-			public void onAchieve(ImageLoader loader) {
+			public void onAchieve(Loader loader) {
 
 				loadAchieve();
 			}

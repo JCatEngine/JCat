@@ -38,20 +38,6 @@ public class FrameAnimeClip extends AnimeClip {
 	private List<Frame> frames=new ArrayList<>();
 	
 	
-	
-	
-
-	
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getName() {
-		return name;
-	}
-	
-	
 	/**
 	 * insert one frame,the first frame must set index 1!
 	 * @param index

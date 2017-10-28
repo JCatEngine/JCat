@@ -5,19 +5,19 @@ import JCat.Display.Bitmap;
 import JCat.Display.Texture;
 import JCat.Event.Event;
 import JCat.Event.EventListener;
-import JCat.Utils.ImageLoader;
-import JCat.Utils.ImageLoader.onAchieveListener;
+import JCat.Utils.Loader;
+import JCat.Utils.Loader.onAchieveListener;
 
 public class Basic {
 	public static void main(String[] args) {
 		
-		ImageLoader loader=new ImageLoader();
+		Loader loader=new Loader();
 		loader
 		.add("resources\\bunny.png")
 		.start(new onAchieveListener() {
 
 			@Override
-			public void onAchieve(ImageLoader loader) {
+			public void onAchieve(Loader loader) {
 				
 				loadAchieve();
 			}
