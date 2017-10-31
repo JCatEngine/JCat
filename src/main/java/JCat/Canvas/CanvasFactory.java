@@ -1,6 +1,7 @@
 package JCat.Canvas;
 
 import JCat.Graphics.Color;
+import JCat.Platform.Canvas.SwingCanvas;
 
 public class CanvasFactory {
 

@@ -10,7 +10,7 @@ import JCat.Event.EventDispatcher;
 import JCat.Event.EventManager;
 import JCat.Event.UpdateEvent;
 import JCat.Interaction.InteractionManager;
-import JCat.Manager.TextureManager;
+import JCat.Manager.ResourceManager;
 import JCat.Render.Renderer;
 import JCat.Utils.MathTool;
 import JCat.Utils.Ticker;
@@ -162,9 +162,9 @@ public class RenderSystem extends EventDispatcher{
 	 * getImageManager
 	 * @return
 	 */
-	public TextureManager getImageManager() {
+	public ResourceManager getImageManager() {
 		// TODO Auto-generated method stub
-		return TextureManager.getInstance();
+		return ResourceManager.getInstance();
 	}
 
 

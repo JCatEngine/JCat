@@ -2,11 +2,11 @@ package Example.Basic;
 
 import JCat.RenderSystem;
 import JCat.Display.Bitmap;
-import JCat.Display.Texture;
 import JCat.Display.MovieClip.MovieClip;
 import JCat.Event.Event;
 import JCat.Event.EventListener;
-import JCat.Manager.TextureManager;
+import JCat.Manager.ResourceManager;
+import JCat.Platform.Texture.SwingTexture;
 import JCat.Utils.Loader;
 import JCat.Utils.Loader.onAchieveListener;
 
@@ -32,7 +32,7 @@ public static void main(String[] args) {
 		
 		RenderSystem system=new RenderSystem(800, 600);
 		MovieClip movieClip=new MovieClip();
-		movieClip.addAnime(TextureManager.getInstance().getAnimeclipByName("moveanime0"));
+		movieClip.addAnime(ResourceManager.getInstance().getAnimeclipByName("moveanime0"));
 		
 		movieClip.x=system.getStage().getStageWidth()/2;
 		movieClip.y=system.getStage().getStageHeight()/2;

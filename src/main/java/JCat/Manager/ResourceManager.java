@@ -10,22 +10,23 @@ import java.util.stream.Collectors;
 
 import JCat.Display.Texture;
 import JCat.Display.MovieClip.FrameAnimeClip;
+import JCat.Platform.Texture.SwingTexture;
 
 /**
- * a instace,used to cache image
+ * a instace,used to cache resource
  * @author Administrator
  *
  */
-public class TextureManager {
+public class ResourceManager {
 
-	private static TextureManager instance;
+	private static ResourceManager instance;
 
 
-	static public TextureManager getInstance()
+	static public ResourceManager getInstance()
 	{
 		if(instance==null)
 		{
-			instance=new TextureManager();
+			instance=new ResourceManager();
 		}
 		return instance;
 	}
@@ -34,7 +35,7 @@ public class TextureManager {
 	/**
 	 * instace class
 	 */
-	private TextureManager() {
+	private ResourceManager() {
 		// TODO Auto-generated constructor stub
 	}
 	

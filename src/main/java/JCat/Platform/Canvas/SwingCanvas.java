@@ -1,4 +1,4 @@
-package JCat.Canvas;
+package JCat.Platform.Canvas;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -18,6 +18,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import JCat.Canvas.Canvas;
 import JCat.Display.Texture;
 import JCat.Display.Text.FontStyle;
 import JCat.Graphics.ColorTool;
@@ -211,7 +212,7 @@ public class SwingCanvas extends JFrame  implements Canvas{
 	@Override
 	public void drawTexture(Texture texture, TextureRenderData renderData) {
 
-		Image image=texture.getImage();
+		Image image=(Image) texture.getImage();
 		double alpha=renderData.alpha;
 		int width=(int) renderData.width;
 		int height=(int) renderData.height;

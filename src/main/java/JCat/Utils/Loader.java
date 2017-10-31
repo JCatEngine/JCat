@@ -9,8 +9,8 @@ import java.util.LinkedList;
 import javax.imageio.ImageIO;
 
 import JCat.RenderSystem;
-import JCat.Display.Texture;
-import JCat.Manager.TextureManager;
+import JCat.Manager.ResourceManager;
+import JCat.Platform.Texture.SwingTexture;
 
 public class Loader {
 
@@ -20,7 +20,7 @@ public class Loader {
 		public void onAchieve(Loader loader);
 	}
 	
-	private TextureManager cache;
+	private ResourceManager cache;
 	
 	private LinkedList<String> paths=new LinkedList<>();
 	
@@ -29,7 +29,7 @@ public class Loader {
 	private boolean isRunning=false;
 
 	public Loader() {
-		this.cache=TextureManager.getInstance();
+		this.cache=ResourceManager.getInstance();
 	}
 
 	public Loader add(String path) {
@@ -82,7 +82,7 @@ public class Loader {
 							
 							try {
 								BufferedImage image=ImageIO.read(new File(path));
-								Texture texture=new Texture(image);
+								SwingTexture texture=new SwingTexture(image);
 								cache.addToCache(texture,path,true);
 								
 							} catch (IOException e) {

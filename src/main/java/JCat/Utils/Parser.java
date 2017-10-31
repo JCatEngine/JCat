@@ -10,7 +10,8 @@ import Bean.ResourceData;
 import JCat.Display.Texture;
 import JCat.Display.MovieClip.FrameAnimeClip;
 import JCat.Display.Text.TextManager;
-import JCat.Manager.TextureManager;
+import JCat.Manager.ResourceManager;
+import JCat.Platform.Texture.SwingTexture;
 import Manager.ResourceType;
 import Parser.SerializaParser;
 import javafx.embed.swing.SwingFXUtils;
@@ -32,8 +33,8 @@ public class Parser {
 			{
 				Image image=(Image) resourceData.data;
 				BufferedImage im=SwingFXUtils.fromFXImage(image, null);
-				Texture texture=new Texture(im);
-				TextureManager.getInstance().addToCache(texture, resourceData.name, false);
+				SwingTexture texture=new SwingTexture(im);
+				ResourceManager.getInstance().addToCache(texture, resourceData.name, false);
 			}
 			else if(resourceData.type==ResourceType.MOVIECLIP)
 			{
@@ -42,11 +43,11 @@ public class Parser {
 				for (Frame frame : animeClip.getFrames()) {
 					Image image=(Image) frame.texture;
 					BufferedImage im=SwingFXUtils.fromFXImage(image, null);
-					Texture texture=new Texture(im);
+					Texture texture=new SwingTexture(im);
 					frameAnimeClip.insertFrame(frame.index, texture);
 				}
 				
-				TextureManager.getInstance().addToCache(frameAnimeClip);
+				ResourceManager.getInstance().addToCache(frameAnimeClip);
 				
 			}
 		}
