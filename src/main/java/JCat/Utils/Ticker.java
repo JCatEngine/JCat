@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Ticker {
 	
+	
+	
 	public interface OnResponceListener {
 
 		public void	onResponce();

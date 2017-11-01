@@ -23,8 +23,8 @@ public class TextureRenderer extends BaseRenderer{
 		renderData.alpha=displayObject.getWorldAlpha();
 		//be notice there are not set the width of bitmap!
 		//because rotation was be dealed before,so just return the width*scale will be fine
-		renderData.width=texture.getImage().getWidth(null);
-		renderData.height=texture.getImage().getHeight(null);
+		renderData.width=texture.getWidth();
+		renderData.height=texture.getHeight();
 		renderData.offsetX=-anchorX;
 		renderData.offsetY=-anchorY;
 		
