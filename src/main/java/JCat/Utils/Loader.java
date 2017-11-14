@@ -1,6 +1,5 @@
 package JCat.Utils;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -8,7 +7,6 @@ import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 
-import JCat.RenderSystem;
 import JCat.Manager.ResourceManager;
 import JCat.Platform.Texture.SwingTexture;
 
